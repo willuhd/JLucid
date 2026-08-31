@@ -1,0 +1,32 @@
+[fetch_atlas_schaefer_2018] Dataset directory found: /Volumes/thinkplus/Code/JLucid2/data/atlas/schaefer_2018/nilearn/schaefer_2018
+[pennlead:rest] found 104 files, kept 87 after FD>0.5 drop
+[pennlead:rest] parcel N varies [514, 515, 516, 517, 518, 519] -> intersecting to N_min=514
+[pennlead:rest] binary balance among labeled: {np.int64(1): 42, np.int64(0): 45} (ADHD 42 / TD-like 45), ESWAN non-NaN 85/87
+PennLEAD n=87 N_rois=514
+cortical mapped: 400/400
+kernel L=75 TRs = 60.0s
+W1 built
+ESWAN inatt available: 85, total: 85
+components with |loading|>0.5: 15
+
+[inatt] n=85  sign-consistency: 9/15 same sign (p=0.6072)
+  Holm-significant components:
+    none
+  top-5 |r|:
+    VIS-VIS        r=+nan (sp +nan) p_holm=1.000 adhd200_w=+0.000
+    VIS-DMN        r=-0.231 (sp -0.203) p_holm=0.933 adhd200_w=-0.261
+    VIS-FPN        r=-0.142 (sp -0.200) p_holm=1.000 adhd200_w=+0.047
+    VIS-DAN        r=+0.116 (sp +0.123) p_holm=1.000 adhd200_w=+0.200
+    SOM-SOM        r=+nan (sp +nan) p_holm=1.000 adhd200_w=+0.000
+
+[total] n=85  sign-consistency: 9/15 same sign (p=0.6072)
+  Holm-significant components:
+    none
+  top-5 |r|:
+    VIS-VIS        r=+nan (sp +nan) p_holm=1.000 adhd200_w=+0.000
+    SOM-SOM        r=+nan (sp +nan) p_holm=1.000 adhd200_w=+0.000
+    DAN-DAN        r=+nan (sp +nan) p_holm=1.000 adhd200_w=+0.000
+    SAL-SAL        r=+nan (sp +nan) p_holm=1.000 adhd200_w=+0.000
+    LIM-LIM        r=+nan (sp +nan) p_holm=1.000 adhd200_w=+0.000
+
+saved penn_confirm_results.json

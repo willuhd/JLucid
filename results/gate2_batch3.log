@@ -1,0 +1,41 @@
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+=== T-family (per-site estimator) ===
+[Inatt] X1_W1_g050       mean_r=+0.199 per_site=[0.2, 0.158, 0.239] dr2=+0.380 sex={0: 0.116, 1: 0.113}
+[Inatt] X2_W1_g080       mean_r=+0.038 per_site=[-0.028, 0.027, 0.116] dr2=+0.078 sex={0: 0.024, 1: 0.076}
+[Inatt] X3_W2_g050       mean_r=+0.126 per_site=[0.093, 0.133, 0.151] dr2=+0.267 sex={0: 0.123, 1: 0.064}
+[Inatt] X4_Lstr7_g050    mean_r=+0.088 per_site=[0.192, 0.093, -0.019] dr2=+0.194 sex={0: 0.124, 1: 0.035}
+[Inatt] X5_C1_tce        mean_r=-0.164 per_site=[-0.168, -0.136, -0.189] dr2=-0.298 sex={0: -0.226, 1: -0.113}
+[Hyper] X1_W1_g050       mean_r=+0.131 per_site=[0.098, 0.098, 0.195] dr2=+0.133 sex={0: 0.2, 1: -0.017}
+[Hyper] X2_W1_g080       mean_r=-0.055 per_site=[-0.133, 0.018, -0.05] dr2=-0.168 sex={0: 0.042, 1: -0.022}
+[Hyper] X3_W2_g050       mean_r=-0.018 per_site=[-0.108, 0.029, 0.025] dr2=-0.110 sex={0: 0.116, 1: -0.127}
+[Hyper] X4_Lstr7_g050    mean_r=+0.181 per_site=[0.314, 0.132, 0.096] dr2=+0.218 sex={0: 0.22, 1: 0.089}
+[Hyper] X5_C1_tce        mean_r=-0.041 per_site=[-0.057, -0.085, 0.018] dr2=-0.219 sex={0: -0.241, 1: 0.061}
+
+=== A-family (per-site estimator) ===
+[Idx] X1_W1_g050       mean_r=+0.104 per_site=[0.06, 0.167, 0.086] dr2=+0.106 sex={0: 0.178, 1: 0.052}
+[Idx] X2_W1_g080       mean_r=+0.088 per_site=[0.076, 0.132, 0.056] dr2=+0.079 sex={0: 0.127, 1: 0.103}
+
+familywise nulls (200 perms)...
+  perm 50/200 (2s)
+  perm 100/200 (3s)
+  perm 150/200 (3s)
+  perm 200/200 (4s)
+  perm 50/200 (5s)
+  perm 100/200 (5s)
+  perm 150/200 (5s)
+  perm 200/200 (5s)
+[T|Inatt] X1_W1_g050       mean_r=+0.199 fw_p=0.0995 dr2=+0.380 -> dead
+[T|Inatt] X2_W1_g080       mean_r=+0.038 fw_p=1.0000 dr2=+0.078 -> dead
+[T|Inatt] X3_W2_g050       mean_r=+0.126 fw_p=0.7264 dr2=+0.267 -> dead
+[T|Inatt] X4_Lstr7_g050    mean_r=+0.088 fw_p=0.9751 dr2=+0.194 -> dead
+[T|Inatt] X5_C1_tce        mean_r=-0.164 fw_p=0.3781 dr2=-0.298 -> dead
+[T|Hyper] X1_W1_g050       mean_r=+0.131 fw_p=0.6816 dr2=+0.133 -> dead
+[T|Hyper] X2_W1_g080       mean_r=-0.055 fw_p=1.0000 dr2=-0.168 -> dead
+[T|Hyper] X3_W2_g050       mean_r=-0.018 fw_p=1.0000 dr2=-0.110 -> dead
+[T|Hyper] X4_Lstr7_g050    mean_r=+0.181 fw_p=0.2189 dr2=+0.218 -> dead
+[T|Hyper] X5_C1_tce        mean_r=-0.041 fw_p=1.0000 dr2=-0.219 -> dead
+[A|Idx] X1_W1_g050       mean_r=+0.104 fw_p=0.2040 dr2=+0.106 -> dead
+[A|Idx] X2_W1_g080       mean_r=+0.088 fw_p=0.3383 dr2=+0.079 -> dead
+
+DONE 5s

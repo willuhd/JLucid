@@ -1,0 +1,15 @@
+loading cc200 ...
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+loaded 872 in 16s
+loading cached V1 for g050c5K60 ...
+  L-sign-invariance verified on 3 subjects
+g050c5K60: V1+lam done 3s
+  g050c5K60 features built (5s)
+g080c3nat: V1+lam done 3s
+  g080c3nat features built (4s)
+g065c3nat: V1+lam done 3s
+  g065c3nat features built (4s)
+g095c3nat: V1+lam done 3s
+  g095c3nat features built (4s)
+DONE 34s -> features.npz

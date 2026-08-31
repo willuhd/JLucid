@@ -1,0 +1,54 @@
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+site-5 T-cohort n=187
+[Inatt] Lnet28       CVr=+0.022 n=187
+[Inatt] Lstr7        CVr=+0.172 n=187
+[Inatt] Mnet7        CVr=+0.107 n=187
+[Inatt] Lrow190      CVr=+0.161 n=187
+[Inatt] W1_g050      CVr=-0.071 n=187
+[Inatt] W1_g080      CVr=-0.140 n=187
+[Inatt] V2_meta      CVr=+0.066 n=187
+[Inatt] H1_vab       CVr=+0.067 n=187
+[Inatt] H3_hvar      CVr=-0.116 n=187
+[Inatt] K1_signed    CVr=-0.021 n=187
+[Hyper] Lnet28       CVr=+0.043 n=187
+[Hyper] Lstr7        CVr=+0.058 n=187
+[Hyper] Mnet7        CVr=-0.003 n=187
+[Hyper] Lrow190      CVr=+0.136 n=187
+[Hyper] W1_g050      CVr=-0.036 n=187
+[Hyper] W1_g080      CVr=-0.121 n=187
+[Hyper] V2_meta      CVr=+0.024 n=187
+[Hyper] H1_vab       CVr=-0.017 n=187
+[Hyper] H3_hvar      CVr=-0.151 n=187
+[Hyper] K1_signed    CVr=+0.036 n=187
+[Inatt] conf baseline CVr=+0.202
+[Hyper] conf baseline CVr=+0.111
+
+familywise null (200) ...
+  perm 50/200 (114s)
+  perm 100/200 (230s)
+  perm 150/200 (375s)
+  perm 200/200 (560s)
+null max q95=0.281
+[Inatt] Lnet28       CVr=+0.022 fw_p=1.0000 -> dead
+[Inatt] Lstr7        CVr=+0.172 fw_p=0.6169 -> dead
+[Inatt] Mnet7        CVr=+0.107 fw_p=0.9950 -> dead
+[Inatt] Lrow190      CVr=+0.161 fw_p=0.7214 -> dead
+[Inatt] W1_g050      CVr=-0.071 fw_p=1.0000 -> dead
+[Inatt] W1_g080      CVr=-0.140 fw_p=0.8856 -> dead
+[Inatt] V2_meta      CVr=+0.066 fw_p=1.0000 -> dead
+[Inatt] H1_vab       CVr=+0.067 fw_p=1.0000 -> dead
+[Inatt] H3_hvar      CVr=-0.116 fw_p=0.9751 -> dead
+[Inatt] K1_signed    CVr=-0.021 fw_p=1.0000 -> dead
+[Hyper] Lnet28       CVr=+0.043 fw_p=1.0000 -> dead
+[Hyper] Lstr7        CVr=+0.058 fw_p=1.0000 -> dead
+[Hyper] Mnet7        CVr=-0.003 fw_p=1.0000 -> dead
+[Hyper] Lrow190      CVr=+0.136 fw_p=0.8905 -> dead
+[Hyper] W1_g050      CVr=-0.036 fw_p=1.0000 -> dead
+[Hyper] W1_g080      CVr=-0.121 fw_p=0.9701 -> dead
+[Hyper] V2_meta      CVr=+0.024 fw_p=1.0000 -> dead
+[Hyper] H1_vab       CVr=-0.017 fw_p=1.0000 -> dead
+[Hyper] H3_hvar      CVr=-0.151 fw_p=0.8109 -> dead
+[Hyper] K1_signed    CVr=+0.036 fw_p=1.0000 -> dead
+
+DONE 560s

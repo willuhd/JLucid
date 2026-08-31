@@ -1,0 +1,19 @@
+loading ...
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+loaded 872 in 69s
+  b050 f=0.05 L=31TR (62s) done 6s
+  b065 f=0.065 L=23TR (46s) done 5s
+  b070 f=0.07 L=21TR (42s) done 7s
+  b080 f=0.08 L=19TR (38s) done 9s
+  b090 f=0.09 L=17TR (34s) done 6s
+  b095 f=0.095 L=15TR (30s) done 5s
+JOINT 2-band dict: mean SB=0.465 siteres=0.429 per-state [0.439, 0.406, 0.556, 0.53, 0.392] (40s)
+FUSED_3band_050_070_090: mean SB=0.505 siteres=0.474 per-state [0.411, 0.437, 0.567, 0.54, 0.569] (55s)
+FUSED_4band_050_065_080_095: mean SB=0.508 siteres=0.477 per-state [0.417, 0.448, 0.557, 0.548, 0.57] (88s)
+
+lam1 (eigen-leader coherence) subject mean/std split-half SB by geometry:
+  b050: lam1.mean SB=0.605 (siteres 0.537), lam1.std SB=0.302
+  b080: lam1.mean SB=0.639 (siteres 0.596), lam1.std SB=0.321
+
+DONE 290s

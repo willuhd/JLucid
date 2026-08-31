@@ -1,0 +1,114 @@
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+T-cohort n=336 sites {np.int64(3): np.int64(77), np.int64(5): np.int64(187), np.int64(6): np.int64(72)}
+Gate-2 family: 23 variants
+['g050c5K60__Lnet28', 'g050c5K60__Lstr7', 'g050c5K60__Mnet7', 'g050c5K60__Lrow190', 'g050c5K60__Mrow190', 'g080c3nat__Lnet28', 'g080c3nat__Lstr7', 'g080c3nat__Mnet7', 'g080c3nat__Lrow190', 'g080c3nat__Mrow190', 'g065c3nat__Lnet28', 'g065c3nat__Lstr7', 'g065c3nat__Mnet7', 'g065c3nat__Lrow190', 'g065c3nat__Mrow190', 'g095c3nat__Lnet28', 'g095c3nat__Lstr7', 'g095c3nat__Mnet7', 'g095c3nat__Lrow190', 'g095c3nat__Mrow190', 'FUSED__FUSED_Lstr7', 'FUSED__FUSED_Mnet7', 'FUSED__FUSED_Lnet28']
+rows with NaN in some variant: 1 (dropped from ALL analyses for familywise integrity)
+final n=335
+[Inatt] g050c5K60__Lnet28                      r_sc=+0.039 per_site={3: 0.218, 5: 0.033, 6: -0.093} dr2=-15.473 sex={0: 0.07317708941625796, 1: 0.022410063631693695}
+[Inatt] g050c5K60__Lstr7                       r_sc=+0.076 per_site={3: 0.192, 5: 0.093, 6: -0.019} dr2=-15.373 sex={0: 0.12440924173932216, 1: 0.04225817252574293}
+[Inatt] g050c5K60__Mnet7                       r_sc=-0.017 per_site={3: 0.115, 5: -0.066, 6: -0.088} dr2=-15.367 sex={0: 0.010933026835003943, 1: -0.028817267856787603}
+[Inatt] g050c5K60__Lrow190                     r_sc=+0.012 per_site={3: 0.147, 5: 0.006, 6: -0.133} dr2=-15.523 sex={0: 0.15781249559124577, 1: -0.0811585454807653}
+[Inatt] g050c5K60__Mrow190                     r_sc=-0.095 per_site={3: 0.045, 5: -0.066, 6: -0.19} dr2=-15.794 sex={0: -0.010911337130780258, 1: -0.14657871930601904}
+[Inatt] g080c3nat__Lnet28                      r_sc=+0.058 per_site={3: 0.06, 5: 0.074, 6: 0.013} dr2=-15.484 sex={0: -0.019512487859873192, 1: 0.14193265802291094}
+[Inatt] g080c3nat__Lstr7                       r_sc=+0.036 per_site={3: 0.077, 5: -0.019, 6: 0.038} dr2=-15.350 sex={0: 0.002709321877415962, 1: 0.0439621991165701}
+[Inatt] g080c3nat__Mnet7                       r_sc=+0.075 per_site={3: 0.03, 5: 0.121, 6: 0.04} dr2=-15.349 sex={0: 0.07670025116097395, 1: 0.09728877644353946}
+[Inatt] g080c3nat__Lrow190                     r_sc=-0.077 per_site={3: -0.023, 5: 0.001, 6: -0.169} dr2=-16.327 sex={0: -0.0734227706598095, 1: -0.08107176346360075}
+[Inatt] g080c3nat__Mrow190                     r_sc=-0.044 per_site={3: 0.002, 5: 0.03, 6: -0.098} dr2=-15.342 sex={0: -0.001451025113589453, 1: -0.08467276485381457}
+[Inatt] g065c3nat__Lnet28                      r_sc=+0.081 per_site={3: 0.099, 5: 0.152, 6: -0.082} dr2=-15.462 sex={0: 0.03672493285352291, 1: 0.12882261939583453}
+[Inatt] g065c3nat__Lstr7                       r_sc=-0.014 per_site={3: 0.078, 5: -0.035, 6: -0.083} dr2=-15.383 sex={0: -0.025591975535801146, 1: -0.021307492206824222}
+[Inatt] g065c3nat__Mnet7                       r_sc=+0.128 per_site={3: 0.06, 5: 0.207, 6: 0.072} dr2=-15.338 sex={0: 0.10035683504540885, 1: 0.14657837230327433}
+[Inatt] g065c3nat__Lrow190                     r_sc=-0.020 per_site={3: -0.026, 5: 0.028, 6: -0.151} dr2=-17.992 sex={0: -0.09060824203337249, 1: 0.033021109067497056}
+[Inatt] g065c3nat__Mrow190                     r_sc=+0.002 per_site={3: 0.075, 5: 0.012, 6: -0.021} dr2=-16.937 sex={0: -0.00909772425437707, 1: 0.007941259539271729}
+[Inatt] g095c3nat__Lnet28                      r_sc=-0.009 per_site={3: 0.034, 5: -0.02, 6: -0.126} dr2=-15.557 sex={0: -0.06402352286929579, 1: 0.04979230607071123}
+[Inatt] g095c3nat__Lstr7                       r_sc=+0.052 per_site={3: 0.088, 5: -0.03, 6: 0.074} dr2=-15.341 sex={0: -0.009625770573292662, 1: 0.08888873256326749}
+[Inatt] g095c3nat__Mnet7                       r_sc=+0.014 per_site={3: 0.043, 5: 0.001, 6: 0.013} dr2=-15.366 sex={0: -0.028290398737869735, 1: 0.0674779691978137}
+[Inatt] g095c3nat__Lrow190                     r_sc=-0.075 per_site={3: 0.012, 5: 0.006, 6: -0.164} dr2=-16.899 sex={0: -0.1243580995376683, 1: -0.048772106965388015}
+[Inatt] g095c3nat__Mrow190                     r_sc=-0.001 per_site={3: 0.021, 5: 0.039, 6: -0.069} dr2=-17.676 sex={0: 0.0047058636949917935, 1: -0.0066565897932393345}
+[Inatt] FUSED__FUSED_Lstr7                     r_sc=+0.121 per_site={3: 0.186, 5: 0.152, 6: 0.006} dr2=-15.353 sex={0: 0.14993929135945092, 1: 0.10591781909635918}
+[Inatt] FUSED__FUSED_Mnet7                     r_sc=+0.067 per_site={3: 0.114, 5: 0.116, 6: -0.042} dr2=-15.359 sex={0: 0.09164754215094786, 1: 0.06317670165633026}
+[Inatt] FUSED__FUSED_Lnet28                    r_sc=+0.104 per_site={3: 0.147, 5: 0.126, 6: 0.01} dr2=-15.473 sex={0: 0.08213171747047336, 1: 0.13748937453180368}
+[Hyper] g050c5K60__Lnet28                      r_sc=+0.086 per_site={3: 0.1, 5: 0.086, 6: 0.076} dr2=-15.407 sex={0: 0.1797029171827567, 1: 0.03798800269726125}
+[Hyper] g050c5K60__Lstr7                       r_sc=+0.140 per_site={3: 0.314, 5: 0.132, 6: 0.077} dr2=-15.302 sex={0: 0.21907592165492937, 1: 0.09416410954978825}
+[Hyper] g050c5K60__Mnet7                       r_sc=+0.082 per_site={3: 0.186, 5: 0.083, 6: 0.039} dr2=-15.307 sex={0: 0.1183789424168797, 1: 0.07759132437476891}
+[Hyper] g050c5K60__Lrow190                     r_sc=+0.099 per_site={3: 0.203, 5: 0.08, 6: -0.016} dr2=-15.539 sex={0: 0.1707546344634098, 1: 0.054236648951894645}
+[Hyper] g050c5K60__Mrow190                     r_sc=+0.035 per_site={3: 0.15, 5: 0.031, 6: -0.133} dr2=-15.598 sex={0: 0.03270511631442209, 1: 0.04325915538787922}
+[Hyper] g080c3nat__Lnet28                      r_sc=+0.082 per_site={3: 0.035, 5: 0.108, 6: 0.04} dr2=-15.448 sex={0: 0.05723018739868204, 1: 0.12557629127959838}
+[Hyper] g080c3nat__Lstr7                       r_sc=+0.129 per_site={3: 0.132, 5: 0.152, 6: 0.069} dr2=-15.296 sex={0: 0.169959424737477, 1: 0.11563091699453673}
+[Hyper] g080c3nat__Mnet7                       r_sc=+0.131 per_site={3: 0.042, 5: 0.173, 6: 0.107} dr2=-15.287 sex={0: 0.20830853814772288, 1: 0.10663328965119569}
+[Hyper] g080c3nat__Lrow190                     r_sc=-0.030 per_site={3: -0.11, 5: -0.037, 6: -0.098} dr2=-18.505 sex={0: 0.04655379753457437, 1: -0.06125580828926463}
+[Hyper] g080c3nat__Mrow190                     r_sc=-0.038 per_site={3: -0.107, 5: -0.048, 6: -0.128} dr2=-17.466 sex={0: -0.010525666007369107, 1: -0.04729093333603342}
+[Hyper] g065c3nat__Lnet28                      r_sc=+0.118 per_site={3: 0.067, 5: 0.159, 6: 0.053} dr2=-15.415 sex={0: 0.10715290823842188, 1: 0.14077772250763804}
+[Hyper] g065c3nat__Lstr7                       r_sc=+0.133 per_site={3: 0.181, 5: 0.17, 6: 0.028} dr2=-15.302 sex={0: 0.18923861229986982, 1: 0.10368195367586786}
+[Hyper] g065c3nat__Mnet7                       r_sc=+0.191 per_site={3: 0.117, 5: 0.235, 6: 0.162} dr2=-15.263 sex={0: 0.18488835093572079, 1: 0.19782570848529404}
+[Hyper] g065c3nat__Lrow190                     r_sc=+0.098 per_site={3: -0.058, 5: 0.133, 6: -0.065} dr2=-17.458 sex={0: 0.20794812536237012, 1: 0.007967826628437756}
+[Hyper] g065c3nat__Mrow190                     r_sc=-0.071 per_site={3: -0.007, 5: 0.006, 6: -0.213} dr2=-17.274 sex={0: -0.10677551508220103, 1: -0.032900221194552076}
+[Hyper] g095c3nat__Lnet28                      r_sc=-0.003 per_site={3: -0.027, 5: 0.023, 6: -0.08} dr2=-15.532 sex={0: -0.031152487718953233, 1: 0.04052852692106744}
+[Hyper] g095c3nat__Lstr7                       r_sc=+0.075 per_site={3: -0.08, 5: 0.1, 6: 0.041} dr2=-15.313 sex={0: 0.11916811468354348, 1: 0.06132239749166345}
+[Hyper] g095c3nat__Mnet7                       r_sc=+0.114 per_site={3: -0.064, 5: 0.144, 6: 0.093} dr2=-15.287 sex={0: 0.18580363068349262, 1: 0.09959395035844125}
+[Hyper] g095c3nat__Lrow190                     r_sc=-0.013 per_site={3: -0.088, 5: 0.07, 6: -0.026} dr2=-15.298 sex={0: -0.007200191452670774, 1: -0.026060231153795917}
+[Hyper] g095c3nat__Mrow190                     r_sc=-0.049 per_site={3: -0.054, 5: -0.065, 6: -0.017} dr2=-16.592 sex={0: -0.08755684707059988, 1: -0.018003339940832256}
+[Hyper] FUSED__FUSED_Lstr7                     r_sc=+0.175 per_site={3: 0.328, 5: 0.176, 6: 0.109} dr2=-15.297 sex={0: 0.23901499184299355, 1: 0.14270250883039143}
+[Hyper] FUSED__FUSED_Mnet7                     r_sc=+0.147 per_site={3: 0.21, 5: 0.161, 6: 0.079} dr2=-15.289 sex={0: 0.22269911629427777, 1: 0.11957360425109541}
+[Hyper] FUSED__FUSED_Lnet28                    r_sc=+0.145 per_site={3: 0.081, 5: 0.163, 6: 0.152} dr2=-15.473 sex={0: 0.17583557434471173, 1: 0.14506030896670788}
+real battery done 7s
+
+familywise null: 200 perms, permute y within site ...
+  perm 20/200 (9s)
+  perm 40/200 (12s)
+  perm 60/200 (14s)
+  perm 80/200 (17s)
+  perm 100/200 (19s)
+  perm 120/200 (22s)
+  perm 140/200 (25s)
+  perm 160/200 (27s)
+  perm 180/200 (29s)
+  perm 200/200 (32s)
+[Inatt] g050c5K60__Lnet28                      r_sc=+0.039 fw_p=1.0000 dr2=-15.473 -> dead
+[Inatt] g050c5K60__Lstr7                       r_sc=+0.076 fw_p=0.9751 dr2=-15.373 -> dead
+[Inatt] g050c5K60__Mnet7                       r_sc=-0.017 fw_p=1.0000 dr2=-15.367 -> dead
+[Inatt] g050c5K60__Lrow190                     r_sc=+0.012 fw_p=1.0000 dr2=-15.523 -> dead
+[Inatt] g050c5K60__Mrow190                     r_sc=-0.095 fw_p=0.8905 dr2=-15.794 -> dead
+[Inatt] g080c3nat__Lnet28                      r_sc=+0.058 fw_p=0.9950 dr2=-15.484 -> dead
+[Inatt] g080c3nat__Lstr7                       r_sc=+0.036 fw_p=1.0000 dr2=-15.350 -> dead
+[Inatt] g080c3nat__Mnet7                       r_sc=+0.075 fw_p=0.9751 dr2=-15.349 -> dead
+[Inatt] g080c3nat__Lrow190                     r_sc=-0.077 fw_p=0.9701 dr2=-16.327 -> dead
+[Inatt] g080c3nat__Mrow190                     r_sc=-0.044 fw_p=1.0000 dr2=-15.342 -> dead
+[Inatt] g065c3nat__Lnet28                      r_sc=+0.081 fw_p=0.9552 dr2=-15.462 -> dead
+[Inatt] g065c3nat__Lstr7                       r_sc=-0.014 fw_p=1.0000 dr2=-15.383 -> dead
+[Inatt] g065c3nat__Mnet7                       r_sc=+0.128 fw_p=0.4478 dr2=-15.338 -> dead
+[Inatt] g065c3nat__Lrow190                     r_sc=-0.020 fw_p=1.0000 dr2=-17.992 -> dead
+[Inatt] g065c3nat__Mrow190                     r_sc=+0.002 fw_p=1.0000 dr2=-16.937 -> dead
+[Inatt] g095c3nat__Lnet28                      r_sc=-0.009 fw_p=1.0000 dr2=-15.557 -> dead
+[Inatt] g095c3nat__Lstr7                       r_sc=+0.052 fw_p=1.0000 dr2=-15.341 -> dead
+[Inatt] g095c3nat__Mnet7                       r_sc=+0.014 fw_p=1.0000 dr2=-15.366 -> dead
+[Inatt] g095c3nat__Lrow190                     r_sc=-0.075 fw_p=0.9751 dr2=-16.899 -> dead
+[Inatt] g095c3nat__Mrow190                     r_sc=-0.001 fw_p=1.0000 dr2=-17.676 -> dead
+[Inatt] FUSED__FUSED_Lstr7                     r_sc=+0.121 fw_p=0.5373 dr2=-15.353 -> dead
+[Inatt] FUSED__FUSED_Mnet7                     r_sc=+0.067 fw_p=0.9851 dr2=-15.359 -> dead
+[Inatt] FUSED__FUSED_Lnet28                    r_sc=+0.104 fw_p=0.7861 dr2=-15.473 -> dead
+[Hyper] g050c5K60__Lnet28                      r_sc=+0.086 fw_p=0.9254 dr2=-15.407 -> dead
+[Hyper] g050c5K60__Lstr7                       r_sc=+0.140 fw_p=0.4129 dr2=-15.302 -> dead
+[Hyper] g050c5K60__Mnet7                       r_sc=+0.082 fw_p=0.9552 dr2=-15.307 -> dead
+[Hyper] g050c5K60__Lrow190                     r_sc=+0.099 fw_p=0.8308 dr2=-15.539 -> dead
+[Hyper] g050c5K60__Mrow190                     r_sc=+0.035 fw_p=1.0000 dr2=-15.598 -> dead
+[Hyper] g080c3nat__Lnet28                      r_sc=+0.082 fw_p=0.9552 dr2=-15.448 -> dead
+[Hyper] g080c3nat__Lstr7                       r_sc=+0.129 fw_p=0.5323 dr2=-15.296 -> dead
+[Hyper] g080c3nat__Mnet7                       r_sc=+0.131 fw_p=0.5274 dr2=-15.287 -> dead
+[Hyper] g080c3nat__Lrow190                     r_sc=-0.030 fw_p=1.0000 dr2=-18.505 -> dead
+[Hyper] g080c3nat__Mrow190                     r_sc=-0.038 fw_p=1.0000 dr2=-17.466 -> dead
+[Hyper] g065c3nat__Lnet28                      r_sc=+0.118 fw_p=0.6468 dr2=-15.415 -> dead
+[Hyper] g065c3nat__Lstr7                       r_sc=+0.133 fw_p=0.5124 dr2=-15.302 -> dead
+[Hyper] g065c3nat__Mnet7                       r_sc=+0.191 fw_p=0.0746 dr2=-15.263 -> dead
+[Hyper] g065c3nat__Lrow190                     r_sc=+0.098 fw_p=0.8408 dr2=-17.458 -> dead
+[Hyper] g065c3nat__Mrow190                     r_sc=-0.071 fw_p=0.9900 dr2=-17.274 -> dead
+[Hyper] g095c3nat__Lnet28                      r_sc=-0.003 fw_p=1.0000 dr2=-15.532 -> dead
+[Hyper] g095c3nat__Lstr7                       r_sc=+0.075 fw_p=0.9751 dr2=-15.313 -> dead
+[Hyper] g095c3nat__Mnet7                       r_sc=+0.114 fw_p=0.6915 dr2=-15.287 -> dead
+[Hyper] g095c3nat__Lrow190                     r_sc=-0.013 fw_p=1.0000 dr2=-15.298 -> dead
+[Hyper] g095c3nat__Mrow190                     r_sc=-0.049 fw_p=1.0000 dr2=-16.592 -> dead
+[Hyper] FUSED__FUSED_Lstr7                     r_sc=+0.175 fw_p=0.1542 dr2=-15.297 -> dead
+[Hyper] FUSED__FUSED_Mnet7                     r_sc=+0.147 fw_p=0.3582 dr2=-15.289 -> dead
+[Hyper] FUSED__FUSED_Lnet28                    r_sc=+0.145 fw_p=0.3632 dr2=-15.473 -> dead
+
+DONE 32s -> gate2_results.json

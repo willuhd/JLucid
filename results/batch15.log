@@ -1,0 +1,62 @@
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+n=722 HC=401 ADHD=321; per-site TDC: {1: 141, 3: 64, 4: 35, 5: 97, 6: 64}
+z: Lnet28 (0s)
+z: Lstr7 (0s)
+z: Mnet7 (0s)
+z: Lrow190 (0s)
+z: W1_g050 (1s)
+z: W1_g080 (1s)
+z: V2_meta (1s)
+z: H1_vab (1s)
+z: H3_hvar (1s)
+z: K1_signed (1s)
+z: NAmean_a080 (1s)
+z: Avar_a080 (1s)
+z: NAstd_a080 (1s)
+[disp] Lnet28       obs=+0.0845 p=0.0020 (n_comp=28)
+[disp] Lstr7        obs=+0.1538 p=0.0020 (n_comp=7)
+[disp] Mnet7        obs=+0.0959 p=0.0339 (n_comp=7)
+[disp] Lrow190      obs=+0.2131 p=0.0020 (n_comp=190)
+[disp] W1_g050      obs=+0.0669 p=0.0020 (n_comp=28)
+[disp] W1_g080      obs=+0.0613 p=0.0020 (n_comp=28)
+[disp] V2_meta      obs=+0.0762 p=0.4731 (n_comp=1)
+[disp] H1_vab       obs=+0.0890 p=0.0020 (n_comp=28)
+[disp] H3_hvar      obs=+0.2382 p=0.0020 (n_comp=8)
+[disp] K1_signed    obs=+0.1743 p=0.0020 (n_comp=14)
+[disp] NAmean_a080  obs=+0.3132 p=0.0020 (n_comp=7)
+[disp] Avar_a080    obs=+0.3054 p=0.0020 (n_comp=7)
+[disp] NAstd_a080   obs=+0.3150 p=0.0020 (n_comp=7)
+[burd] Lnet28       obs=+0.3535 p=0.0519
+[burd] Lstr7        obs=+0.1523 p=0.0858
+[burd] Mnet7        obs=+0.1128 p=0.1397
+[burd] Lrow190      obs=+5.1920 p=0.0020
+[burd] W1_g050      obs=+0.2776 p=0.0100
+[burd] W1_g080      obs=+0.2031 p=0.0679
+[burd] V2_meta      obs=+0.0024 p=1.0000
+[burd] H1_vab       obs=+0.2923 p=0.1337
+[burd] H3_hvar      obs=+0.2688 p=0.0080
+[burd] K1_signed    obs=+0.3038 p=0.0339
+[burd] NAmean_a080  obs=+0.4358 p=0.0020
+[burd] Avar_a080    obs=+0.4390 p=0.0020
+[burd] NAstd_a080   obs=+0.4315 p=0.0020
+[disp-holm] Lnet28       holm=0.0259 -> ALIVE
+[disp-holm] Lstr7        holm=0.0240 -> ALIVE
+[disp-holm] Mnet7        holm=0.0679 -> dead
+[disp-holm] Lrow190      holm=0.0220 -> ALIVE
+[disp-holm] W1_g050      holm=0.0200 -> ALIVE
+[disp-holm] W1_g080      holm=0.0160 -> ALIVE
+[disp-holm] V2_meta      holm=0.4731 -> dead
+[disp-holm] H1_vab       holm=0.0180 -> ALIVE
+[disp-holm] H3_hvar      holm=0.0120 -> ALIVE
+[disp-holm] K1_signed    holm=0.0140 -> ALIVE
+[disp-holm] NAmean_a080  holm=0.0060 -> ALIVE
+[disp-holm] Avar_a080    holm=0.0080 -> ALIVE
+[disp-holm] NAstd_a080   holm=0.0100 -> ALIVE
+
+cumulative-score cohort n=721 p=360
+severity cohort n=336
+split-half cumulative score: mean r=+0.016 median=+0.020 P(r>0)=0.630
+cumulative-score perm p=0.8317
+
+DONE 209s

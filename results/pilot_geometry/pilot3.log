@@ -1,0 +1,5 @@
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+hilbW_040_100: kept 872/872 (dropped 0) mean SB=0.417 siteres=0.386 per-state [0.343, 0.449, 0.411, 0.402, 0.478] (18s)
+hilbN_060_095: kept 872/872 (dropped 0) mean SB=0.367 siteres=0.342 per-state [0.411, 0.418, 0.312, 0.385, 0.311] (31s)
+DONE 80s

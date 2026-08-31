@@ -1,0 +1,37 @@
+11 blocks
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+cohort n=722 ADHD=321
+complete-case n=721 ADHD=321
+baseline AUC (age+sex+site): 0.6955
+Lnet28       AUC=0.6943 dAUC=-0.0012 C=0.1
+Lstr7        AUC=0.6987 dAUC=+0.0032 C=0.1
+Mnet7        AUC=0.6911 dAUC=-0.0044 C=0.01
+Lrow190      AUC=0.6535 dAUC=-0.0420 C=0.01
+W1_g050      AUC=0.6692 dAUC=-0.0263 C=0.01
+W1_g080      AUC=0.6851 dAUC=-0.0104 C=0.01
+V2_meta      AUC=0.6932 dAUC=-0.0023 C=0.1
+H1_vab       AUC=0.6966 dAUC=+0.0011 C=0.01
+H2_mag       AUC=0.6903 dAUC=-0.0052 C=0.1
+H3_hvar      AUC=0.6896 dAUC=-0.0059 C=0.01
+K1_signed    AUC=0.6917 dAUC=-0.0038 C=0.01
+
+perm null (200) ...
+  perm 50/200 (74s)
+  perm 100/200 (116s)
+  perm 150/200 (152s)
+  perm 200/200 (187s)
+
+Lnet28       dAUC=-0.0012 fw_p=1.0000 -> dead
+Lstr7        dAUC=+0.0032 fw_p=1.0000 -> dead
+Mnet7        dAUC=-0.0044 fw_p=1.0000 -> dead
+Lrow190      dAUC=-0.0420 fw_p=1.0000 -> dead
+W1_g050      dAUC=-0.0263 fw_p=1.0000 -> dead
+W1_g080      dAUC=-0.0104 fw_p=1.0000 -> dead
+V2_meta      dAUC=-0.0023 fw_p=1.0000 -> dead
+H1_vab       dAUC=+0.0011 fw_p=1.0000 -> dead
+H2_mag       dAUC=-0.0052 fw_p=1.0000 -> dead
+H3_hvar      dAUC=-0.0059 fw_p=1.0000 -> dead
+K1_signed    dAUC=-0.0038 fw_p=1.0000 -> dead
+
+DONE 187s

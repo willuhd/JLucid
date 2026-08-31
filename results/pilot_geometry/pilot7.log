@@ -1,0 +1,47 @@
+loading cc200 ...
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+loaded 872 in 25s total_T=154668
+V1 (154668, 190) cent (5, 190)
+T>=60: 871/872 | T min/med/max 55/172/257
+age: nan=0 mean=11.98 sd=3.34 range 7.1-26.3
+mean occ per state (locked dict): [0.307, 0.096, 0.176, 0.185, 0.236]
+usable n_s>=8 both halves:  [np.float64(0.741), np.float64(0.2), np.float64(0.463), np.float64(0.478), np.float64(0.617)]
+usable n_s>=10 both halves: [np.float64(0.685), np.float64(0.145), np.float64(0.379), np.float64(0.402), np.float64(0.56)]
+
+template pass (pooled per-state z-BOLD frames) ...
+  state 0: pooled 45970 frames, |x|=0.097
+  state 1: pooled 14741 frames, |x|=0.200
+  state 2: pooled 27922 frames, |x|=0.107
+  state 3: pooled 28929 frames, |x|=0.141
+  state 4: pooled 37106 frames, |x|=0.110
+template pass done in 3s
+
+per-subject pass (serial in-process; mp.Pool fork hangs in this sandbox) ...
+  subj 0/872 (0s)
+  subj 100/872 (47s)
+  subj 200/872 (101s)
+  subj 300/872 (150s)
+  subj 400/872 (185s)
+  subj 500/872 (241s)
+  subj 600/872 (294s)
+  subj 700/872 (339s)
+  subj 800/872 (393s)
+per-subject pass done in 420s
+
+=== Gate-0 previews (n = T>=60 subjects) ===
+  occ5_anchor  d=  5 meanSB=0.358 siteres=0.349 >=0.30: 4/5
+  AxA5_D5A     d=  5 meanSB=0.792 siteres=0.700 >=0.30: 5/5
+  CxA5_D5A_centered d=  5 meanSB=0.290 siteres=0.292 >=0.30: 2/5
+  FC28_anchor  d= 28 meanSB=0.628 siteres=0.599 >=0.30: 28/28
+  dFC_s0_D5B   d= 28 meanSB=0.081 siteres=0.073 >=0.30: 0/28
+  dFC_s1_D5B   d= 28 meanSB=0.013 siteres=0.016 >=0.30: 0/28
+  dFC_s2_D5B   d= 28 meanSB=0.029 siteres=0.027 >=0.30: 0/28
+  dFC_s3_D5B   d= 28 meanSB=0.040 siteres=0.036 >=0.30: 0/28
+  dFC_s4_D5B   d= 28 meanSB=0.031 siteres=0.025 >=0.30: 0/28
+  CT14_D5Ctmpl d= 14 meanSB=0.404 siteres=0.391 >=0.30: 14/14
+  CS14_D5Csubj d= 14 meanSB=0.578 siteres=0.315 >=0.30: 14/14
+  T10_D5Dtrans d= 10 meanSB=0.843 siteres=0.544 >=0.30: 10/10
+  E5_D5Dentry  d=  5 meanSB=0.845 siteres=0.551 >=0.30: 5/5
+
+wall 450s -> pilot7_d5_results.json

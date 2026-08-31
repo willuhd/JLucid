@@ -1,0 +1,14 @@
+loading ...
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+  occ_b050               d=  5 meanSB=0.445 siteres=0.419 >=0.30: 5/5 per=[0.37, 0.41, 0.55, 0.43, 0.47]
+    band b050 built in 13s
+  occ_b070               d=  5 meanSB=0.446 siteres=0.412 >=0.30: 5/5 per=[0.51, 0.46, 0.41, 0.35, 0.51]
+    band b070 built in 16s
+  occ_b090               d=  5 meanSB=0.431 siteres=0.398 >=0.30: 5/5 per=[0.49, 0.47, 0.33, 0.38, 0.48]
+    band b090 built in 17s
+  occFUSED_3band         d=  5 meanSB=0.505 siteres=0.474 >=0.30: 5/5 per=[0.41, 0.44, 0.57, 0.54, 0.57]
+  CxA_D5A_fused_centered d=  5 meanSB=0.463 siteres=0.456 >=0.30: 5/5 per=[0.4, 0.37, 0.56, 0.52, 0.47]
+  AxA_D5A_fused_raw      d=  5 meanSB=0.463 siteres=0.456 >=0.30: 5/5 per=[0.4, 0.37, 0.56, 0.52, 0.47]
+
+wall 72s -> pilot7c_d5_results.json

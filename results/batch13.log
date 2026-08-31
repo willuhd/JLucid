@@ -1,0 +1,56 @@
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+[Inatt] a050__NA_mean7   LOSO CVr=-0.013 n=336
+[Inatt] a050__NA_std7    LOSO CVr=-0.072 n=336
+[Inatt] a050__Avar7      LOSO CVr=-0.039 n=336
+[Inatt] a080__NA_mean7   LOSO CVr=-0.052 n=336
+[Inatt] a080__NA_std7    LOSO CVr=+0.006 n=336
+[Inatt] a080__AEC21      LOSO CVr=+0.101 n=336
+[Inatt] a080__Avar7      LOSO CVr=-0.039 n=336
+[Inatt] conf baseline      CVr=-0.086
+[Hyper] a050__NA_mean7   LOSO CVr=-0.022 n=336
+[Hyper] a050__NA_std7    LOSO CVr=-0.111 n=336
+[Hyper] a050__Avar7      LOSO CVr=-0.027 n=336
+[Hyper] a080__NA_mean7   LOSO CVr=-0.052 n=336
+[Hyper] a080__NA_std7    LOSO CVr=+0.003 n=336
+[Hyper] a080__AEC21      LOSO CVr=+0.074 n=336
+[Hyper] a080__Avar7      LOSO CVr=-0.027 n=336
+[Hyper] conf baseline      CVr=-0.063
+[DX   ] a050__NA_mean7   LOSO CVr=+0.026 n=722
+[DX   ] a050__NA_std7    LOSO CVr=-0.023 n=722
+[DX   ] a050__Avar7      LOSO CVr=+0.035 n=722
+[DX   ] a080__NA_mean7   LOSO CVr=+0.029 n=722
+[DX   ] a080__NA_std7    LOSO CVr=+0.075 n=722
+[DX   ] a080__AEC21      LOSO CVr=+0.086 n=722
+[DX   ] a080__Avar7      LOSO CVr=+0.074 n=722
+[DX   ] conf baseline      CVr=-0.082
+
+familywise null (200) ...
+  perm 50/200 (115s)
+  perm 100/200 (287s)
+  perm 150/200 (455s)
+  perm 200/200 (591s)
+null max q95=0.180
+[Inatt] a050__NA_mean7   CVr=-0.013 fw_p=1.0000 conf=-0.086 -> dead
+[Inatt] a050__NA_std7    CVr=-0.072 fw_p=0.9652 conf=-0.086 -> dead
+[Inatt] a050__Avar7      CVr=-0.039 fw_p=1.0000 conf=-0.086 -> dead
+[Inatt] a080__NA_mean7   CVr=-0.052 fw_p=1.0000 conf=-0.086 -> dead
+[Inatt] a080__NA_std7    CVr=+0.006 fw_p=1.0000 conf=-0.086 -> dead
+[Inatt] a080__AEC21      CVr=+0.101 fw_p=0.6816 conf=-0.086 -> dead
+[Inatt] a080__Avar7      CVr=-0.039 fw_p=1.0000 conf=-0.086 -> dead
+[Hyper] a050__NA_mean7   CVr=-0.022 fw_p=1.0000 conf=-0.063 -> dead
+[Hyper] a050__NA_std7    CVr=-0.111 fw_p=0.5622 conf=-0.063 -> dead
+[Hyper] a050__Avar7      CVr=-0.027 fw_p=1.0000 conf=-0.063 -> dead
+[Hyper] a080__NA_mean7   CVr=-0.052 fw_p=1.0000 conf=-0.063 -> dead
+[Hyper] a080__NA_std7    CVr=+0.003 fw_p=1.0000 conf=-0.063 -> dead
+[Hyper] a080__AEC21      CVr=+0.074 fw_p=0.9602 conf=-0.063 -> dead
+[Hyper] a080__Avar7      CVr=-0.027 fw_p=1.0000 conf=-0.063 -> dead
+[DX   ] a050__NA_mean7   CVr=+0.026 fw_p=1.0000 conf=-0.082 -> dead
+[DX   ] a050__NA_std7    CVr=-0.023 fw_p=1.0000 conf=-0.082 -> dead
+[DX   ] a050__Avar7      CVr=+0.035 fw_p=1.0000 conf=-0.082 -> dead
+[DX   ] a080__NA_mean7   CVr=+0.029 fw_p=1.0000 conf=-0.082 -> dead
+[DX   ] a080__NA_std7    CVr=+0.075 fw_p=0.9602 conf=-0.082 -> dead
+[DX   ] a080__AEC21      CVr=+0.086 fw_p=0.8706 conf=-0.082 -> dead
+[DX   ] a080__Avar7      CVr=+0.074 fw_p=0.9602 conf=-0.082 -> dead
+
+DONE 591s

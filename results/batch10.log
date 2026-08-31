@@ -1,0 +1,38 @@
+[dx  ] W1_rest      CVr=-0.166 n=71
+[dx  ] W1_nback     CVr=-0.222 n=71
+[dx  ] dW1          CVr=-0.081 n=71
+[dx  ] Lnet_rest    CVr=-0.223 n=71
+[dx  ] Lnet_nback   CVr=-0.210 n=71
+[dx  ] dLnet        CVr=-0.019 n=71
+[esw ] W1_rest      CVr=+0.169 n=70
+[esw ] W1_nback     CVr=+0.075 n=70
+[esw ] dW1          CVr=-0.113 n=70
+[esw ] Lnet_rest    CVr=+0.409 n=70
+[esw ] Lnet_nback   CVr=-0.131 n=70
+[esw ] dLnet        CVr=-0.051 n=70
+[dx  ] W1_rest      AUC 0.3478 vs base 0.3077 (d=+0.0402)
+[dx  ] W1_nback     AUC 0.2662 vs base 0.3077 (d=-0.0415)
+[dx  ] dW1          AUC 0.3171 vs base 0.3077 (d=+0.0095)
+[dx  ] Lnet_rest    AUC 0.4254 vs base 0.3077 (d=+0.1178)
+[dx  ] Lnet_nback   AUC 0.3043 vs base 0.3077 (d=-0.0034)
+[dx  ] dLnet        AUC 0.3902 vs base 0.3077 (d=+0.0825)
+
+perm null (1000)...
+  perm 200
+  perm 400
+  perm 600
+  perm 800
+  perm 1000
+[dx  ] W1_rest      stat=+0.040 fw_p=1.0000 -> dead
+[dx  ] W1_nback     stat=-0.041 fw_p=1.0000 -> dead
+[dx  ] dW1          stat=+0.009 fw_p=1.0000 -> dead
+[dx  ] Lnet_rest    stat=+0.118 fw_p=1.0000 -> dead
+[dx  ] Lnet_nback   stat=-0.003 fw_p=1.0000 -> dead
+[dx  ] dLnet        stat=+0.083 fw_p=1.0000 -> dead
+[esw ] W1_rest      stat=+0.169 fw_p=0.9540 -> dead
+[esw ] W1_nback     stat=+0.075 fw_p=1.0000 -> dead
+[esw ] dW1          stat=-0.113 fw_p=1.0000 -> dead
+[esw ] Lnet_rest    stat=+0.409 fw_p=0.0370 -> ALIVE
+[esw ] Lnet_nback   stat=-0.131 fw_p=0.9950 -> dead
+[esw ] dLnet        stat=-0.051 fw_p=1.0000 -> dead
+saved batch10_results.json

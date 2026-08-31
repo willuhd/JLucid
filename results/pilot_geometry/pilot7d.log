@@ -1,0 +1,36 @@
+loading ...
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+
+soft-gate dFC pass ...
+  subj 0/872 (0s)
+  subj 400/872 (47s)
+  subj 800/872 (83s)
+soft pass done 89s
+
+PC1 rescue (fit on full-run 28-blocks per state; applied to h1/h2) ...
+  pc1_hard_s0                SB=0.157 siteres=0.134 (n=645)
+  pc1_hard_s1                SB=-0.086 siteres=-0.072 (n=174)
+  pc1_hard_s2                SB=-0.035 siteres=-0.035 (n=403)
+  pc1_hard_s3                SB=0.073 siteres=0.069 (n=416)
+  pc1_hard_s4                SB=0.066 siteres=0.056 (n=537)
+  pc1_hard_all112            SB=0.191 siteres=0.246 (n=109)
+  pc1_soft_s0                SB=0.123 siteres=0.114 (n=871)
+  pc1_soft_s1                SB=0.032 siteres=0.025 (n=871)
+  pc1_soft_s2                SB=0.129 siteres=0.129 (n=871)
+  pc1_soft_s3                SB=0.053 siteres=0.055 (n=871)
+  pc1_soft_s4                SB=0.030 siteres=0.023 (n=871)
+  pc1_soft_all112            SB=0.164 siteres=0.145 (n=871)
+
+fused 3-band occ for redundancy ...
+
+redundancy of survivors vs occupancy bases and static blocks ...
+  R2[CS14_vs_occ5lock | occ5_locked] = 0.078 (n=14)
+  R2[CS14_vs_occFUSED | occFUSED_3band] = 0.106 (n=14)
+  R2[T10E5_vs_occ5lock | occ5_locked] = 0.012 (n=15)
+  R2[T10E5_vs_occFUSED | occFUSED_3band] = 0.023 (n=15)
+  R2[CxAfused_vs_occFUSED | occFUSED_3band] = 0.026 (n=5)
+  R2[CS14_vs_occFC28 | occ5+FC28] = 0.272 (n=14)
+  R2[T10E5_vs_occFC28 | occ5+FC28] = 0.165 (n=15)
+
+wall 163s -> pilot7d_d5_results.json

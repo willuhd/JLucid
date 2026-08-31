@@ -1,0 +1,34 @@
+loading ...
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+
+=== D5B-SOFT: state-weighted FC shift, continuous weights ===
+  subj 0/872 (0s)
+  subj 200/872 (15s)
+  subj 400/872 (31s)
+  subj 600/872 (50s)
+  subj 800/872 (69s)
+soft-gate pass done 75s
+effective-n fraction of T per state: [0.48, 0.48, 0.463, 0.495, 0.503]
+  dFCsoft_s0       d= 28 meanSB=0.114 siteres=0.106 >=0.30: 0/28
+  dFCsoft_s1       d= 28 meanSB=0.073 siteres=0.065 >=0.30: 0/28
+  dFCsoft_s2       d= 28 meanSB=0.069 siteres=0.065 >=0.30: 0/28
+  dFCsoft_s3       d= 28 meanSB=0.096 siteres=0.087 >=0.30: 0/28
+  dFCsoft_s4       d= 28 meanSB=0.072 siteres=0.063 >=0.30: 0/28
+
+=== anchors (repro from pilot7 raw) ===
+  occ5_anchor      d=  5 meanSB=0.358 siteres=0.349 >=0.30: 4/5
+
+=== redundancy (feature-only, no targets) ===
+  R2[CxA5_centered | FC28] = 0.044 (n=5)
+  R2[CS14 | FC28] = 0.223 (n=14)
+  R2[T10E5_15 | FC28] = 0.161 (n=15)
+  R2[dFCsoft_s0 | FC28] = 0.129 (n=28)
+  R2[dFCsoft_s2 | FC28] = 0.082 (n=28)
+  R2[dFCsoft_s4 | FC28] = 0.093 (n=28)
+  R2[occ5 | FC28] = 0.321 (n=5)
+  R2[CT14_tmpl | FC28] = 0.397 (n=14)
+  R2[CS14 | FC28+prec+phi+mu] = 0.901 (n=14)
+  R2[T10E5_15 | FC28+prec+phi+mu] = 0.913 (n=15)
+
+wall 108s -> pilot7b_d5_results.json

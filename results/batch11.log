@@ -1,0 +1,14 @@
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+[Lnet28] HC age-model r=0.084; ADHD−HC Δ (site-centered) = -0.282y  t-p=0.1030 perm-p=0.0619
+  [Lnet28] Δ vs Inatt among ADHD: r=-0.110 p=0.0479 n=335
+  [Lnet28] Δ vs Hyper among ADHD: r=-0.110 p=0.0579 n=335
+[Lrow190] HC age-model r=0.169; ADHD−HC Δ (site-centered) = -0.238y  t-p=0.1490 perm-p=0.1098
+  [Lrow190] Δ vs Inatt among ADHD: r=-0.098 p=0.0818 n=335
+  [Lrow190] Δ vs Hyper among ADHD: r=-0.091 p=0.1078 n=335
+
+PennLEAD ...
+[PennLnet] HC age-model r=0.057; ADHD−HC Δ = -0.480y  t-p=0.2792 perm-p=0.1257 (n ADHD=32)
+[PennLnet] Δ vs ESWAN total: r=+0.067 p=0.5988 n=70
+
+DONE 4s

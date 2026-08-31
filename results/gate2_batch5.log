@@ -1,0 +1,32 @@
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+T n=335
+[T|Inatt] H1__vab      r_sc=+0.074 per_site={3: 0.093, 5: -0.105, 6: 0.133} dr2=-0.018 sex={0: 0.083, 1: 0.051}
+[T|Inatt] H3__hvar     r_sc=+0.077 per_site={3: 0.222, 5: 0.069, 6: 0.089} dr2=+0.013 sex={0: 0.078, 1: 0.075}
+[T|Inatt] K1__signed   r_sc=-0.020 per_site={3: 0.104, 5: -0.037, 6: 0.081} dr2=-0.010 sex={0: -0.026, 1: -0.024}
+[T|Hyper] H1__vab      r_sc=-0.009 per_site={3: -0.019, 5: -0.095, 6: -0.111} dr2=-0.034 sex={0: -0.044, 1: 0.004}
+[T|Hyper] H3__hvar     r_sc=+0.067 per_site={3: 0.264, 5: 0.09, 6: 0.129} dr2=+0.006 sex={0: 0.055, 1: 0.078}
+[T|Hyper] K1__signed   r_sc=-0.068 per_site={3: -0.021, 5: -0.096, 6: -0.054} dr2=-0.037 sex={0: -0.079, 1: -0.077}
+A n=514
+[A|Idx] H1__vab      r_sc=+0.055 per_site={1: 0.148, 3: -0.034, 5: 0.099} dr2=+0.011 sex={0: 0.048, 1: 0.036}
+[A|Idx] K1__signed   r_sc=+0.066 per_site={1: 0.121, 3: -0.067, 5: 0.096} dr2=+0.000 sex={0: -0.032, 1: 0.091}
+
+familywise nulls (200 perms)...
+  perm 50/200 (2s)
+  perm 100/200 (2s)
+  perm 150/200 (3s)
+  perm 200/200 (4s)
+  perm 50/200 (4s)
+  perm 100/200 (4s)
+  perm 150/200 (5s)
+  perm 200/200 (5s)
+[T|Inatt] H1__vab      r_sc=+0.074 fw_p=0.7910 dr2=-0.018 -> dead
+[T|Inatt] H3__hvar     r_sc=+0.077 fw_p=0.7463 dr2=+0.013 -> dead
+[T|Inatt] K1__signed   r_sc=-0.020 fw_p=1.0000 dr2=-0.010 -> dead
+[T|Hyper] H1__vab      r_sc=-0.009 fw_p=1.0000 dr2=-0.034 -> dead
+[T|Hyper] H3__hvar     r_sc=+0.067 fw_p=0.8458 dr2=+0.006 -> dead
+[T|Hyper] K1__signed   r_sc=-0.068 fw_p=0.8358 dr2=-0.037 -> dead
+[A|Idx] H1__vab      r_sc=+0.055 fw_p=0.4179 dr2=+0.011 -> dead
+[A|Idx] K1__signed   r_sc=+0.066 fw_p=0.2836 dr2=+0.000 -> dead
+
+DONE 5s

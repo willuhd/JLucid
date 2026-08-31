@@ -1,0 +1,60 @@
+[pennlead:rest] found 104 files, kept 87 after FD>0.5 drop
+[pennlead:rest] parcel N varies [514, 515, 516, 517, 518, 519] -> intersecting to N_min=514
+[pennlead:rest] binary balance among labeled: {np.int64(1): 42, np.int64(0): 45} (ADHD 42 / TD-like 45), ESWAN non-NaN 85/87
+[fetch_atlas_schaefer_2018] Dataset directory found: /Volumes/thinkplus/Code/JLucid2/data/atlas/schaefer_2018/nilearn/schaefer_2018
+a050 (12s)
+a080 (13s)
+a120 (13s)
+[attention_to  ] a050__NA_mean7   CVr=-0.076 n=85
+[attention_to  ] a050__NA_std7    CVr=-0.040 n=85
+[attention_to  ] a050__AEC21      CVr=-0.085 n=85
+[attention_to  ] a050__Avar7      CVr=+0.050 n=85
+[attention_to  ] a080__NA_mean7   CVr=-0.060 n=85
+[attention_to  ] a080__NA_std7    CVr=-0.107 n=85
+[attention_to  ] a080__AEC21      CVr=-0.089 n=85
+[attention_to  ] a080__Avar7      CVr=-0.037 n=85
+[attention_to  ] a120__NA_mean7   CVr=-0.011 n=85
+[attention_to  ] a120__NA_std7    CVr=-0.025 n=85
+[attention_to  ] a120__AEC21      CVr=+0.138 n=85
+[attention_to  ] a120__Avar7      CVr=+0.064 n=85
+[tal_score     ] a050__NA_mean7   CVr=-0.054 n=85
+[tal_score     ] a050__NA_std7    CVr=-0.121 n=85
+[tal_score     ] a050__AEC21      CVr=-0.035 n=85
+[tal_score     ] a050__Avar7      CVr=+0.043 n=85
+[tal_score     ] a080__NA_mean7   CVr=-0.023 n=85
+[tal_score     ] a080__NA_std7    CVr=-0.138 n=85
+[tal_score     ] a080__AEC21      CVr=-0.072 n=85
+[tal_score     ] a080__Avar7      CVr=-0.014 n=85
+[tal_score     ] a120__NA_mean7   CVr=-0.087 n=85
+[tal_score     ] a120__NA_std7    CVr=-0.043 n=85
+[tal_score     ] a120__AEC21      CVr=+0.168 n=85
+[tal_score     ] a120__Avar7      CVr=+0.063 n=85
+  perm 100 (154s)
+  perm 200 (298s)
+  perm 300 (448s)
+null q95=0.363
+[attention_to  ] a050__NA_mean7   CVr=-0.076 fw_p=1.0000 -> dead
+[attention_to  ] a050__NA_std7    CVr=-0.040 fw_p=1.0000 -> dead
+[attention_to  ] a050__AEC21      CVr=-0.085 fw_p=1.0000 -> dead
+[attention_to  ] a050__Avar7      CVr=+0.050 fw_p=1.0000 -> dead
+[attention_to  ] a080__NA_mean7   CVr=-0.060 fw_p=1.0000 -> dead
+[attention_to  ] a080__NA_std7    CVr=-0.107 fw_p=1.0000 -> dead
+[attention_to  ] a080__AEC21      CVr=-0.089 fw_p=1.0000 -> dead
+[attention_to  ] a080__Avar7      CVr=-0.037 fw_p=1.0000 -> dead
+[attention_to  ] a120__NA_mean7   CVr=-0.011 fw_p=1.0000 -> dead
+[attention_to  ] a120__NA_std7    CVr=-0.025 fw_p=1.0000 -> dead
+[attention_to  ] a120__AEC21      CVr=+0.138 fw_p=0.9900 -> dead
+[attention_to  ] a120__Avar7      CVr=+0.064 fw_p=1.0000 -> dead
+[tal_score     ] a050__NA_mean7   CVr=-0.054 fw_p=1.0000 -> dead
+[tal_score     ] a050__NA_std7    CVr=-0.121 fw_p=1.0000 -> dead
+[tal_score     ] a050__AEC21      CVr=-0.035 fw_p=1.0000 -> dead
+[tal_score     ] a050__Avar7      CVr=+0.043 fw_p=1.0000 -> dead
+[tal_score     ] a080__NA_mean7   CVr=-0.023 fw_p=1.0000 -> dead
+[tal_score     ] a080__NA_std7    CVr=-0.138 fw_p=0.9900 -> dead
+[tal_score     ] a080__AEC21      CVr=-0.072 fw_p=1.0000 -> dead
+[tal_score     ] a080__Avar7      CVr=-0.014 fw_p=1.0000 -> dead
+[tal_score     ] a120__NA_mean7   CVr=-0.087 fw_p=1.0000 -> dead
+[tal_score     ] a120__NA_std7    CVr=-0.043 fw_p=1.0000 -> dead
+[tal_score     ] a120__AEC21      CVr=+0.168 fw_p=0.9568 -> dead
+[tal_score     ] a120__Avar7      CVr=+0.063 fw_p=1.0000 -> dead
+DONE 448s

@@ -1,0 +1,76 @@
+[pennlead:rest] found 104 files, kept 87 after FD>0.5 drop
+[pennlead:rest] parcel N varies [514, 515, 516, 517, 518, 519] -> intersecting to N_min=514
+[pennlead:rest] binary balance among labeled: {np.int64(1): 42, np.int64(0): 45} (ADHD 42 / TD-like 45), ESWAN non-NaN 85/87
+[fetch_atlas_schaefer_2018] Dataset directory found: /Volumes/thinkplus/Code/JLucid2/data/atlas/schaefer_2018/nilearn/schaefer_2018
+g050 rebuilt (182s)
+g080 rebuilt (347s)
+features rebuilt (352s)
+[attention_total             ] g050__W1     CVr=+0.117 sp=+0.179 n=85
+[attention_total             ] g050__H1v    CVr=-0.149 sp=-0.154 n=85
+[attention_total             ] g050__H3v    CVr=+0.011 sp=-0.029 n=85
+[attention_total             ] g050__Lnet   CVr=+0.134 sp=+0.077 n=85
+[attention_total             ] g080__W1     CVr=+0.131 sp=+0.113 n=85
+[attention_total             ] g080__H1v    CVr=-0.120 sp=+0.060 n=85
+[attention_total             ] g080__H3v    CVr=-0.057 sp=-0.061 n=85
+[attention_total             ] g080__Lnet   CVr=-0.044 sp=-0.057 n=85
+[attention_total             ] K1_signed    CVr=-0.094 sp=-0.075 n=85
+[peractivity_impulsivity_tot ] g050__W1     CVr=-0.037 sp=+0.021 n=86
+[peractivity_impulsivity_tot ] g050__H1v    CVr=-0.034 sp=-0.024 n=86
+[peractivity_impulsivity_tot ] g050__H3v    CVr=+0.192 sp=+0.159 n=86
+[peractivity_impulsivity_tot ] g050__Lnet   CVr=+0.053 sp=+0.030 n=86
+[peractivity_impulsivity_tot ] g080__W1     CVr=-0.058 sp=-0.199 n=86
+[peractivity_impulsivity_tot ] g080__H1v    CVr=-0.065 sp=-0.132 n=86
+[peractivity_impulsivity_tot ] g080__H3v    CVr=-0.128 sp=-0.114 n=86
+[peractivity_impulsivity_tot ] g080__Lnet   CVr=-0.029 sp=-0.069 n=86
+[peractivity_impulsivity_tot ] K1_signed    CVr=-0.067 sp=-0.151 n=86
+[tal_score                   ] g050__W1     CVr=+0.128 sp=+0.197 n=85
+[tal_score                   ] g050__H1v    CVr=-0.092 sp=-0.076 n=85
+[tal_score                   ] g050__H3v    CVr=+0.183 sp=+0.061 n=85
+[tal_score                   ] g050__Lnet   CVr=+0.145 sp=+0.093 n=85
+[tal_score                   ] g080__W1     CVr=+0.128 sp=+0.118 n=85
+[tal_score                   ] g080__H1v    CVr=-0.140 sp=+0.018 n=85
+[tal_score                   ] g080__H3v    CVr=-0.168 sp=-0.089 n=85
+[tal_score                   ] g080__Lnet   CVr=-0.065 sp=-0.062 n=85
+[tal_score                   ] K1_signed    CVr=-0.106 sp=-0.085 n=85
+
+perm null (1000) ...
+  perm 100/1000 (503s)
+  perm 200/1000 (629s)
+  perm 300/1000 (760s)
+  perm 400/1000 (909s)
+  perm 500/1000 (1070s)
+  perm 600/1000 (1236s)
+  perm 700/1000 (1402s)
+  perm 800/1000 (1569s)
+  perm 900/1000 (1735s)
+  perm 1000/1000 (1902s)
+
+[attention_total             ] g050__W1     CVr=+0.117 fw_p=1.0000 -> dead
+[attention_total             ] g050__H1v    CVr=-0.149 fw_p=0.9990 -> dead
+[attention_total             ] g050__H3v    CVr=+0.011 fw_p=1.0000 -> dead
+[attention_total             ] g050__Lnet   CVr=+0.134 fw_p=1.0000 -> dead
+[attention_total             ] g080__W1     CVr=+0.131 fw_p=1.0000 -> dead
+[attention_total             ] g080__H1v    CVr=-0.120 fw_p=1.0000 -> dead
+[attention_total             ] g080__H3v    CVr=-0.057 fw_p=1.0000 -> dead
+[attention_total             ] g080__Lnet   CVr=-0.044 fw_p=1.0000 -> dead
+[attention_total             ] K1_signed    CVr=-0.094 fw_p=1.0000 -> dead
+[peractivity_impulsivity_tot ] g050__W1     CVr=-0.037 fw_p=1.0000 -> dead
+[peractivity_impulsivity_tot ] g050__H1v    CVr=-0.034 fw_p=1.0000 -> dead
+[peractivity_impulsivity_tot ] g050__H3v    CVr=+0.192 fw_p=0.9810 -> dead
+[peractivity_impulsivity_tot ] g050__Lnet   CVr=+0.053 fw_p=1.0000 -> dead
+[peractivity_impulsivity_tot ] g080__W1     CVr=-0.058 fw_p=1.0000 -> dead
+[peractivity_impulsivity_tot ] g080__H1v    CVr=-0.065 fw_p=1.0000 -> dead
+[peractivity_impulsivity_tot ] g080__H3v    CVr=-0.128 fw_p=1.0000 -> dead
+[peractivity_impulsivity_tot ] g080__Lnet   CVr=-0.029 fw_p=1.0000 -> dead
+[peractivity_impulsivity_tot ] K1_signed    CVr=-0.067 fw_p=1.0000 -> dead
+[tal_score                   ] g050__W1     CVr=+0.128 fw_p=1.0000 -> dead
+[tal_score                   ] g050__H1v    CVr=-0.092 fw_p=1.0000 -> dead
+[tal_score                   ] g050__H3v    CVr=+0.183 fw_p=0.9930 -> dead
+[tal_score                   ] g050__Lnet   CVr=+0.145 fw_p=0.9990 -> dead
+[tal_score                   ] g080__W1     CVr=+0.128 fw_p=1.0000 -> dead
+[tal_score                   ] g080__H1v    CVr=-0.140 fw_p=1.0000 -> dead
+[tal_score                   ] g080__H3v    CVr=-0.168 fw_p=0.9960 -> dead
+[tal_score                   ] g080__Lnet   CVr=-0.065 fw_p=1.0000 -> dead
+[tal_score                   ] K1_signed    CVr=-0.106 fw_p=1.0000 -> dead
+
+DONE 1902s

@@ -1,0 +1,62 @@
+{
+  "H1__vab|T|Inatt": {
+    "oracle_r": 0.3349947772449026,
+    "alpha": 0.1,
+    "n": 336
+  },
+  "H1__vab|T|Hyper": {
+    "oracle_r": 0.3037949774433117,
+    "alpha": 0.1,
+    "n": 336
+  },
+  "H2__mag|T|Inatt": {
+    "oracle_r": 0.09238432397680221,
+    "alpha": 0.1,
+    "n": 336
+  },
+  "H2__mag|T|Hyper": {
+    "oracle_r": 0.1151682927330338,
+    "alpha": 0.1,
+    "n": 336
+  },
+  "H3__hvar|T|Inatt": {
+    "oracle_r": 0.17227541684818887,
+    "alpha": 10,
+    "n": 336
+  },
+  "H3__hvar|T|Hyper": {
+    "oracle_r": 0.18873305575798607,
+    "alpha": 10,
+    "n": 336
+  },
+  "K1__signed|T|Inatt": {
+    "oracle_r": 0.21575934477936778,
+    "alpha": 0.1,
+    "n": 335
+  },
+  "K1__signed|T|Hyper": {
+    "oracle_r": 0.19475060881682046,
+    "alpha": 0.1,
+    "n": 335
+  },
+  "H1__vab|A|Idx": {
+    "oracle_r": 0.20775136855342868,
+    "alpha": 0.1,
+    "n": 514
+  },
+  "H2__mag|A|Idx": {
+    "oracle_r": 0.07750335115077624,
+    "alpha": 300000.0,
+    "n": 514
+  },
+  "H3__hvar|A|Idx": {
+    "oracle_r": 0.08092676418254542,
+    "alpha": 100,
+    "n": 514
+  },
+  "K1__signed|A|Idx": {
+    "oracle_r": 0.17383577426547392,
+    "alpha": 1,
+    "n": 514
+  }
+}

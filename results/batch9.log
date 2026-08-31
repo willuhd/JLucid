@@ -1,0 +1,23 @@
+[fetch_atlas_schaefer_2018] Dataset directory found: /Volumes/thinkplus/Code/JLucid2/data/atlas/schaefer_2018/nilearn/schaefer_2018
+[pennlead:nback] found 104 files, kept 86 after FD>0.5 drop
+[pennlead:nback] parcel N varies [515, 516, 517, 518, 519] -> intersecting to N_min=515
+[pennlead:nback] binary balance among labeled: {np.int64(1): 41, np.int64(0): 45} (ADHD 41 / TD-like 45), ESWAN non-NaN 85/86
+n=86
+kernel L=75 TRs (60s)
+subjects with both blocks: 0 (1s)
+d-prime stats: 0.0 4.924146941983728 finite: 86
+[attention_total     ] BEH_dprime   CVr=+0.230 n=85
+[peractivity_impulsi ] BEH_dprime   CVr=+0.193 n=86
+[tal_score           ] BEH_dprime   CVr=+0.350 n=85
+
+perm null (500)...
+  perm 100/500 (19s)
+  perm 200/500 (36s)
+  perm 300/500 (52s)
+  perm 400/500 (68s)
+  perm 500/500 (85s)
+[attention_total     ] BEH_dprime   CVr=+0.230 fw_p=0.1916 -> dead
+[peractivity_impulsi ] BEH_dprime   CVr=+0.193 fw_p=0.3453 -> dead
+[tal_score           ] BEH_dprime   CVr=+0.350 fw_p=0.0100 -> ALIVE
+
+DONE 85s

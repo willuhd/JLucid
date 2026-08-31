@@ -1,0 +1,38 @@
+[fetch_atlas_schaefer_2018] Dataset directory found: /Volumes/thinkplus/Code/JLucid2/data/atlas/schaefer_2018/nilearn/schaefer_2018
+[pennlead:rest] found 104 files, kept 87 after FD>0.5 drop
+[pennlead:rest] parcel N varies [514, 515, 516, 517, 518, 519] -> intersecting to N_min=514
+[pennlead:rest] binary balance among labeled: {np.int64(1): 42, np.int64(0): 45} (ADHD 42 / TD-like 45), ESWAN non-NaN 85/87
+n=87 rois=514 net sizes=[61, 77, 46, 47, 26, 52, 91]
+g050 done (194s)
+g080 done (423s)
+K1 done (432s)
+eswan cols: ['eswan_adhd_inattention_total', 'eswan_adhd_hyperactivity_impulsivity_total', 'eswan_adhd_total_score']
+g050__W1       eswan_adhd_inattention_total           oracle +0.555 n=85
+g050__H1v      eswan_adhd_inattention_total           oracle +0.460 n=85
+g050__H3v      eswan_adhd_inattention_total           oracle +0.311 n=85
+g050__Lnet     eswan_adhd_inattention_total           oracle +0.635 n=85
+g080__W1       eswan_adhd_inattention_total           oracle +0.566 n=85
+g080__H1v      eswan_adhd_inattention_total           oracle +0.510 n=85
+g080__H3v      eswan_adhd_inattention_total           oracle +0.253 n=85
+g080__Lnet     eswan_adhd_inattention_total           oracle +0.587 n=85
+K1_signed      eswan_adhd_inattention_total           oracle +0.411 n=85
+g050__W1       eswan_adhd_hyperactivity_impulsivity_total oracle +0.524 n=86
+g050__H1v      eswan_adhd_hyperactivity_impulsivity_total oracle +0.523 n=86
+g050__H3v      eswan_adhd_hyperactivity_impulsivity_total oracle +0.422 n=86
+g050__Lnet     eswan_adhd_hyperactivity_impulsivity_total oracle +0.599 n=86
+g080__W1       eswan_adhd_hyperactivity_impulsivity_total oracle +0.498 n=86
+g080__H1v      eswan_adhd_hyperactivity_impulsivity_total oracle +0.638 n=86
+g080__H3v      eswan_adhd_hyperactivity_impulsivity_total oracle +0.209 n=86
+g080__Lnet     eswan_adhd_hyperactivity_impulsivity_total oracle +0.561 n=86
+K1_signed      eswan_adhd_hyperactivity_impulsivity_total oracle +0.360 n=86
+g050__W1       eswan_adhd_total_score                 oracle +0.550 n=85
+g050__H1v      eswan_adhd_total_score                 oracle +0.488 n=85
+g050__H3v      eswan_adhd_total_score                 oracle +0.389 n=85
+g050__Lnet     eswan_adhd_total_score                 oracle +0.625 n=85
+g080__W1       eswan_adhd_total_score                 oracle +0.542 n=85
+g080__H1v      eswan_adhd_total_score                 oracle +0.570 n=85
+g080__H3v      eswan_adhd_total_score                 oracle +0.189 n=85
+g080__Lnet     eswan_adhd_total_score                 oracle +0.572 n=85
+K1_signed      eswan_adhd_total_score                 oracle +0.379 n=85
+
+n_tests=27; saved batch8_gate1_results.json (432s)

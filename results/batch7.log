@@ -1,0 +1,93 @@
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+n=721
+[C1: DX1 vs HC] base AUC=0.6011
+  Lnet28       dAUC=-0.0276
+  Lstr7        dAUC=-0.0075
+  Mnet7        dAUC=-0.0082
+  Lrow190      dAUC=-0.0532
+  W1_g050      dAUC=-0.0289
+  W1_g080      dAUC=+0.0010
+  V2_meta      dAUC=+0.0042
+  H1_vab       dAUC=-0.0327
+  H2_mag       dAUC=-0.0000
+  H3_hvar      dAUC=-0.0085
+  K1_signed    dAUC=-0.0195
+[C2: DX3 vs HC] base AUC=0.5894
+  Lnet28       dAUC=-0.0502
+  Lstr7        dAUC=-0.0363
+  Mnet7        dAUC=-0.0405
+  Lrow190      dAUC=-0.0872
+  W1_g050      dAUC=-0.0550
+  W1_g080      dAUC=-0.0310
+  V2_meta      dAUC=-0.0081
+  H1_vab       dAUC=-0.0351
+  H2_mag       dAUC=-0.0129
+  H3_hvar      dAUC=-0.0053
+  K1_signed    dAUC=-0.0425
+C3 n=442 cases=42
+[C3: DX1-unmed vs HC] base AUC=0.5345
+  Lnet28       dAUC=+0.0021
+  Lstr7        dAUC=+0.0085
+  Mnet7        dAUC=+0.0341
+  Lrow190      dAUC=+0.0704
+  W1_g050      dAUC=-0.0088
+  W1_g080      dAUC=+0.0567
+  V2_meta      dAUC=-0.0126
+  H1_vab       dAUC=-0.0333
+  H2_mag       dAUC=+0.0119
+  H3_hvar      dAUC=-0.0079
+  K1_signed    dAUC=+0.0315
+  C4 Lnet28       med-oracle r=+0.405 (a=0.1)
+  C4 Lstr7        med-oracle r=+0.155 (a=0.1)
+  C4 Mnet7        med-oracle r=+0.135 (a=0.1)
+  C4 Lrow190      med-oracle r=+0.986 (a=0.1)
+  C4 W1_g050      med-oracle r=+0.322 (a=0.1)
+  C4 W1_g080      med-oracle r=+0.335 (a=0.1)
+  C4 V2_meta      med-oracle r=+0.034 (a=0.1)
+  C4 H1_vab       med-oracle r=+0.323 (a=0.1)
+  C4 H2_mag       med-oracle r=+0.083 (a=0.1)
+  C4 H3_hvar      med-oracle r=+0.145 (a=0.1)
+  C4 K1_signed    med-oracle r=+0.280 (a=0.1)
+
+familywise null C1/C2/C3 (200 perms)...
+  perm 50/200 (121s)
+  perm 100/200 (218s)
+  perm 150/200 (300s)
+  perm 200/200 (393s)
+
+[C1] Lnet28       dAUC=-0.0276 fw_p=1.0000 -> dead
+[C1] Lstr7        dAUC=-0.0075 fw_p=1.0000 -> dead
+[C1] Mnet7        dAUC=-0.0082 fw_p=1.0000 -> dead
+[C1] Lrow190      dAUC=-0.0532 fw_p=0.9900 -> dead
+[C1] W1_g050      dAUC=-0.0289 fw_p=1.0000 -> dead
+[C1] W1_g080      dAUC=+0.0010 fw_p=1.0000 -> dead
+[C1] V2_meta      dAUC=+0.0042 fw_p=1.0000 -> dead
+[C1] H1_vab       dAUC=-0.0327 fw_p=1.0000 -> dead
+[C1] H2_mag       dAUC=-0.0000 fw_p=1.0000 -> dead
+[C1] H3_hvar      dAUC=-0.0085 fw_p=1.0000 -> dead
+[C1] K1_signed    dAUC=-0.0195 fw_p=1.0000 -> dead
+[C2] Lnet28       dAUC=-0.0502 fw_p=0.9950 -> dead
+[C2] Lstr7        dAUC=-0.0363 fw_p=1.0000 -> dead
+[C2] Mnet7        dAUC=-0.0405 fw_p=1.0000 -> dead
+[C2] Lrow190      dAUC=-0.0872 fw_p=0.7711 -> dead
+[C2] W1_g050      dAUC=-0.0550 fw_p=0.9900 -> dead
+[C2] W1_g080      dAUC=-0.0310 fw_p=1.0000 -> dead
+[C2] V2_meta      dAUC=-0.0081 fw_p=1.0000 -> dead
+[C2] H1_vab       dAUC=-0.0351 fw_p=1.0000 -> dead
+[C2] H2_mag       dAUC=-0.0129 fw_p=1.0000 -> dead
+[C2] H3_hvar      dAUC=-0.0053 fw_p=1.0000 -> dead
+[C2] K1_signed    dAUC=-0.0425 fw_p=1.0000 -> dead
+[C3] Lnet28       dAUC=+0.0021 fw_p=1.0000 -> dead
+[C3] Lstr7        dAUC=+0.0085 fw_p=1.0000 -> dead
+[C3] Mnet7        dAUC=+0.0341 fw_p=1.0000 -> dead
+[C3] Lrow190      dAUC=+0.0704 fw_p=0.9453 -> dead
+[C3] W1_g050      dAUC=-0.0088 fw_p=1.0000 -> dead
+[C3] W1_g080      dAUC=+0.0567 fw_p=0.9900 -> dead
+[C3] V2_meta      dAUC=-0.0126 fw_p=1.0000 -> dead
+[C3] H1_vab       dAUC=-0.0333 fw_p=1.0000 -> dead
+[C3] H2_mag       dAUC=+0.0119 fw_p=1.0000 -> dead
+[C3] H3_hvar      dAUC=-0.0079 fw_p=1.0000 -> dead
+[C3] K1_signed    dAUC=+0.0315 fw_p=1.0000 -> dead
+
+DONE 393s

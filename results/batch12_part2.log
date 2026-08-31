@@ -1,0 +1,41 @@
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+[   21.0s] T-cohort n=336; IQ n=795
+[   21.0s] Gate-0 survivors among t4: ['EDIFF', 'DYNCTRL', 'EMAP']
+[   21.0s] Gate 1 (oracle) ...
+  EDIFF     oracle Inatt=+0.176 Hyper=+0.134 IQ=+0.159
+  DYNCTRL   oracle Inatt=+0.289 Hyper=+0.238 IQ=+0.198
+  EMAP      oracle Inatt=+0.272 Hyper=+0.200 IQ=+0.179
+  Dp        oracle Inatt=+0.193 Hyper=+0.186 IQ=+0.143
+  Cp        oracle Inatt=+0.218 Hyper=+0.232 IQ=+0.151
+  Ap        oracle Inatt=+0.051 Hyper=+0.078 IQ=+0.092
+[   21.1s] Gate 1 DEAD: ['Ap']
+[   21.1s] Gate 2 (LOSO battery, 5 seeds, then 200-perm familywise null) ...
+  EDIFF x Inatt: r_sc=+0.1239 (seeds ['0.14', '0.11', '0.13', '0.11', '0.14'])
+  EDIFF x Hyper: r_sc=+0.1413 (seeds ['0.14', '0.14', '0.14', '0.14', '0.14'])
+  DYNCTRL x Inatt: r_sc=+0.0567 (seeds ['0.08', '0.14', '0.03', '0.01', '0.01'])
+  DYNCTRL x Hyper: r_sc=+0.0023 (seeds ['0.03', '0.00', '0.03', '-0.03', '-0.03'])
+  EMAP x Inatt: r_sc=+0.0160 (seeds ['-0.01', '-0.01', '0.05', '0.02', '0.03'])
+  EMAP x Hyper: r_sc=-0.0063 (seeds ['0.01', '-0.02', '-0.03', '0.01', '-0.00'])
+  Dp x Inatt: r_sc=-0.0560 (seeds ['-0.10', '0.01', '-0.10', '-0.10', '0.01'])
+  Dp x Hyper: r_sc=-0.0785 (seeds ['-0.12', '-0.02', '-0.06', '-0.12', '-0.08'])
+  Cp x Inatt: r_sc=+0.0407 (seeds ['0.02', '0.05', '0.05', '0.05', '0.04'])
+  Cp x Hyper: r_sc=+0.0668 (seeds ['0.06', '0.08', '0.07', '0.05', '0.07'])
+[   29.7s] IQ canary r_sc: [('EDIFF', 0.108), ('DYNCTRL', 0.015), ('EMAP', -0.013), ('Dp', -0.011), ('Cp', 0.025)]
+[   29.7s] fw null 200 perms ...
+[  132.0s]   perm 50
+[  228.0s]   perm 100
+[  324.8s]   perm 150
+[  427.9s]   perm 200
+  EDIFF x Inatt: obs=+0.1239 fw_p=0.3831
+  EDIFF x Hyper: obs=+0.1413 fw_p=0.2338
+  DYNCTRL x Inatt: obs=+0.0567 fw_p=0.9900
+  DYNCTRL x Hyper: obs=+0.0023 fw_p=1.0000
+  EMAP x Inatt: obs=+0.0160 fw_p=1.0000
+  EMAP x Hyper: obs=-0.0063 fw_p=1.0000
+  Dp x Inatt: obs=-0.0560 fw_p=0.9900
+  Dp x Hyper: obs=-0.0785 fw_p=0.9005
+  Cp x Inatt: obs=+0.0407 fw_p=1.0000
+  Cp x Hyper: obs=+0.0668 fw_p=0.9851
+[  427.9s] ALIVE cells: []
+[  427.9s] saved batch12_results.json

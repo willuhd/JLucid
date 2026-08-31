@@ -1,0 +1,466 @@
+{
+  "inatt": {
+    "n": 85,
+    "comps": [
+      {
+        "pair": "VIS-VIS",
+        "pearson": NaN,
+        "spearman": NaN,
+        "adhd200_loading": 0.0,
+        "p_raw": NaN,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "VIS-SOM",
+        "pearson": 0.011738795781842438,
+        "spearman": 0.008532381235745902,
+        "adhd200_loading": -0.1470312001516302,
+        "p_raw": 0.9150844505062554,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "VIS-DAN",
+        "pearson": 0.11571753409267274,
+        "spearman": 0.12274104383164748,
+        "adhd200_loading": 0.19950910975172959,
+        "p_raw": 0.2916017693156326,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "VIS-SAL",
+        "pearson": -0.0577418594864879,
+        "spearman": -0.06433532869842812,
+        "adhd200_loading": -0.25827113537657037,
+        "p_raw": 0.5996459684790456,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "VIS-LIM",
+        "pearson": -0.07158354175966386,
+        "spearman": -0.089374736476265,
+        "adhd200_loading": -0.2821610731545946,
+        "p_raw": 0.5150259110305284,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "VIS-FPN",
+        "pearson": -0.14210079186104457,
+        "spearman": -0.19963032336202746,
+        "adhd200_loading": 0.04654913568477548,
+        "p_raw": 0.1945276362314034,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "VIS-DMN",
+        "pearson": -0.2311337887388437,
+        "spearman": -0.202927814734099,
+        "adhd200_loading": -0.26085747566696194,
+        "p_raw": 0.033311691644110665,
+        "p_holm": 0.9327273660350986
+      },
+      {
+        "pair": "SOM-SOM",
+        "pearson": NaN,
+        "spearman": NaN,
+        "adhd200_loading": 0.0,
+        "p_raw": NaN,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SOM-DAN",
+        "pearson": 0.0360434922825669,
+        "spearman": 0.04209438540846202,
+        "adhd200_loading": 0.18914215115423325,
+        "p_raw": 0.7432967048647952,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SOM-SAL",
+        "pearson": 0.10605916754257262,
+        "spearman": 0.10284846234968485,
+        "adhd200_loading": -0.2654732451480452,
+        "p_raw": 0.3340104026185112,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SOM-LIM",
+        "pearson": -0.055578305283379245,
+        "spearman": -0.09359200288980454,
+        "adhd200_loading": -0.05018580116184003,
+        "p_raw": 0.6134109605157977,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SOM-FPN",
+        "pearson": 0.06976129275711733,
+        "spearman": 0.0021135256272031134,
+        "adhd200_loading": 0.18867785906121975,
+        "p_raw": 0.5258080813310615,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SOM-DMN",
+        "pearson": -0.015351414609288197,
+        "spearman": -0.053640497631145694,
+        "adhd200_loading": 0.3528918167546086,
+        "p_raw": 0.8890979993014144,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "DAN-DAN",
+        "pearson": NaN,
+        "spearman": NaN,
+        "adhd200_loading": 0.0,
+        "p_raw": NaN,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "DAN-SAL",
+        "pearson": -0.03688621425482659,
+        "spearman": 0.013317168419552954,
+        "adhd200_loading": 0.17773743545452755,
+        "p_raw": 0.7375097365540144,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "DAN-LIM",
+        "pearson": 0.01250476380997821,
+        "spearman": -0.036164771843253285,
+        "adhd200_loading": -0.2815003692408075,
+        "p_raw": 0.9095662668310015,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "DAN-FPN",
+        "pearson": -0.1154860879622829,
+        "spearman": -0.16855366876944833,
+        "adhd200_loading": -0.31890163179100256,
+        "p_raw": 0.2925744755253192,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "DAN-DMN",
+        "pearson": -0.10635741434379593,
+        "spearman": -0.10812249157682595,
+        "adhd200_loading": -0.2487556411299346,
+        "p_raw": 0.3326451511361608,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SAL-SAL",
+        "pearson": NaN,
+        "spearman": NaN,
+        "adhd200_loading": 0.0,
+        "p_raw": NaN,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SAL-LIM",
+        "pearson": -0.022025914009535047,
+        "spearman": -0.06365038983776045,
+        "adhd200_loading": -0.1397659970143828,
+        "p_raw": 0.8414129849185373,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SAL-FPN",
+        "pearson": -0.1091256131854369,
+        "spearman": -0.16304480336150687,
+        "adhd200_loading": -0.14301372606834303,
+        "p_raw": 0.3201426529733298,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SAL-DMN",
+        "pearson": -0.02305350546324871,
+        "spearman": -0.005636068339208303,
+        "adhd200_loading": -0.15977883064466009,
+        "p_raw": 0.8341175380659478,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "LIM-LIM",
+        "pearson": NaN,
+        "spearman": NaN,
+        "adhd200_loading": 0.0,
+        "p_raw": NaN,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "LIM-FPN",
+        "pearson": 0.19613338604797717,
+        "spearman": 0.211088372016911,
+        "adhd200_loading": -0.2502361789815663,
+        "p_raw": 0.0720181549664275,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "LIM-DMN",
+        "pearson": -0.10715482825059722,
+        "spearman": -0.10082300029028188,
+        "adhd200_loading": -0.17724402247278664,
+        "p_raw": 0.3290123218423978,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "FPN-FPN",
+        "pearson": NaN,
+        "spearman": NaN,
+        "adhd200_loading": 0.0,
+        "p_raw": NaN,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "FPN-DMN",
+        "pearson": 0.09109372669048871,
+        "spearman": 0.10662541092422377,
+        "adhd200_loading": -0.24374390460249326,
+        "p_raw": 0.40702890757739696,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "DMN-DMN",
+        "pearson": NaN,
+        "spearman": NaN,
+        "adhd200_loading": 0.0,
+        "p_raw": NaN,
+        "p_holm": 1.0
+      }
+    ],
+    "sign_same": 9,
+    "n_big": 15,
+    "sign_p": 0.6072387695312499
+  },
+  "total": {
+    "n": 85,
+    "comps": [
+      {
+        "pair": "VIS-VIS",
+        "pearson": NaN,
+        "spearman": NaN,
+        "adhd200_loading": 0.0,
+        "p_raw": NaN,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "VIS-SOM",
+        "pearson": 0.0809980079173433,
+        "spearman": 0.08144133676894127,
+        "adhd200_loading": -0.1470312001516302,
+        "p_raw": 0.46117105278977777,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "VIS-DAN",
+        "pearson": 0.13480769712524476,
+        "spearman": 0.12519735926057265,
+        "adhd200_loading": 0.19950910975172959,
+        "p_raw": 0.21866446309362086,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "VIS-SAL",
+        "pearson": -0.03365603439936774,
+        "spearman": -0.033051633611306024,
+        "adhd200_loading": -0.25827113537657037,
+        "p_raw": 0.7597678707737818,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "VIS-LIM",
+        "pearson": -0.13029321378262226,
+        "spearman": -0.16150430017521053,
+        "adhd200_loading": -0.2821610731545946,
+        "p_raw": 0.2346237622522869,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "VIS-FPN",
+        "pearson": -0.18687283640755542,
+        "spearman": -0.20261110861518147,
+        "adhd200_loading": 0.04654913568477548,
+        "p_raw": 0.08680575513304421,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "VIS-DMN",
+        "pearson": -0.17608882943224838,
+        "spearman": -0.19875948375778588,
+        "adhd200_loading": -0.26085747566696194,
+        "p_raw": 0.10695218339282686,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SOM-SOM",
+        "pearson": NaN,
+        "spearman": NaN,
+        "adhd200_loading": 0.0,
+        "p_raw": NaN,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SOM-DAN",
+        "pearson": 0.09127270462040635,
+        "spearman": 0.047011329794963225,
+        "adhd200_loading": 0.18914215115423325,
+        "p_raw": 0.4061039578099717,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SOM-SAL",
+        "pearson": 0.15028483772612494,
+        "spearman": 0.1662161864220752,
+        "adhd200_loading": -0.2654732451480452,
+        "p_raw": 0.16979786936521743,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SOM-LIM",
+        "pearson": -0.09303332449384012,
+        "spearman": -0.1036908245238459,
+        "adhd200_loading": -0.05018580116184003,
+        "p_raw": 0.3970710204178664,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SOM-FPN",
+        "pearson": -0.0185816051599661,
+        "spearman": -0.11212725155920736,
+        "adhd200_loading": 0.18867785906121975,
+        "p_raw": 0.865960293467603,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SOM-DMN",
+        "pearson": 0.01851324124261133,
+        "spearman": -0.0004887848803801541,
+        "adhd200_loading": 0.3528918167546086,
+        "p_raw": 0.8664488853014215,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "DAN-DAN",
+        "pearson": NaN,
+        "spearman": NaN,
+        "adhd200_loading": 0.0,
+        "p_raw": NaN,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "DAN-SAL",
+        "pearson": -0.018127682487572353,
+        "spearman": 0.015152331291784778,
+        "adhd200_loading": 0.17773743545452755,
+        "p_raw": 0.8692053780488985,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "DAN-LIM",
+        "pearson": 0.01495764119863889,
+        "spearman": 0.015846405821924595,
+        "adhd200_loading": -0.2815003692408075,
+        "p_raw": 0.8919253342120703,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "DAN-FPN",
+        "pearson": -0.08362252121876497,
+        "spearman": -0.16192465517233745,
+        "adhd200_loading": -0.31890163179100256,
+        "p_raw": 0.4467284657528157,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "DAN-DMN",
+        "pearson": -0.0448688356722461,
+        "spearman": -0.04704065688778604,
+        "adhd200_loading": -0.2487556411299346,
+        "p_raw": 0.6834566885296978,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SAL-SAL",
+        "pearson": NaN,
+        "spearman": NaN,
+        "adhd200_loading": 0.0,
+        "p_raw": NaN,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SAL-LIM",
+        "pearson": 0.00855703067671394,
+        "spearman": -0.035955015800764135,
+        "adhd200_loading": -0.1397659970143828,
+        "p_raw": 0.9380466251258464,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SAL-FPN",
+        "pearson": -0.08331045638640473,
+        "spearman": -0.13474821582320087,
+        "adhd200_loading": -0.14301372606834303,
+        "p_raw": 0.44843239275157126,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "SAL-DMN",
+        "pearson": -0.023914619330361184,
+        "spearman": -0.022347244730980643,
+        "adhd200_loading": -0.15977883064466009,
+        "p_raw": 0.8280147599998219,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "LIM-LIM",
+        "pearson": NaN,
+        "spearman": NaN,
+        "adhd200_loading": 0.0,
+        "p_raw": NaN,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "LIM-FPN",
+        "pearson": 0.12940824506169085,
+        "spearman": 0.15589304974844634,
+        "adhd200_loading": -0.2502361789815663,
+        "p_raw": 0.23784483108561616,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "LIM-DMN",
+        "pearson": -0.21487611177866567,
+        "spearman": -0.259368808924925,
+        "adhd200_loading": -0.17724402247278664,
+        "p_raw": 0.04828393205665089,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "FPN-FPN",
+        "pearson": NaN,
+        "spearman": NaN,
+        "adhd200_loading": 0.0,
+        "p_raw": NaN,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "FPN-DMN",
+        "pearson": 0.12782500424640894,
+        "spearman": 0.14951929490828914,
+        "adhd200_loading": -0.24374390460249326,
+        "p_raw": 0.24368365816571388,
+        "p_holm": 1.0
+      },
+      {
+        "pair": "DMN-DMN",
+        "pearson": NaN,
+        "spearman": NaN,
+        "adhd200_loading": 0.0,
+        "p_raw": NaN,
+        "p_holm": 1.0
+      }
+    ],
+    "sign_same": 9,
+    "n_big": 15,
+    "sign_p": 0.6072387695312499
+  }
+}

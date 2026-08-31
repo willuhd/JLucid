@@ -1,0 +1,267 @@
+{
+ "occ_b050": {
+  "n_comp": 5,
+  "comps": 5,
+  "mean_sb": 0.4445607482435422,
+  "mean_sb_siteres": 0.41874556320223694,
+  "n_ge030": 5,
+  "per_comp": [
+   {
+    "comp": 0,
+    "n_used": 871,
+    "r": 0.2237,
+    "sb": 0.3656,
+    "sb_siteres": 0.3476
+   },
+   {
+    "comp": 1,
+    "n_used": 871,
+    "r": 0.2545,
+    "sb": 0.4057,
+    "sb_siteres": 0.3885
+   },
+   {
+    "comp": 2,
+    "n_used": 871,
+    "r": 0.3757,
+    "sb": 0.5462,
+    "sb_siteres": 0.5388
+   },
+   {
+    "comp": 3,
+    "n_used": 871,
+    "r": 0.2756,
+    "sb": 0.4321,
+    "sb_siteres": 0.3907
+   },
+   {
+    "comp": 4,
+    "n_used": 871,
+    "r": 0.3099,
+    "sb": 0.4732,
+    "sb_siteres": 0.4281
+   }
+  ]
+ },
+ "occ_b070": {
+  "n_comp": 5,
+  "comps": 5,
+  "mean_sb": 0.4463015898431289,
+  "mean_sb_siteres": 0.4116053494146853,
+  "n_ge030": 5,
+  "per_comp": [
+   {
+    "comp": 0,
+    "n_used": 871,
+    "r": 0.3412,
+    "sb": 0.5089,
+    "sb_siteres": 0.4604
+   },
+   {
+    "comp": 1,
+    "n_used": 871,
+    "r": 0.2968,
+    "sb": 0.4577,
+    "sb_siteres": 0.4236
+   },
+   {
+    "comp": 2,
+    "n_used": 871,
+    "r": 0.2596,
+    "sb": 0.4122,
+    "sb_siteres": 0.358
+   },
+   {
+    "comp": 3,
+    "n_used": 871,
+    "r": 0.2095,
+    "sb": 0.3464,
+    "sb_siteres": 0.3228
+   },
+   {
+    "comp": 4,
+    "n_used": 871,
+    "r": 0.339,
+    "sb": 0.5063,
+    "sb_siteres": 0.4931
+   }
+  ]
+ },
+ "occ_b090": {
+  "n_comp": 5,
+  "comps": 5,
+  "mean_sb": 0.4305384761848149,
+  "mean_sb_siteres": 0.3981976522551129,
+  "n_ge030": 5,
+  "per_comp": [
+   {
+    "comp": 0,
+    "n_used": 871,
+    "r": 0.3264,
+    "sb": 0.4922,
+    "sb_siteres": 0.4515
+   },
+   {
+    "comp": 1,
+    "n_used": 871,
+    "r": 0.3031,
+    "sb": 0.4652,
+    "sb_siteres": 0.4529
+   },
+   {
+    "comp": 2,
+    "n_used": 871,
+    "r": 0.1954,
+    "sb": 0.3269,
+    "sb_siteres": 0.3141
+   },
+   {
+    "comp": 3,
+    "n_used": 871,
+    "r": 0.2373,
+    "sb": 0.3836,
+    "sb_siteres": 0.3212
+   },
+   {
+    "comp": 4,
+    "n_used": 871,
+    "r": 0.32,
+    "sb": 0.4848,
+    "sb_siteres": 0.4514
+   }
+  ]
+ },
+ "occFUSED_3band": {
+  "n_comp": 5,
+  "comps": 5,
+  "mean_sb": 0.5050580053973477,
+  "mean_sb_siteres": 0.47408673943396734,
+  "n_ge030": 5,
+  "per_comp": [
+   {
+    "comp": 0,
+    "n_used": 871,
+    "r": 0.2575,
+    "sb": 0.4096,
+    "sb_siteres": 0.3914
+   },
+   {
+    "comp": 1,
+    "n_used": 871,
+    "r": 0.2805,
+    "sb": 0.4381,
+    "sb_siteres": 0.3927
+   },
+   {
+    "comp": 2,
+    "n_used": 871,
+    "r": 0.3951,
+    "sb": 0.5664,
+    "sb_siteres": 0.557
+   },
+   {
+    "comp": 3,
+    "n_used": 871,
+    "r": 0.3709,
+    "sb": 0.5411,
+    "sb_siteres": 0.5033
+   },
+   {
+    "comp": 4,
+    "n_used": 871,
+    "r": 0.3987,
+    "sb": 0.5701,
+    "sb_siteres": 0.526
+   }
+  ]
+ },
+ "CxA_D5A_fused_centered": {
+  "n_comp": 5,
+  "comps": 5,
+  "mean_sb": 0.4629151632630225,
+  "mean_sb_siteres": 0.4564657659917244,
+  "n_ge030": 5,
+  "per_comp": [
+   {
+    "comp": 0,
+    "n_used": 871,
+    "r": 0.2469,
+    "sb": 0.396,
+    "sb_siteres": 0.4003
+   },
+   {
+    "comp": 1,
+    "n_used": 871,
+    "r": 0.2252,
+    "sb": 0.3677,
+    "sb_siteres": 0.3567
+   },
+   {
+    "comp": 2,
+    "n_used": 871,
+    "r": 0.3878,
+    "sb": 0.5588,
+    "sb_siteres": 0.5617
+   },
+   {
+    "comp": 3,
+    "n_used": 871,
+    "r": 0.3498,
+    "sb": 0.5183,
+    "sb_siteres": 0.5032
+   },
+   {
+    "comp": 4,
+    "n_used": 871,
+    "r": 0.3104,
+    "sb": 0.4737,
+    "sb_siteres": 0.4604
+   }
+  ]
+ },
+ "AxA_D5A_fused_raw": {
+  "n_comp": 5,
+  "comps": 5,
+  "mean_sb": 0.4629151632630225,
+  "mean_sb_siteres": 0.4564657659917244,
+  "n_ge030": 5,
+  "per_comp": [
+   {
+    "comp": 0,
+    "n_used": 871,
+    "r": 0.2469,
+    "sb": 0.396,
+    "sb_siteres": 0.4003
+   },
+   {
+    "comp": 1,
+    "n_used": 871,
+    "r": 0.2252,
+    "sb": 0.3677,
+    "sb_siteres": 0.3567
+   },
+   {
+    "comp": 2,
+    "n_used": 871,
+    "r": 0.3878,
+    "sb": 0.5588,
+    "sb_siteres": 0.5617
+   },
+   {
+    "comp": 3,
+    "n_used": 871,
+    "r": 0.3498,
+    "sb": 0.5183,
+    "sb_siteres": 0.5032
+   },
+   {
+    "comp": 4,
+    "n_used": 871,
+    "r": 0.3104,
+    "sb": 0.4737,
+    "sb_siteres": 0.4604
+   }
+  ]
+ },
+ "wall_secs": 72
+}

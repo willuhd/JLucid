@@ -1,0 +1,33 @@
+{
+  "real": {
+    "eswan_adhd_inattention_total": {
+      "BEH_dprime": {
+        "cv_r": 0.22999453431161648,
+        "n": 85,
+        "fw_p": 0.19161676646706588,
+        "GATE2_VERDICT": "dead"
+      }
+    },
+    "eswan_adhd_hyperactivity_impulsivity_total": {
+      "BEH_dprime": {
+        "cv_r": 0.19255401749205275,
+        "n": 86,
+        "fw_p": 0.34530938123752497,
+        "GATE2_VERDICT": "dead"
+      }
+    },
+    "eswan_adhd_total_score": {
+      "BEH_dprime": {
+        "cv_r": 0.35045933793792455,
+        "n": 85,
+        "fw_p": 0.00998003992015968,
+        "GATE2_VERDICT": "ALIVE"
+      }
+    }
+  },
+  "null_max": {
+    "mean": 0.17074679379953875,
+    "q95": 0.2997700424764239
+  },
+  "n_perm": 500
+}

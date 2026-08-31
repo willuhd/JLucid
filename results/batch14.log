@@ -1,0 +1,41 @@
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+features done (72s)
+[Inatt] s5_frac7   LOSO CVr=+0.033 n=336
+[Inatt] s4_frac7   LOSO CVr=+0.028 n=336
+[Inatt] s4_pl_f28  LOSO CVr=+0.058 n=336
+[Inatt] s4_am_f28  LOSO CVr=-0.053 n=336
+[Inatt] s4_fc28    LOSO CVr=+0.038 n=336
+[Hyper] s5_frac7   LOSO CVr=-0.033 n=336
+[Hyper] s4_frac7   LOSO CVr=-0.009 n=336
+[Hyper] s4_pl_f28  LOSO CVr=+0.066 n=336
+[Hyper] s4_am_f28  LOSO CVr=-0.119 n=336
+[Hyper] s4_fc28    LOSO CVr=+0.051 n=336
+[DX   ] s5_frac7   LOSO CVr=+0.038 n=722
+[DX   ] s4_frac7   LOSO CVr=+0.006 n=722
+[DX   ] s4_pl_f28  LOSO CVr=+0.102 n=722
+[DX   ] s4_am_f28  LOSO CVr=+0.051 n=722
+[DX   ] s4_fc28    LOSO CVr=+0.027 n=722
+
+familywise null (200)...
+  perm 50 (189s)
+  perm 100 (289s)
+  perm 150 (392s)
+  perm 200 (495s)
+null q95=0.174
+[Inatt] s5_frac7   CVr=+0.033 fw_p=1.0000 -> dead
+[Inatt] s4_frac7   CVr=+0.028 fw_p=1.0000 -> dead
+[Inatt] s4_pl_f28  CVr=+0.058 fw_p=1.0000 -> dead
+[Inatt] s4_am_f28  CVr=-0.053 fw_p=1.0000 -> dead
+[Inatt] s4_fc28    CVr=+0.038 fw_p=1.0000 -> dead
+[Hyper] s5_frac7   CVr=-0.033 fw_p=1.0000 -> dead
+[Hyper] s4_frac7   CVr=-0.009 fw_p=1.0000 -> dead
+[Hyper] s4_pl_f28  CVr=+0.066 fw_p=0.9900 -> dead
+[Hyper] s4_am_f28  CVr=-0.119 fw_p=0.5025 -> dead
+[Hyper] s4_fc28    CVr=+0.051 fw_p=1.0000 -> dead
+[DX   ] s5_frac7   CVr=+0.038 fw_p=1.0000 -> dead
+[DX   ] s4_frac7   CVr=+0.006 fw_p=1.0000 -> dead
+[DX   ] s4_pl_f28  CVr=+0.102 fw_p=0.7065 -> dead
+[DX   ] s4_am_f28  CVr=+0.051 fw_p=1.0000 -> dead
+[DX   ] s4_fc28    CVr=+0.027 fw_p=1.0000 -> dead
+DONE 496s

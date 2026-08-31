@@ -1,0 +1,21 @@
+[cc200] loaded 872 subjects (skipped 0), HC=547, ADHD=325
+[cc200] site distribution: {np.int64(1): np.int64(240), np.int64(3): np.int64(88), np.int64(4): np.int64(65), np.int64(5): np.int64(225), np.int64(6): np.int64(104), np.int64(7): np.int64(96), np.int64(8): np.int64(54)}
+[   26.5s] T-cohort n=336
+[   26.6s] IQ cohort n=795
+[   26.6s] building t4 features full+halves (this is the heavy pass) ...
+[   27.4s]   subj 0/872
+[  106.2s]   subj 100/872
+[  196.8s]   subj 200/872
+[  299.2s]   subj 300/872
+[  376.3s]   subj 400/872
+[  458.1s]   subj 500/872
+[  545.3s]   subj 600/872
+[  628.6s]   subj 700/872
+[  720.2s]   subj 800/872
+[  772.8s] t4 features built and saved
+[  772.8s] Gate 0 (split-half SB) ...
+  CGATE: mean SB=0.024 min=-0.195 frac>=0.30=0.00
+  EDIFF: mean SB=0.751 min=0.669 frac>=0.30=1.00
+  DYNCTRL: mean SB=0.762 min=0.215 frac>=0.30=0.93
+  EMAP: mean SB=0.868 min=0.802 frac>=0.30=1.00
+[  772.8s] Gate 0 DEAD: ['CGATE']
