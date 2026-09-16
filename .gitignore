@@ -26,6 +26,7 @@ data/
 __pycache__/
 *.py[cod]
 
-# heavy binaries (never commit; tracked results/*.npz predate this rule)
+# heavy binaries (never commit; tracked results/*.npz/*.npy predate this rule)
 *.npz
 *.pt
+*.npy

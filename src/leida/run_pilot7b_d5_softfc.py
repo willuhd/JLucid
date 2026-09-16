@@ -108,7 +108,7 @@ if __name__ == "__main__":
     for T in Ts:
         subs.append((pos, pos + T)); pos += T
     assert pos == V1c.shape[0]
-    FSTATIC = np.load(f"{BASE}/exp/28_neighborhood/results/cache/F_STATIC.npy")
+    FSTATIC = np.load(f"{BASE}/results/F_STATIC.npy")
 
     # raw = pilot7 outputs (instant re-analysis)
     Z = np.load(f"{OUT}/pilot7_d5_raw.npz")

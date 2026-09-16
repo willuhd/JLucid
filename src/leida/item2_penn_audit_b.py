@@ -3,7 +3,7 @@
 
 Source: fork-session testimony Round 4 2026-08-30 (turn after SyntaxError turn).
 Adapted ONLY: BASE JLucid2->JLucid, OUT exp/37_leida_sieve/gate1_oracle->results,
-src-pennlead->src/pennlead. SAVE REDIRECTED to exp_overnight_leida/00_recovered/
+src-pennlead->src/pennlead. SAVE REDIRECTED to /tmp scratch
 (never overwrite results/). LOGIC IDENTICAL: Morlet 0.05Hz/5cyc/60s cap, 7-net
 phases, W1/H3v/Lnet/K1 blocks, non-ADHD normative (min 20), MAD+clip3,
 comb=H3v+K1+Lnet_r, B3 mean-FD+age+sex lstsq (seed 31, 2000 perms),
@@ -16,7 +16,7 @@ import numpy as np
 import pandas as pd
 BASE = "/Volumes/thinkplus/Code/JLucid"
 OUT = f"{BASE}/results"
-VERIFY_OUT = f"{BASE}/exp_overnight_leida/00_recovered/verify_batch15c_penn_dispz.npz"
+VERIFY_OUT = "/tmp/verify_batch15c_penn_dispz.npz"
 sys.path.insert(0, f"{BASE}/src")
 from pennlead.datasets import load_pennlead
 from nilearn.datasets import fetch_atlas_schaefer_2018

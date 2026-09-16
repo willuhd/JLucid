@@ -32,17 +32,11 @@ def worker_k_half(ts):
     mu = (vecs**2) @ (1.0 - np.exp(vals))
     phi7 = np.array([phi[net_idx[k]].mean() for k in range(7)])
     mu7 = np.array([mu[net_idx[k]].mean() for k in range(7)])
-    Araw = np.abs(FC)
-    lmax2 = float(np.max(np.linalg.eigvalsh((Araw + Araw.T)/2)))
-    A6 = Araw / (1.0 + lmax2 + 1e-12) - np.eye(Nn)
-    A6 = (A6 + A6.T)/2
-    from scipy.linalg import solve_discrete_lyapunov
-    W = solve_discrete_lyapunov(A6, np.eye(Nn))
-    ca_node = 1.0 / np.maximum(np.diag(W), 1e-12)
-    ld_node = np.log(np.maximum(np.diag(W), 1e-12))
-    ca7 = np.array([ca_node[net_idx[k]].mean() for k in range(7)])
-    ld7 = np.array([ld_node[net_idx[k]].mean() for k in range(7)])
-    return np.concatenate([phi7, mu7]), np.concatenate([ca7, ld7])
+    # K2 |A|-form intentionally NOT computed: documented discrete-UNSTABLE
+    # (sieve-table batch 5 invalidation note; run_gate1_batch5.py DROPPED it,
+    # and the discrete Lyapunov need not exist — LAPACK builds differ between
+    # inf-filled W and LinAlgError). Gate 0 records K1__signed only.
+    return np.concatenate([phi7, mu7]), None
 
 ts_all, _, meta = load_cc200(qc_only=True)
 Ts = [t.shape[0] for t in ts_all]
@@ -51,7 +45,7 @@ with mp.Pool(4) as pool:
     kh2 = pool.map(worker_k_half, [t[Ts[i]//2:] if Ts[i]>=60 else None for i, t in enumerate(ts_all)], chunksize=8)
 def sb(r): return 2*r/(1+abs(r)) if r > -1 else -1
 res = json.load(open(f"{OUT}/gate0_batch5.json")) if os.path.exists(f"{OUT}/gate0_batch5.json") else {}
-for fam, ci in [("K1__signed", 0), ("K2__ca", 1)]:
+for fam, ci in [("K1__signed", 0)]:
     A = np.array([x[ci] if x else np.full(14, np.nan) for x in kh1])
     B = np.array([x[ci] if x else np.full(14, np.nan) for x in kh2])
     m = np.isfinite(A).all(1) & np.isfinite(B).all(1)

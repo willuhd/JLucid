@@ -130,7 +130,7 @@ if __name__ == "__main__":
     cent = np.load(f"{BASE}/results/ADHD200_A1_centers.npy")
     yeo = json.load(open(f"{BASE}/src/leida/atlas/yeo_true_idx.json"))
     net_idx = [np.array(yeo[n]) for n in NETS]
-    FSTATIC = np.load(f"{BASE}/exp/28_neighborhood/results/cache/F_STATIC.npy")
+    FSTATIC = np.load(f"{BASE}/results/F_STATIC.npy")
     Z = np.load(f"{OUT}/pilot7_d5_raw.npz")
     occF_lock = Z["occF"]; CSF = Z["CSF"]; DDF = Z["DDF"]
     dFCH_F = Z["dFCF"]  # (nS, K, 28) hard-gate full-run
