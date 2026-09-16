@@ -1,16 +1,16 @@
 {
   "g050__W1|eswan_adhd_inattention_total": {
-    "oracle_r": 0.5546034722892099,
+    "oracle_r": 0.5546034722892098,
     "alpha": 1,
     "n": 85
   },
   "g050__H1v|eswan_adhd_inattention_total": {
-    "oracle_r": 0.460104298067989,
+    "oracle_r": 0.46010429806798925,
     "alpha": 1,
     "n": 85
   },
   "g050__H3v|eswan_adhd_inattention_total": {
-    "oracle_r": 0.3108441007032721,
+    "oracle_r": 0.31084410070327195,
     "alpha": 1,
     "n": 85
   },
@@ -30,37 +30,37 @@
     "n": 85
   },
   "g080__H3v|eswan_adhd_inattention_total": {
-    "oracle_r": 0.25307463579151035,
+    "oracle_r": 0.2530746357915107,
     "alpha": 1,
     "n": 85
   },
   "g080__Lnet|eswan_adhd_inattention_total": {
-    "oracle_r": 0.586932397251602,
+    "oracle_r": 0.5869323972516022,
     "alpha": 1,
     "n": 85
   },
   "K1_signed|eswan_adhd_inattention_total": {
-    "oracle_r": 0.4105678864454839,
+    "oracle_r": 0.41056788644551817,
     "alpha": 1,
     "n": 85
   },
   "g050__W1|eswan_adhd_hyperactivity_impulsivity_total": {
-    "oracle_r": 0.5244489431098793,
+    "oracle_r": 0.5244489431098796,
     "alpha": 1,
     "n": 86
   },
   "g050__H1v|eswan_adhd_hyperactivity_impulsivity_total": {
-    "oracle_r": 0.5233837243276979,
+    "oracle_r": 0.5233837243276978,
     "alpha": 1,
     "n": 86
   },
   "g050__H3v|eswan_adhd_hyperactivity_impulsivity_total": {
-    "oracle_r": 0.4220297136493564,
+    "oracle_r": 0.4220297136493562,
     "alpha": 1,
     "n": 86
   },
   "g050__Lnet|eswan_adhd_hyperactivity_impulsivity_total": {
-    "oracle_r": 0.5992771083067535,
+    "oracle_r": 0.5992771083067532,
     "alpha": 1,
     "n": 86
   },
@@ -75,17 +75,17 @@
     "n": 86
   },
   "g080__H3v|eswan_adhd_hyperactivity_impulsivity_total": {
-    "oracle_r": 0.20913340153958293,
+    "oracle_r": 0.2091334015395828,
     "alpha": 1,
     "n": 86
   },
   "g080__Lnet|eswan_adhd_hyperactivity_impulsivity_total": {
-    "oracle_r": 0.5607157436502345,
+    "oracle_r": 0.5607157436502344,
     "alpha": 1,
     "n": 86
   },
   "K1_signed|eswan_adhd_hyperactivity_impulsivity_total": {
-    "oracle_r": 0.35959526239143214,
+    "oracle_r": 0.3595952623915446,
     "alpha": 1,
     "n": 86
   },
@@ -95,17 +95,17 @@
     "n": 85
   },
   "g050__H1v|eswan_adhd_total_score": {
-    "oracle_r": 0.48755128607868836,
+    "oracle_r": 0.48755128607868825,
     "alpha": 1,
     "n": 85
   },
   "g050__H3v|eswan_adhd_total_score": {
-    "oracle_r": 0.38861085088202985,
+    "oracle_r": 0.3886108508820296,
     "alpha": 1,
     "n": 85
   },
   "g050__Lnet|eswan_adhd_total_score": {
-    "oracle_r": 0.6248733958222448,
+    "oracle_r": 0.6248733958222447,
     "alpha": 1,
     "n": 85
   },
@@ -115,22 +115,22 @@
     "n": 85
   },
   "g080__H1v|eswan_adhd_total_score": {
-    "oracle_r": 0.5699111809723652,
+    "oracle_r": 0.5699111809723653,
     "alpha": 1,
     "n": 85
   },
   "g080__H3v|eswan_adhd_total_score": {
-    "oracle_r": 0.18904945890042277,
+    "oracle_r": 0.18904945890042293,
     "alpha": 1,
     "n": 85
   },
   "g080__Lnet|eswan_adhd_total_score": {
-    "oracle_r": 0.572422514473545,
+    "oracle_r": 0.5724225144735451,
     "alpha": 1,
     "n": 85
   },
   "K1_signed|eswan_adhd_total_score": {
-    "oracle_r": 0.37895286226528985,
+    "oracle_r": 0.3789528622653753,
     "alpha": 1,
     "n": 85
   }

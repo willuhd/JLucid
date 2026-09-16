@@ -1,16 +1,16 @@
 {
  "soft_neff_frac_T": {
-  "0": 0.4796842826790818,
+  "0": 0.47968428267908175,
   "1": 0.479705639115557,
-  "2": 0.46264656457579806,
+  "2": 0.462646564575798,
   "3": 0.495327098408152,
   "4": 0.502656493037572
  },
  "dFCsoft_s0": {
   "n_comp": 28,
   "comps": 28,
-  "mean_sb": 0.1139227565199092,
-  "mean_sb_siteres": 0.10553747491924291,
+  "mean_sb": 0.11392275651990917,
+  "mean_sb_siteres": 0.10553747491924294,
   "n_ge030": 0,
   "per_comp": [
    {
@@ -214,8 +214,8 @@
  "dFCsoft_s1": {
   "n_comp": 28,
   "comps": 28,
-  "mean_sb": 0.07279093616026423,
-  "mean_sb_siteres": 0.06511414742481142,
+  "mean_sb": 0.07279093616026429,
+  "mean_sb_siteres": 0.06511414742481149,
   "n_ge030": 0,
   "per_comp": [
    {
@@ -625,7 +625,7 @@
   "n_comp": 28,
   "comps": 28,
   "mean_sb": 0.09551339318129612,
-  "mean_sb_siteres": 0.08748467182153355,
+  "mean_sb_siteres": 0.08748467182153356,
   "n_ge030": 0,
   "per_comp": [
    {
@@ -829,8 +829,8 @@
  "dFCsoft_s4": {
   "n_comp": 28,
   "comps": 28,
-  "mean_sb": 0.07213196666858154,
-  "mean_sb_siteres": 0.06272751221324317,
+  "mean_sb": 0.07213196666858158,
+  "mean_sb_siteres": 0.06272751221324323,
   "n_ge030": 0,
   "per_comp": [
    {
@@ -1034,7 +1034,7 @@
  "occ5_anchor": {
   "n_comp": 5,
   "comps": 5,
-  "mean_sb": 0.35785714755902553,
+  "mean_sb": 0.3578571475590256,
   "mean_sb_siteres": 0.3486051250902017,
   "n_ge030": 4,
   "per_comp": [
@@ -1077,32 +1077,32 @@
  },
  "redundancy_CxA5_centered": {
   "blocks": "FC28",
-  "mean_R2": 0.044060382067535264,
+  "mean_R2": 0.044060382067535306,
   "n_comp": 5
  },
  "redundancy_CS14": {
   "blocks": "FC28+prec+phi+mu",
-  "mean_R2": 0.9010166928409822,
+  "mean_R2": 0.9010166928409852,
   "n_comp": 14
  },
  "redundancy_T10E5_15": {
   "blocks": "FC28+prec+phi+mu",
-  "mean_R2": 0.9132329709657822,
+  "mean_R2": 0.9132329709657799,
   "n_comp": 15
  },
  "redundancy_dFCsoft_s0": {
   "blocks": "FC28",
-  "mean_R2": 0.12884942044739983,
+  "mean_R2": 0.12884942044739986,
   "n_comp": 28
  },
  "redundancy_dFCsoft_s2": {
   "blocks": "FC28",
-  "mean_R2": 0.08161563653157397,
+  "mean_R2": 0.08161563653157396,
   "n_comp": 28
  },
  "redundancy_dFCsoft_s4": {
   "blocks": "FC28",
-  "mean_R2": 0.09269971860005066,
+  "mean_R2": 0.09269971860005063,
   "n_comp": 28
  },
  "redundancy_occ5": {
@@ -1112,8 +1112,8 @@
  },
  "redundancy_CT14_tmpl": {
   "blocks": "FC28",
-  "mean_R2": 0.3966992157978559,
+  "mean_R2": 0.3966992157979326,
   "n_comp": 14
  },
- "wall_secs": 107
+ "wall_secs": 17
 }
