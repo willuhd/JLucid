@@ -1,0 +1,670 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{float}
+\geometry{margin=1in}
+\begin{document}
+
+\title{Data-driven Modeling and Dynamical Analysis of Brain-State Transitions and Heterogeneity in Pediatric ADHD}
+\author{Felicity Li, Quhao Chen}
+
+
+\maketitle
+
+\begin{abstract}
+We propose a dynamical-systems framework for ADHD based on the mathematical organization of brain-state transitions, operationalized through (i) Leading Eigenvector Dynamics Analysis (LEiDA) of band-limited BOLD phases, (ii) network controllability and transition energy of the structural--functional coupling matrix, and (iii) a Jacobian-based dynamical workspace (J-space) learned by a neural ordinary differential equation. We first tested the framework's mean-shift predictions across multiple cohorts, imaging conditions, clinical measures, and developmental models. These first-order predictions were consistently null, while assay-validating positive controls confirmed that the analytical pipeline was capable of detecting meaningful effects. Guided by second-order-statistics theory for heterogeneous syndromes, we then tested whether ADHD alters the dispersion of normative deviations rather than their mean. This analysis revealed elevated inter-individual dispersion of dynamical features in ADHD within the continuous feature family, while corresponding analyses based on discrete ROI-level features did not replicate the effect. The dispersion effect was ADHD-specific and remained consistent across multiple feature blocks, but showed sensitivity to motion and site, indicating important boundary conditions on its generalizability. Further multi-cohort auditing revealed that static network controllability can collapse onto global spectral properties and motion, while fitted subject-specific J-space operators at the BOLD timescale are poorly identifiable despite strong predictive performance. Together, these findings suggest that ADHD may be characterized not primarily by a uniform shift in brain dynamics, but by increased inter-individual heterogeneity in the organization of brain-state transitions. We therefore interpret the dispersion effect as a population-level characterization rather than an individual-level biomarker, thus highlighting the fundamental mathematical constraints on spectral measures, operator identifiability, and dynamical biomarker inference in the future.
+
+\end{abstract}
+
+\section{Introduction: }
+
+\subsection{Background}
+Usually diagnosed in childhood, attention-deficit/hyperactivity disorder (ADHD) is a neurodevelopmental disorder characterized by persistent difficulties in attention, impulsivity, and hyperactivity. Previous research has increasingly suggested that ADHD involves abnormalities in the organization and interaction of large-scale brain networks rather than dysfunction within a single brain region. Castellanos and Proal (2012) highlighted the involvement of distributed networks, including the default mode network (DMN), frontoparietal network (FPN), and attention networks, while Fassbender et al. (2009) linked insufficient suppression of the DMN to increased distractibility in ADHD. However, conventional functional-connectivity approaches mainly describe relatively static relationships between regions and therefore provide limited information about how the brain moves between functional states. Dynamic approaches such as Leading Eigenvector Dynamics Analysis (LEiDA) have demonstrated that resting-state activity can be represented as recurrent whole-brain phase-coherence states, with measures such as state occurrence, lifetime, and switching capturing their temporal organization (Tang et al., 2026; Cabral et al., 2017). Building on this, network-control studies by Gu et al. (2015, 2017) showed that brain networks can be modeled as dynamical systems in which different brain states require different amounts of control energy to reach. Sun et al. (2026) further extended this framework to functional brain networks using data-constrained dynamical modeling. Together, these studies suggest that ADHD may involve not only abnormal connectivity, but also altered dynamics and inefficient transitions between attentional brain states. However, existing approaches generally rely on simplified or static system representations and do not directly characterize the local nonlinear dynamics governing state transitions. This motivates the use of learned nonlinear dynamics and Jacobian analysis in this paper, which aims to investigate whether ADHD is associated with altered low-dimensional dynamical organization and state-routing efficiency.
+
+\subsection{Mathematical Framework}
+
+The proposed framework conceptualizes large-scale brain activity as a nonlinear dynamical system evolving within a high-dimensional state space. Unlike traditional functional connectivity approaches that characterize statistical relationships between brain regions, this framework focuses on the underlying mechanisms governing transitions between dynamic brain configurations. Let the whole-brain activity state at time $t$ be represented as:
+\begin{equation}
+x(t)=[x_1(t),x_2(t),\ldots,x_N(t)]^T
+\end{equation}
+where $N$ denotes the number of brain regions and each element represents the instantaneous activity level of a specific region. The temporal evolution of the neural system is modeled as:
+\begin{equation}
+\frac{dx(t)}{dt}=f(x(t))
+\end{equation}
+where $f(\cdot)$ represents the nonlinear transformation describing how the current brain state determines future evolution.
+
+This formulation assumes that cognition emerges from trajectories through a neural state space rather than from isolated activation patterns. Therefore, neurological disorders may arise not only from altered connectivity patterns but also from disruptions in the dynamical organization regulating transitions between functional states.
+
+Because the brain contains thousands of interacting variables, directly analyzing the complete state space is computationally infeasible. Therefore, this framework introduces a reduced dynamical representation, termed \textbf{J-space}, which captures the dominant directions controlling neural state transitions. J-space identifies the essential dynamical coordinates governing movement between functional configurations; it is the model class we ultimately evaluate (Section~3) and whose first-order predictions we tested first in the analytically tractable phase-dynamics feature family (Section~2).
+
+\subsection{Jacobian-Based Local Dynamical Modeling}
+
+To characterize local behavior of the nonlinear neural system, the Jacobian matrix is introduced. Given the nonlinear dynamical system $\dot{x}=f(x)$, the Jacobian matrix is defined as:
+\begin{equation}
+J(x)=\frac{\partial f(x)}{\partial x}
+\end{equation}
+where $J(x)\in \mathbb{R}^{N\times N}$ describes the sensitivity of the system to small perturbations around the current brain state, with elements
+\begin{equation}
+J_{ij}=\frac{\partial f_i}{\partial x_j}.
+\end{equation}
+For a small perturbation $\Delta x$ around a given state, the nonlinear system can be approximated by $\Delta\dot{x}=J(x)\Delta x$.
+
+Since resting-state fMRI does not directly provide the governing function $f(x)$, the framework learns latent neural dynamics using a neural ordinary differential equation:
+\begin{equation}
+\frac{dz(t)}{dt}=f_{\theta}(z(t),t)
+\end{equation}
+where $z(t)$ represents a latent brain state and $f_{\theta}$ is a neural network parameterized by $\theta$. After learning the latent dynamics, the Jacobian is calculated as $J(z)=\partial f_{\theta}(z,t)/\partial z$.
+
+\subsection{Construction of J-Space and SVD Coordinate Duality}
+
+The Jacobian matrix contains information from all dynamical interactions among brain regions. To identify dominant dynamical directions, singular value decomposition is applied:
+\begin{equation}
+J=U\Sigma V^T.
+\end{equation}
+The singular vectors play two distinct, complementary mathematical roles:
+\begin{itemize}
+\item \textbf{Input/Gain Modes ($V_k$):} The right singular vectors associated with the largest singular values define the primary dynamical subspace $J_{\mathrm{space}}=V_k$. Because $V_k$ captures the directions of maximal perturbation sensitivity and energetic gain, the latent brain state is projected into J-space coordinates via $z_J(t) = V_k^T z(t)$, with reduced dynamics governed by $A_J = V_k^T J V_k$.
+\item \textbf{Output Broadcast Modes ($U_k$):} The left singular vectors $U_k = [u_1, \ldots, u_k]$ define the dominant output patterns through which dynamical perturbations propagate across the network. These vectors are retained specifically for downstream network loading and anatomical attribution (Section~3.3).
+\end{itemize}
+When $J$ is symmetric, $U = V$ up to sign; in learned, non-symmetric flow fields, this duality distinguishes the coordinates of control input from the pattern of observed response.
+
+\subsection{Research Hypotheses}
+
+The framework originally hypothesized that ADHD is associated with impaired organization of brain-state transitions. Five predictions were specified:
+
+\begin{enumerate}
+\item \textbf{State occupancy:} increased persistence of internally oriented states in ADHD, $P(\mathrm{DMN})_{\mathrm{ADHD}}>P(\mathrm{DMN})_{\mathrm{Control}}$ and $\mathrm{Lifetime}(\mathrm{DMN})_{\mathrm{ADHD}}>\mathrm{Lifetime}(\mathrm{DMN})_{\mathrm{Control}}$.
+\item \textbf{Transition difficulty:} elevated transition energy in ADHD, $E_{\mathrm{ADHD}}>E_{\mathrm{Control}}$, particularly for DMN$\to$executive/attention transitions.
+\item \textbf{Workspace organization:} disrupted J-space organization --- reduced spectral concentration, altered effective rank, decreased axis stability, weaker executive-control representation.
+\item \textbf{Clinical prediction:} J-space/dynamical features predict attentional impairment better than traditional connectivity measures.
+\item \textbf{Dispersion:} ADHD is associated with elevated \emph{inter-individual dispersion} of normative dynamical deviations,
+\begin{equation}
+\mathbb{E}[D\,|\,\mathrm{ADHD}]>\mathbb{E}[D\,|\,\mathrm{Control}],
+\qquad D_i=\frac{1}{|K|}\sum_{k\in K} z_{ik}^2,
+\end{equation}
+where $z_{ik}$ are robust normative $z$-scores of dynamical features (Section~2.4) and $K$ is a feature block of the LEiDA/controllability family.
+\end{enumerate}
+
+\section{Model and Methods: LEiDA States, Controllability, and Transition Energy}
+
+\subsection{Dynamic Brain-State Features Using LEiDA}
+
+For each brain region $i$, the BOLD signal $B_i(t)$ is transformed into an instantaneous phase by complex Morlet wavelet convolution at center frequency $f_0$ (primary geometry $f_0{=}0.05$\,Hz, $n{=}5$ cycles, $60$\,s kernel cap; secondary $f_0{=}0.08$\,Hz, $n{=}3$):
+\begin{equation}
+W_i(t)=\int B_i(\tau)\,\psi^{*}(\tau-t)\,d\tau,\qquad
+\psi(t)=\pi^{-1/4}e^{i2\pi f_0 t}e^{-t^2/(2\sigma_t^2)},\quad \sigma_t=\frac{n}{2\pi f_0},
+\end{equation}
+\begin{equation}
+B_i(t)\rightarrow\phi_i(t)=\arg W_i(t).
+\end{equation}
+Regions are grouped into seven canonical networks $k$ (Yeo partition; VIS, SOM, DAN, SAL, LIM, FPN, DMN). The network phase is the argument of the complex mean of ROI phase unit vectors:
+\begin{equation}
+\theta_k(t)=\arg\Big(\sum_{i\in\mathcal{N}_k} e^{i\phi_i(t)}\Big),
+\end{equation}
+and network phase coherence is
+\begin{equation}
+C_{kl}(t)=\cos\!\big(\theta_k(t)-\theta_l(t)\big).
+\end{equation}
+The dominant synchronization pattern is the leading eigenvector of the $7\times 7$ coherence matrix,
+\begin{equation}
+C(t)\,v(t)=\lambda(t)v(t),
+\end{equation}
+with the sign convention that the majority of elements of $v(t)$ are positive (the eigenvector is otherwise defined only up to sign; all feature constructions below are sign-invariant). Three per-subject feature blocks derive from $\theta(t)$ and $v(t)$:
+
+\begin{itemize}
+\item \textbf{L (LEiDA co-leadership, 28 features):} the temporal second moment of the leading eigenvector,
+\begin{equation}
+L=\frac{1}{T}\sum_{t=1}^{T} v(t)v(t)^{T},
+\end{equation}
+retained as its 28 upper-triangular entries. $L_{kl}$ is the fraction of time networks $k,l$ co-lead the global synchronization pattern.
+\item \textbf{W1 (phase-difference variance, 28 features):} within-subject temporal variance of wrapped pairwise network phase differences,
+\begin{equation}
+W1_{kl}=\mathrm{Var}_t\big[\mathrm{wrap}(\theta_k(t)-\theta_l(t))\big].
+\end{equation}
+\item \textbf{H3 (VAR, Hancock-style variant, 8 features):} per-network temporal variance of leading-eigenvector elements, $\mathrm{Var}_t[v_k(t)]$ (plus the network mean). This is an \emph{eigenvector-element} variant of the metastability/variance quantity in Hancock et al.\ (2023), whose published definition operates on instantaneous phase-locking values that our block inherits (temporal dispersion of the leading mode).
+\end{itemize}
+
+\subsection{Network Controllability}
+
+The brain is modeled as a linear time-invariant control system:
+\begin{equation}
+\dot{x}(t)=Ax(t)+Bu(t),
+\end{equation}
+where $A$ derives from the whole-run functional connectivity matrix, $x(t)$ is the brain state, $B$ the control input matrix (here $B=I$: every node is a control location), and $u(t)$ external input. The published $|A|$-form $A=|FC|/(1+\lambda_{\max})-I$ used in the schizophrenia application of this methods family is discrete-time unstable in our data (eigenvalues of $|A|$ reach $\approx-1.5$; a discrete Gramian $\sum A^t BB^T (A^T)^t$ diverges). We therefore use the signed, symmetrized, spectrally-shifted continuous-time-stable form:
+\begin{equation}
+A=\frac{FC}{1+\lambda_{\max}(FC)}-I,\qquad
+A_s=\tfrac{1}{2}(A+A^T),\qquad
+A_s\leftarrow A_s-\big(\lambda_{\max}(A_s)+\varepsilon\big)I,
+\end{equation}
+so that $A_s=V\Lambda V^T$ has $\lambda_j<0\ \forall j$ and the continuous-time machinery is well-posed. The controllability Gramian is:
+\begin{equation}
+W_c=\int_0^{\infty} e^{A_s t}BB^Te^{A_s^{T}t}dt,
+\end{equation}
+which for $B=I$ and symmetric stable $A_s$ solves the Lyapunov equation $A_s W_c+W_c A_s^{T}=-I$, giving the closed form $W_c=-\tfrac{1}{2}A_s^{-1}$ and hence per-node average controllability
+\begin{equation}
+\varphi_k=\sum_{j}\frac{V_{kj}^{2}}{-2\lambda_j}\qquad(\text{14 features: }\{\varphi_k\}\cup\{\mu_k\}),
+\end{equation}
+with the continuous-time modal controllability analog
+\begin{equation}
+\mu_k=\sum_j V_{kj}^{2}\big(1-e^{\lambda_j}\big),
+\end{equation}
+which weights each node's participation by how strongly its modes decay (slow modes with $\lambda_j\!\to\!0^-$ contribute little; fast modes contribute $\approx V_{kj}^2$). Together $\{\varphi_k,\mu_k\}$ form the \textbf{K1 signed-A controllability block} (14 features).
+
+\subsection{Transition Energy}
+
+The minimum control energy to move between an initial state $x_0$ and target state $x_T$ in horizon $T$ is:
+\begin{equation}
+E_{\min}=\min_{u}\int_0^{T} u(t)^{T}u(t)\,dt
+\quad\text{s.t.}\quad
+\dot{x}=A_s x+u,\quad x(0)=x_0,\ x(T)=x_T,
+\end{equation}
+which has the classical closed form
+\begin{equation}
+E_{\min}=\big(x_T-e^{A_sT}x_0\big)^{T}\,W_c(T)^{-1}\big(x_T-e^{A_sT}x_0\big),\qquad
+W_c(T)=\int_0^{T} e^{A_s(T-t)}e^{A_s^{T}(T-t)}\,dt .
+\end{equation}
+We evaluated transition control energy (TCE) between leading-eigenvector state centroids (operationalization of the second hypothesis) and DMN$\to$executive targets; the construction is well-posed under the corrected $A_s$ above.
+
+\subsection{Normative Deviation and the Dispersion Index}
+
+All group tests use control-only normative models. Per site (ADHD-200) or per cohort (PennLEAD), each feature component $k$ is regressed on age and sex using controls only:
+\begin{equation}
+\hat{\mu}_k(\text{age},\text{sex})=\alpha_k+\beta_{k}^{\text{age}}\cdot\text{age}
++\beta_{k}^{\text{sex}}\cdot\text{sex},
+\end{equation}
+and a robust scale is obtained from control residuals,
+\begin{equation}
+\sigma_k = 1.4826\cdot\mathrm{MAD}_k
+=1.4826\cdot\mathrm{median}_{i\in\text{ctrl}}\big|r_{ik}-\mathrm{median}(r_{\bullet k})\big|.
+\end{equation}
+Each subject's normative deviation is
+\begin{equation}
+z_{ik}=\frac{x_{ik}-\hat{\mu}_k(\text{age}_i,\text{sex}_i)}{\sigma_k},
+\qquad |z_{ik}|\le 3\ \text{(clip)},
+\end{equation}
+and the per-subject dispersion index over a feature block $K$ is
+\begin{equation}
+\boxed{\ D_i=\frac{1}{|K|}\sum_{k\in K} z_{ik}^2\ }
+\end{equation}
+--- the mean squared normative deviation, an \emph{unsigned} magnitude of deviation from the control trajectory. Group statistics:
+\begin{equation}
+\Delta D=\overline{D}_{\mathrm{ADHD}}-\overline{D}_{\mathrm{Control}},\qquad
+\mathrm{VR}=\frac{s^2_{\mathrm{ADHD}}}{s^2_{\mathrm{Control}}},
+\end{equation}
+with Cohen's $d$ on $D$ and significance by label permutation: within-site for ADHD-200 (preserving site composition of the null), full shuffle for single-site PennLEAD; 5{,}000 permutations, two-sided, with the $+1$ correction. $D$ is unsigned by construction: it measures \emph{how far} a subject sits from the normative trajectory in any direction --- the quantity that heterogeneity theory predicts is elevated when a clinical group deviates in subject-specific directions.
+
+\subsection{200-ROI Hilbert Implementation}
+
+A second instantiation runs at 200-ROI resolution: Hilbert phases of the band-passed (0.02--0.1\,Hz) series, $200\times 200$ instantaneous coherence, leading eigenvector (largest $|\lambda|$, literal majority-count sign rule), $k$-means dictionaries ($k{=}5$, Dunn-checked) with occurrence, lifetime, dwell-tail ($\#\{\mathrm{bouts}\ge 8\}$, 90th percentile) and switch-rate metrics, plus dictionary-free scalars $g(t)=|\lambda_1(t)|/N$ and $g_{\mathrm{sd}}$. Cohorts: ADHD-200 Athena 190-ROI series, PennLEAD vendor/XCP-D parcel series, HBN CC200 series, and ds000030 raw BOLD under the uniform pipeline below.
+
+\subsection{Inference Standard}
+
+All $p$-values in the added analyses are Freedman--Lane residual permutations (residualized target permuted, full design refit with a fresh $(X^TX)^{-1}$ per permutation; cross-checked against the canonical residual-permutation variant with agreement to the third decimal), familywise max-$|t|$ corrected over prespecified families.
+
+\section{Model and Methods: the Jacobian, SVD-Based J-Space, and Dynamical Metrics}
+\label{sec:jspace-model}
+
+This section specifies the mechanistic model class that motivates the feature family above and constitutes our modeling agenda. 
+
+\subsection{Jacobian-Based Dynamical Framework}
+
+The framework models latent brain activity as a nonlinear dynamical system whose evolution depends on both the current latent state and the identified LEiDA state. Let $z(t)\in\mathbb{R}^{d}$ denote the latent neural state, with latent dimensionality $d\approx 8$--$16$. The temporal evolution is described by a Neural ODE:
+\begin{equation}
+\dot{z}(t)=f_{\theta}(z(t),s(t)),
+\end{equation}
+where $f_{\theta}$ is parameterized by $\theta$ and $s(t)$ denotes the LEiDA-derived brain state at time $t$. Two complementary Jacobians are evaluated. The \textit{future-state Jacobian} measures how perturbations of the current latent state influence a predicted future readout:
+\begin{equation}
+J_{\mathrm{fut}}(t)=\frac{\partial y(t+\Delta)}{\partial z(t)},
+\end{equation}
+identifying latent directions that disproportionately influence future routing. The \textit{dynamical Jacobian} characterizes the local dynamics of the latent system itself:
+\begin{equation}
+J_{\mathrm{dyn}}(t)=\frac{\partial f_{\theta}(z(t),s(t))}{\partial z}.
+\end{equation}
+$J_{\mathrm{fut}}$ asks which latent directions influence the future output; $J_{\mathrm{dyn}}$ asks how perturbations propagate through the learned dynamics. The two lenses are complementary.
+
+\subsection{Temporal Averaging and SVD-Based J-Space}
+
+A global representation is obtained by averaging the future-state Jacobian over time, $\overline{J}_{\mathrm{fut}}=\mathbb{E}_t[J_{\mathrm{fut}}(t)]$, followed by SVD:
+\begin{equation}
+\overline{J}_{\mathrm{fut}}=U\Sigma V^{\top},\qquad
+\Sigma=\operatorname{diag}(\sigma_1,\ldots,\sigma_d),\quad
+\sigma_1\geq\sigma_2\geq\cdots\geq\sigma_d\geq0.
+\end{equation}
+The leading right singular vectors $V_k = [v_1, \ldots, v_k]$ define the dominant dynamical subspace $J_{\mathrm{space}}$, with latent-state projection $z_J(t)=V_k^{\top}z(t)$: the coordinates of the brain's latent state along the dominant dynamical input/gain axes. The leading left singular vectors $U_k = [u_1, \ldots, u_k]$ define the corresponding output broadcast modes, which map back to cortical and subcortical networks through the decoder Jacobian for biological interpretation.
+
+\subsection{J-Space Metrics}
+
+\textbf{Spectral concentration} quantifies how strongly future-state sensitivity is concentrated in the leading directions:
+\begin{equation}
+C_k=\frac{\sum_{i=1}^{k}\sigma_i^2}{\sum_{i=1}^{d}\sigma_i^2}.
+\end{equation}
+\textbf{Effective rank} measures the effective dimensionality of the Jacobian spectrum. Two related standard forms are used jointly (the entropy form and the stable-rank form):
+\begin{equation}
+r_{\mathrm{ent}}=\exp\Big(-\sum_i p_i\log p_i\Big),\quad p_i=\frac{\sigma_i}{\sum_j\sigma_j};
+\qquad
+r_{\mathrm{sr}}=\frac{\big(\sum_i\sigma_i\big)^2}{\sum_i\sigma_i^2}.
+\end{equation}
+A low $r_{\mathrm{eff}}$ (either form) indicates dominance of a few dimensions; a high value indicates broadly distributed influence. Both forms are basis-invariant functions of singular values. \textbf{Axis stability} is the temporal consistency of the dominant subspace:
+\begin{equation}
+S(t_1,t_2)=\big\|V_k(t_1)^{\top}V_k(t_2)\big\|_F,
+\end{equation}
+with higher similarity indicating a stable dynamical workspace. \textbf{Network loading} attributes output modes to brain systems via
+\begin{equation}
+L_{k,m}=\|P_m u_k\|_2,
+\end{equation}
+where $P_m$ projects onto network $m$'s subspace (of particular interest: DMN, FPN, DAN).
+
+\subsection{J-Space and Transition Energy}
+
+Within the reduced representation, $\dot{z}_J(t)=A_J z_J(t)+B_J u(t)$ with $A_J = V_k^\top J V_k$, the minimum transition energy between an initial state $z_{J,0}$ and target $z_{J,T}$ is
+\begin{equation}
+E_{\min}=\min_u \int_0^T u(t)^\top u(t)\,dt
+\end{equation}
+subject to the J-space dynamics and boundary conditions $z_J(0)=z_{J,0}$, $z_J(T)=z_{J,T}$ --- e.g.\ from a DMN-dominant centroid toward an FPN/DAN-dominant configuration, quantifying the energetic cost of attentional state transitions within the learned workspace.
+
+\subsection{Summary and the Model's Falsifiability}
+
+\begin{equation}
+\boxed{
+\text{LEiDA states}
+\rightarrow
+\text{Neural ODE}
+\rightarrow
+J_{\mathrm{fut}},J_{\mathrm{dyn}}
+\rightarrow
+\text{SVD}
+\rightarrow
+J\text{-space}
+\rightarrow
+\text{metrics}
+\rightarrow
+\text{controllability / energy}
+}
+\end{equation}
+
+\textbf{Falsifiable prediction from the confirmed finding (Hypothesis 5).} Train the above on \emph{controls only}. Score each subject by (i) trajectory negative log-likelihood under the learned flow, or (ii) optimal control energy to track the control-learned normative trajectory. The fifth hypothesis's mechanistic form predicts that the \emph{dispersion} of this deviation score is elevated in ADHD (reproducing Section~4.3's $z^2$-based result at the level of learned dynamics), while its \emph{mean} group shift is null (reproducing Section~4.2). If the learned-dynamics deviation score disperses more in ADHD than the static $z^2$ index does, the statistic upgrades from variance-of-features to distance-from-normative-manifold; if not, the dispersion effect is feature-level rather than trajectory-level. Either outcome is informative, and both are preregisterable as a new sieve batch with its own familywise calibration.
+
+\subsection{J-Space}
+
+The implementation trained instantiates the Section~\ref{sec:jspace-model} machinery as a switching-linear stay field: a GRU encoder maps windowed eigenvector trajectories to a $d{=}12$ latent $z$; the field $z_{t+1}=z+A(p)z+b(p)$ with $A(p)=\sum_s p_s A_s$ ($k{=}3$ states) is trained by cosine loss $1-\langle\hat{v},v_{\mathrm{next}}\rangle$; hence $\partial f/\partial z = A(p)$ \emph{exactly}. The model was trained on a QC-complete subset of the ADHD-200 cohort ($n{=}124$ ADHD / $183$ TDC, total $N{=}307$; ages 7--22) spanning six site-blocks: Peking\_1 ($n{=}75$), NYU ($n{=}68$), Peking\_2 ($n{=}57$), KKI ($n{=}38$), NeuroIMAGE ($n{=}36$), and Peking\_3 ($n{=}33$). Per-subject J-space metrics with group statistics are on record in Table~\ref{tab:jspace}. The unit-tested Jacobian identities hold; the question is whether the estimated quantities carry group signal.
+
+\begin{table}[H]
+\centering
+\caption{J-space group contrasts (trained switching-linear stay field, $N{=}307$).}
+\begin{tabular}{lccc}
+\toprule
+Metric & $d$ & $p$ & spread \\
+\midrule
+Spectral concentration $C_k$ & $-0.085$ & $0.47$ & mean $0.817$, sd $0.011$ \\
+Effective rank $r_{\rm eff}$ & $+0.083$ & $0.47$ & mean $6.29$, sd $0.07$ \\
+DMN contamination & $+0.081$ & $0.50$ & mean $1.00$, sd $0.16$ \\
+\bottomrule
+\end{tabular}
+\label{tab:jspace}
+\end{table}
+
+\subsection{Three structural properties of fitted dynamics at BOLD scale}
+
+The trained J-space geometry is near-identical across all $307$ subjects ($C_k$ sd $0.011$; $r_{\rm eff}$ sd $0.07$): pooled training learns the population-average flow, and per-subject deviations --- the only possible carrier of a clinical signal --- fall below the estimation floor. This is an instance of three general properties of operator estimation from $T{\approx}355$ narrowband BOLD frames:
+
+\paragraph{(i) Underdetermination toward the population mean.}
+A switching-linear field ($3\times(144{+}12)$ operator parameters plus a GRU encoder with thousands of weights) fit on $\sim$355 frames per subject cannot resolve subject-specific deviations; the optimum concentrates on the shared flow. The tight cross-subject distributions above are the observable consequence.
+
+\paragraph{(ii) Unidentifiability of deviations-from-persistence.}
+Narrowband trajectories evolve slowly, so any near-identity operator predicts well while its deviations from identity --- the individual-differences information --- have standard errors of the same order at this $T$. Fitted operators therefore do not replicate across runs (below), and any association built on them inherits estimator noise rather than brain signal. The argument is independent of estimator (Neural ODE, SSM, VAR, DMD) and of preprocessing: it is an information bound on per-subject deviation-from-persistence.
+
+\paragraph{(iii) Variance bound on clinical signal through fitted quantities.}
+With single-run feature reliability $r_{xx}{\approx}0.15$ (state lifetime), an observable clinical correlation is attenuated by $\sqrt{r_{xx}}$; run-averaging ($r_{xx}{\approx}0.26$) should amplify a trait association by $\approx1.3\times$. Absence of amplification locates an association in run-specific rather than trait variance.
+
+\subsection{State-space model}
+
+Per-subject VAR(1) on 7-PC literal-rule eigenvector trajectories, HBN both runs ($931\times 2$): in-sample one-step $R^2$ mean $0.81$, split-half out-of-sample $0.74$; fitted $\rho(A)$ run-1/run-2 $r{=}0.037$; discrete Gramian-trace $r{=}0.040$ (Figure~\ref{fig:ssm}). High predictability coexists with unreplicable parameters: persistence explains the $R^2$ ($\bar\rho{=}0.95$), while the $O(10^{-2})$ deviations that could carry individual differences are estimation noise. The J-space program requires per-subject identifiability that $T{\approx}355$ TR$<2$\,s BOLD cannot provide.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig1_ssm_identifiability.png}
+\caption{\textbf{Predictability without identifiability at BOLD scale.} (a) VAR(1) one-step $R^2$ is high in- and out-of-sample (persistence). (b) Fitted operator spectral radii do not replicate across runs (ICC$=0.04$).}
+\label{fig:ssm}
+\end{figure}
+
+\section{Results}
+
+\subsection{Cohorts}
+
+% NOTE: figure supplied separately on Overleaf
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=\textwidth]{figures/fig1_cohort.png}
+% \caption{\textbf{Cohort overview.} (a--c) ADHD-200 QC cohort ($n{=}722$ across 5 sites): age, in-scanner motion, and site composition. (d--f) PennLEAD n-back QC cohort ($n{=}86$, single site): age, study-group $\times$ dx composition (the comparison group contains typically developing and prodromal-clinical-risk subjects \emph{without} ADHD --- enabling specificity tests), and sex composition.}
+% \label{fig:cohort}
+% \end{figure}
+
+ADHD-200 contributes 722 QC'd subjects across 5 sites (325 ADHD); ages 7--26 with site 4 adult-enriched (from which the $N{=}307$ complete trajectory subset for J-space training was drawn). PennLEAD contributes 86 (n-back) and 87 (rest) QC'd subjects (41--42 ADHD vs 45 non-ADHD); ages 8--15, single site. Motion is group-comparable after QC in ADHD-200; age and sex are partialled twice (inside the control-only normative models and as covariates in first-order screens). Independent cohorts for cross-dataset adjudication include HBN ($n{=}931\times 2$ runs test--retest; $n{=}747$ locked analysis) and OpenNeuro ds000030 ($n{=}169$; 42 ADHD, 127 control).
+
+\subsection{First- and Second-Order Hypotheses}
+
+Fourteen preregistered batches (full trail in Supplementary Materials; every batch frozen before any target fit) tested the mean-shift form of Hypotheses 1--4 across $\sim$120 familywise-controlled cells.
+
+Assay validity was verified by positive controls within the same pipeline: n-back behavioral $d'$ predicts ESWAN total with cross-validated $r{=}0.35$ (familywise $p{=}0.01$), and LEiDA co-leadership predicts age within-site ($r{=}0.108$, $p{=}0.005$) --- the pipeline certifies real signals when they exist; the first-order ADHD nulls are assay-validated negatives.
+
+% NOTE: figure supplied separately on Overleaf
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=\textwidth]{figures/fig2_dispersion.png}
+% \caption{\textbf{The dispersion index $D$ by group and state.} Violins show per-subject $D$ (individual subjects as dots). (a) ADHD-200, rest, non-medicated-coded ADHD: $\Delta D{=}{+}0.251$, VR${=}2.19$, $d{=}0.34$, $p{=}0.0002$ (within-site permutation). (b) PennLEAD, rest: null (VR${=}0.96$). (c) PennLEAD, n-back: $\Delta D{=}{+}0.343$, VR${=}2.30$, $d{=}0.63$, $p{=}0.0022$. The effect is state-dependent in PennLEAD and present at rest in the larger ADHD-200 cohort.}
+% \label{fig:dispersion}
+% \end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Dispersion index $D$ results (permutation-tested; two-sided).}
+\begin{tabular}{lccccc}
+\toprule
+Cell & $n$ (ADHD/HC) & $\Delta D$ & VR & $d$ & $p$ \\
+\midrule
+ADHD-200, rest, non-coded ADHD & 192/401 & $+0.251$ & 2.19 & 0.34 & 0.0002$^{\dagger}$ \\
+\quad strict unmedicated code only & 69/401 & $+0.203$ & --- & --- & 0.017 \\
+\quad motion-IQR matched & 98/401 & $+0.171$ & --- & --- & 0.023 \\
+PennLEAD, n-back & 41/45 & $+0.343$ & 2.30 & 0.63 & 0.0022 \\
+PennLEAD, rest & 42/45 & $+0.096$ & 0.96 & 0.22 & 0.30 (n.s.) \\
+PennLEAD, within-subject change & 32/39 & $+0.351$ & 1.63 & 0.47 & 0.044$^{\ddagger}$ \\
+\bottomrule
+\end{tabular}
+\\[4pt]
+\small $^{\dagger}$Documented within-site subject-level permutation (this recompute, 5{,}000 perms) using a pooled-component null obtained $p{\approx}0.002$--$0.019$ across covariate variants. Sign, magnitude ($\Delta D$, VR) reproduce exactly from artifacts under every variant. $^{\ddagger}$Age/sex/mean-FD covariate-adjusted (raw two-sided $p{=}0.053$; direction-validated one-sided $p{=}0.024$).
+\label{tab:dresults}
+\end{table}
+
+\textbf{Within-subject state modulation.} Computing each subject's rest$\to$n-back change in $D$ differences out every between-subject trait (motion propensity, anatomy, scanner habituation): ADHD subjects' dispersion increases more under cognitive load than controls' ($+0.351$, $p{=}0.044$ covariate-adjusted; Figure~\ref{fig:within-sites}).
+
+% NOTE: figure supplied separately on Overleaf
+% \begin{figure}[H]
+% \centering
+% \begin{minipage}{0.48\textwidth}
+% \centering
+% \includegraphics[width=\textwidth]{figures/fig4_within_subject.png}
+% \end{minipage}\hfill
+% \begin{minipage}{0.48\textwidth}
+% \centering
+% \includegraphics[width=\textwidth]{figures/fig3_sites.png}
+% \end{minipage}
+% \caption{\textbf{Left: within-subject rest$\to$n-back change in $D$ (PennLEAD).} Each thin line is a subject; bold lines are group means. ADHD dispersion rises under load; controls' does not. \textbf{Right: site consistency (ADHD-200).} Site-level $\Delta D$ with 95\% bootstrap CIs; positive at 4 of 5 sites, near zero only at the smallest site ($n{=}21$/64), pooled effect shown dotted.}
+% \label{fig:within-sites}
+% \end{figure}
+
+\textbf{Per-block consistency.} The effect is not one block's artifact: all four feature blocks (LEiDA co-leadership $L$, phase-difference variance $W1$, VAR variant $H3$, controllability $K1$) are elevated in both cohorts (ADHD-200 rest: $H3$ $+0.32$ $p{=}0.009$, $K1$ $+0.29$ $p{=}0.003$, $L$ $+0.15$ $p{=}0.016$, $W1$ $+0.11$ $p{=}0.0015$; PennLEAD n-back: $L$ $+0.22$ $p{=}0.0015$, $W1$ $+0.12$ $p{=}0.014$, $H3$ $+0.35$, $K1$ $+0.46$).
+
+% NOTE: figure supplied separately on Overleaf
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=0.95\textwidth]{figures/fig5_block_forest.png}
+% \caption{\textbf{Per-feature-block dispersion effects} (95\% bootstrap CIs; circles = ADHD-200 rest, squares = PennLEAD n-back). Both datasets agree in sign on every block. The 3-block combined index ($H3{+}K1{+}L$) was selected on ADHD-200 survivors and used \emph{frozen} in PennLEAD --- the PennLEAD $p$ is the clean, selection-free confirmation leg.}
+% \label{fig:blocks}
+% \end{figure}
+
+\subsection{Implications on the Artifact and Finding}
+
+% NOTE: figure supplied separately on Overleaf
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=\textwidth]{figures/fig6_null_calibration.png}
+% \caption{\textbf{Permutation null distributions vs observed statistics} for the three key tests. The ADHD-200 observed statistic sits $\sim$6 null SDs from the null mean under the documented test.}
+% \label{fig:nullcalib}
+% \end{figure}
+
+\begin{itemize}
+\item \textbf{Motion:} the effect is \emph{stronger} in the low-motion half ($+0.32$, VR $2.94$, $p{=}0.0007$); survives motion-IQR matching ($p{=}0.023$); in PennLEAD $\mathrm{corr}(D,\mathrm{FD}){=}-0.10$ (motion does not inflate $D$); and the within-subject contrast removes motion propensity by construction. Amplitude-family dispersion \emph{does} die under motion matching and was excluded from the combined index; only surviving phase-dynamics blocks are used.
+\item \textbf{Sites:} positive at 4/5 sites; survives excluding the adult-enriched site 4 ($p{=}0.0064$); PennLEAD is single-site.
+\item \textbf{Leverage:} block jackknife keeps $p$ between 0.004 and 0.010 (PennLEAD n-back); max single-subject influence is $0.064$ of the $0.343$ effect.
+\item \textbf{Pipeline placebo:} row-shuffled data through the identical pipeline: 0/20 false positives.
+\item \textbf{Specificity:} in PennLEAD, prodromal-risk-\emph{without}-ADHD shows \emph{no} elevation ($\Delta D{=}-0.056$, $p{=}0.68$) while ADHD does --- including the primary-ADHD group alone ($n{=}16$ vs TD-only: $+0.33$, $p{=}0.038$).
+\end{itemize}
+
+$D$ does not classify individuals (distributions overlap heavily; expected ceiling AUC $\approx 0.60$--$0.66$) and does not track symptom severity (ESWAN total $r{\approx}-0.05$, n.s.; Inatt $r{\approx}+0.10$, $p{\approx}0.06$). Medication strata are suggestive (non-coded stronger) but block-dependent and internally unresolved --- exploratory only. This is a \textbf{population-structure result}: the ADHD group is more spread out in normative-deviation space, consistent with subjects deviating in different directions rather than all shifting the same way.
+
+\subsection{Structural Determinants of Cross-Dataset Comparability}
+
+Vendor series split into intact (HBN: static FC mean $+0.12$--$0.21$; ds000030: $+0.40$) vs anti-phase (adhd200/Penn: FC mean $\approx+0.01$, $\approx$50\% negative edges) regimes (Figure~\ref{fig:regime}a): only intact-regime data can host the canonical global/FPN states. The ADHD-200 and HBN CC200 geometries differ as documented above.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig4_regime_atlas.png}
+\caption{\textbf{Structural determinants of comparability.} (a) Intact (HBN/ds000030) vs anti-phase (adhd200/Penn) static-FC regimes. (b) The two ``CC200'' atlases are different parcellations (same-identifier centroid distance $83$\,mm; optimal matching $12.1$\,mm).}
+\label{fig:regime}
+\end{figure}
+
+\subsection{LEiDA Analyses and Clinical Associations}
+
+Dunn-checked dictionaries (literal majority-count sign rule; $k{=}5$) reproduce the canonical repertoire on HBN (global/VIS/DMN/SMN-VAN/FPN) with strong known age effects (global occupancy vs age $t{=}-7.3$, DMN $t{=}+7.0$, Bonferroni). Test--retest on 931 both-run subjects: occupancy ICC $0.23$--$0.49$, lifetime ICC $0.11$--$0.26$, scalars $0.56$--$0.61$, switch $0.08$.
+
+HBN attention $\sim$ FPN-state lifetime ($n{=}747$, run-averaged, covariates age/sex/FD-trait/spike-fraction/DVARS): $t{=}-2.11$, marginal $p{=}0.033$, familywise $p{=}0.113$ (5-metric family, 10k Freedman--Lane max-$|t|$). Without motion covariates the association is familywise significant ($p_{\mathrm{fam}}{=}0.025$); with per-run FD ($n{=}555$) it attenuates to $t{=}-1.33$; run-2 alone gives $t{=}-1.40$; $k{=}6/7/8$ dwell gives $t{=}-1.97/-1.09/-1.06$; Schaefer-100 cross-atlas yields no FPN-positive state ($t{=}-2.06$ on the nearest analog); the youngest age band is null; the highest-motion quartile reverses sign; halves split sign-stably but sub-threshold ($t{\in}[-1.1,-2.0]$). The 7-network dictionary replicates the anatomy (FPN loading $+0.340$, cleanest anywhere) with $t{=}+0.02$. Temporal smoothing of the eigenvector trajectory preserves the association at 5 frames ($t{=}-2.34$) and removes it at $\ge$10 frames ($t{=}-0.76$): the variance lives at the 4--8\,s bout scale.
+
+\begin{table}[H]
+\centering
+\caption{HBN locked family ($n{=}747$, run-averaged, 10k Freedman--Lane max-$|t|$).}
+\begin{tabular}{lccc}
+\toprule
+Metric & $t$ & $p_{\mathrm{fam}}$ & partial $\rho$ \\
+\midrule
+life$_{\mathrm{FPN}}$ (primary) & $-2.11$ & $0.113$ & $-0.056$ \\
+nlong8 & $-1.91$ & $0.175$ & $-0.040$ \\
+p90 dwell & $-1.96$ & $0.159$ & $-0.050$ \\
+occ$_{\mathrm{global}}$ & $-0.25$ & $0.999$ & $-0.036$ \\
+gcoh$_{\mathrm{mean}}$ & $+0.43$ & $0.981$ & $-0.001$ \\
+\bottomrule
+\end{tabular}
+\label{tab:locked}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/fig3_locked_fragility.png}
+\caption{\textbf{Dependence structure of the HBN association.} Locked family ($n{=}747$, familywise max-$|t|$) plus $k$-sweep, run, and motion-covariate variants. Dashed: $|t|{=}1.96$.}
+\label{fig:fragility}
+\end{figure}
+
+\subsection{Controllability Analyses and the Spectral-Concentration Mechanism}
+
+AC/MC on static FC gives, in NYU (adhd200), ADHD$>$TD on Visual/Limbic/SalVentAttn modal controllability (MC$_{\mathrm{Vis}}$ $t{=}+3.21$, Bonf $p{=}0.014$). All seven network MCs intercorrelate $0.93$--$0.98$ ($r(\mathrm{MC_{Vis}},\lambda_{\max}){=}0.979$; Figure~\ref{fig:spectral}a): with a dominant global mode, $A=|FC|/(1+\lambda_{\max})-I$ maps every ``network'' MC onto a rescaled global $|\mathrm{FC}|$ magnitude. That magnitude is motion-loaded ($r{\approx}+0.40$; Figure~\ref{fig:spectral}b); the sample's dx--FD geometry then produces the contrast through covariate adjustment, and the cleanest-motion quintile gives exactly $t{=}+0.04$ (33 imputed-FD subjects anchor one stratum). Penn's clean contrast is opposite-signed ($d{=}-0.62$, CI excludes NYU's $+0.40$); other adhd200 sites are null/heterogeneous; HBN all-7-nets $\times$ \{attention, p\_factor\} are null (28 tests, best $p_{\mathrm{fam}}{=}0.13$); ds000030 subgraph (FPN/DMN/FPN+DMN) variants null. A spectral-concentration latent that changes composition across pipelines cannot carry a cross-dataset claim: the association's sign tracks the vendor's global-signal handling, not diagnosis.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig2_spectral_latent.png}
+\caption{\textbf{One global scalar behind seven ``network'' metrics.} (a) MC$_{\mathrm{Vis}}$ vs $|\mathrm{FC}|$ spectral radius ($r{=}0.979$). (b) Motion loading with the cleanest-quintile null ($t{=}+0.04$).}
+\label{fig:spectral}
+\end{figure}
+
+\subsection{Adjudication of Fourth-Cohort ds000030}
+
+Within the 169 subjects of ds000030, full-cohort contrasts: dx $t{=}+0.62$ (opposite the predicted direction), ASRS $t{=}-0.02$, artifact family $\approx0$ (attenuating with $n$, as noise should), native dictionary reproduces global/modular states ($r{=}0.88$--$0.91$) but \emph{no FPN-positive state emerges}; multi-atlas (Schaefer-100/300, AAL) and subgraph/coverage variants all null. Diagnosis is perfectly confounded with acquisition stratum (all 42 ADHD in block-700, all 127 controls in blocks 101--111) --- the dx contrast is uninterpretable at any $n$ (ADHD mean $2.33$ sits inside the control-block range $1.65$--$2.72$). Batch-free within-stratum ASRS gradients are null in both strata ($t{=}-0.94/+0.19$).
+
+\begin{table}[H]
+\centering
+\caption{ds000030 full cohort ($42$ ADHD / $127$ CONTROL): dx contrasts and ASRS.}
+\begin{tabular}{lcc}
+\toprule
+Test & life$_{\mathrm{FPN}}$ $t$ & family verdict \\
+\midrule
+dx, full motion block & $+0.62$ & $p_{\mathrm{fam}}{=}0.95$ (opposite direction; design confounded) \\
+ASRS dimensional ($n{=}169$) & $-0.02$ & null \\
+ASRS within-700 ($n{=}42$) & $-0.94$ & null (cleanest dimensional test) \\
+ASRS within-10x ($n{=}127$) & $+0.19$ & null (opposite direction) \\
+gcoh$_{\mathrm{sd}}$ / $\lambda_{\max}$ (artifact check) & $-1.38$ / $-0.28$ & null, attenuating with $n$ \\
+\bottomrule
+\end{tabular}
+\label{tab:ds30}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig5_ds30_closure.png}
+\caption{\textbf{Fourth-cohort closure.} (a) Full-cohort contrasts: all null. (b) Diagnosis is perfectly confounded with acquisition stratum.}
+\label{fig:ds30}
+\end{figure}
+
+\subsection{Dispersion Replication and the Second-Harmonic Identity}
+
+\textbf{Dispersion-$D$} (control-only normative OLS + MAD scaling + clipped $z^2$, within-site/full-shuffle permutation) on validated cached features: adhd200 controllability block $dD{=}+0.46$, VR$=1.71$, $d{=}+0.32$, $p{=}0.0016$ ($n{=}113/314$), surviving Pittsburgh-drop ($p{=}0.010$), medication exclusion ($p{=}0.029$), strict motion QC ($p{=}0.0008$), tail-trim ($p{=}0.019$), motion-matched pairs ($t{=}+2.48$), and motion-covariate normative models ($p{=}0.0002$); scalar block null ($p{=}0.24$). Penn (rest/nback/change) and HBN (S/G/C blocks) dispersion: all null (one wrong-signed). The effect is robust within one cohort and absent in two others; site-heterogeneous (two of four sites carry it).
+
+\begin{table}[H]
+\centering
+\caption{Dispersion-$D$ replication (implementation of this study).}
+\begin{tabular}{lcccc}
+\toprule
+Cell & $n$ & $\Delta D$ / VR & $d$ & $p$ \\
+\midrule
+adhd200, controllability block & 113/314 & $+0.46$ / $1.71$ & $+0.32$ & $0.0016$ \\
+\quad excl.\ Pittsburgh & 109/220 & $+0.50$ / $2.59$ & $+0.40$ & $0.010$ \\
+\quad motion QC (maxmotion$\le$2, $n_{tp}{\ge}150$) & 55/164 & $+0.49$ / $1.76$ & $+0.39$ & $0.004$ \\
+\quad + excl.\ Med${=}1$ & 24/89 & $+0.86$ / $3.22$ & $+0.68$ & $0.15$ \\
+adhd200, scalar block & 113/314 & $+0.18$ / $1.33$ & $+0.14$ & $0.24$ \\
+Penn rest / nback / change & 55/49, 49/43, 43 & $\approx0$ & --- & n.s. \\
+HBN S / G / C blocks & 747 & $\approx0$ & --- & n.s. \\
+\bottomrule
+\end{tabular}
+\label{tab:dispersion}
+\end{table}
+
+\paragraph{Feature Block Dissociation and Boundary Conditions (Table~\ref{tab:dresults} vs.\ Table~\ref{tab:dispersion}).}
+Crucially, the apparent contrast between the significant PennLEAD n-back dispersion in Table~\ref{tab:dresults} ($\Delta D = +0.343, d=0.63, p=0.0022$) and the null PennLEAD entry in Table~\ref{tab:dispersion} is a feature-block and sample dissociation, not an empirical refutation. Table~\ref{tab:dispersion} evaluated ROI-level discrete state, switch, and scalar blocks ($S, G, C$) across an unselected sample ($n{=}49/43$ by data availability), whereas Table~\ref{tab:dresults} evaluated 7-network Morlet-wavelet phase-variance ($H3, W1$) and continuous-time controllability ($K1$) on the frozen $n{=}41/45$ QC cohort. Table~\ref{tab:dispersion} did not compute n-back $K1$ or $H3$ (Penn controllability covers rest only in that run). The within-subject change metric reflects the same dissociation (combined-index change in Table~\ref{tab:dresults} vs.\ discrete S-block change in Table~\ref{tab:dispersion}). This dissociation delineates a fundamental boundary condition: normative dispersion in pediatric ADHD is \emph{feature-class specific}. It manifests robustly in continuous phase-coherence variance and continuous-time network controllability, but dissolves when projected onto discrete ROI dwell times, switch counts, or coarse scalar summaries.
+
+\subsection{Second-Harmonic Identity}
+
+\textbf{Second-harmonic identity.} The reported $c_1C_{sd}$ biomarker (SD of $C_1=(1+R_2)^2/2(1+R_2^2)$) is rank-correlated $r{=}0.964$ (same band, $n{=}150$) with the classical metastability scalar $g_{\mathrm{sd}}$ --- the same object up to the static monotone rescaling (Figure~\ref{fig:identity}a; the gap from $1.0$ is exactly the $f'$-variation signature). Its HBN claim ($\rho{=}+.107$) \emph{is} the HBN finding ($\rho{=}+.105$): reproducible, and the same motion-coupled latent. Its cross-dataset claim does not survive the omitted cohort: Penn clean-group $t{=}-2.66$ (Figure~\ref{fig:identity}b). (Note: one displayed identity in that report, $\lambda_{\max}^2/(\lambda_{\max}+\lambda_{\min})^2=C_1$, is misstated; the correct form is $\lambda_{\max}^2/(\lambda_{\max}^2+\lambda_{\min})^2$. Its Stouffer combination spans non-independent runs.)
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig6_identity_contradiction.png}
+\caption{\textbf{Identity and contradiction.} (a) Reported $c_1C_{sd}$ vs classical $g_{\mathrm{sd}}$: same object up to monotone rescaling (rank $r{=}0.964$). (b) The cross-dataset claim does not survive the omitted Penn cohort (opposite sign).}
+\label{fig:identity}
+\end{figure}
+
+\section{Discussion}
+
+\textbf{Why the first-order program failed.} Every mean-shift prediction of the dynamical framework --- dwell times, occupancies, transition energy, controllability means, and their symptom correlations --- was null across two cohorts, five sites, two task states, and $\sim$120 familywise-controlled cells, while positive controls certified the assay. This pattern is precisely what heterogeneity theory predicts: clinically heterogeneous syndromes leave group means nearly unchanged while inflating the second moment (Marquand et al.\ 2019). ADHD's neuroimaging literature --- meta-analytically null for convergent resting-FC alterations (Cortese et al.\ 2020), structurally null for normative-deviation burden (Segal et al.\ 2023), with single-site classification collapsing to chance under site correction --- is consistent with a disorder whose dynamical signature is \emph{idiosyncratic across patients}.
+
+\textbf{What the dispersion effect means.} $D$ is an unsigned distance from the control-learned normative trajectory. Its elevation in ADHD (VR $\approx 2.2$ in both cohorts in continuous blocks) says that ADHD subjects collectively sit farther from typical phase-dynamics organization, and are individually more scattered in \emph{how} far they sit. Two non-exclusive readings: (i)~\emph{heterogeneity} --- different children express the disorder through different dysrhythmic configurations, which no mean direction captures but dispersion does (supported by per-component analysis: mean $|z|$ elevated $0.88$--$0.98$ vs $0.83$--$0.87$, per-component variance ratios only $1.13$--$1.26$ --- the elevation is in absolute deviation, direction-inconsistent across subjects); and (ii)~\emph{load-induced instability} --- PennLEAD's state-dependence (rest null, n-back VR 2.30; within-subject $+0.351$) indicates that under cognitive demand ADHD phase dynamics are less tightly regulated, the resting-state analogue of Gao et al.'s (2025) single-trial finding of reduced temporal and spatial stability in child ADHD, here in the phase-dynamics feature class.
+
+\textbf{Relation to prior art.} Wang, Jiao \& Li (2018) classified ADHD-200 Peking at 78.75\% LOOCV using within-subject \emph{temporal} variance of inter-network phase differences --- the same phase quantities (our $W1$ family) but as a single-site mean-shift classifier; our result is complementary: an \emph{inter-individual dispersion} effect, cross-dataset, surviving the multi-site pooling that defeats single-site classifiers. Gao et al.\ (2025) established ADHD neural heterogeneity as a phenomenon in task fMRI; our contribution is its first demonstration in the LEiDA/controllability family, the first formal dispersion test in ADHD-200, and a within-subject state-modulation design. Segal et al.\ (2023) found no structural-GMV deviation burden in ADHD; our functional dispersion effect, if both stand, locates ADHD heterogeneity in \emph{dynamics} rather than anatomy --- a modality dissociation worth explicit testing. Henry et al.\ (2022) found control-energy differences in medication-naive ADHD that MPH normalized (means, single-site); our controllability block shows no mean shift but elevated dispersion, with medication strata suggestive in the same direction.
+
+\textbf{Limitations.} (1)~The ADHD-200 $p$-value depends on null construction ($p{=}0.0002$ documented subject-level within-site test; $p{\approx}0.002$--$0.019$); sign, magnitude, and significance direction are invariant across all variants, but the exact probability is not --- the conservative reading is $p{\lesssim}0.02$ for ADHD-200 and $p{=}0.0022$ for PennLEAD (frozen index). (2)~The 3-block combined index was selected on ADHD-200 survivors; the ADHD-200 $p$ inherits that selection. (3)~The ``non-medicated-coded'' stratum mixes explicit unmedicated codes ($n{=}69$; significant alone, $p{=}0.017$) with missing/$-999$ ($n{=}123$); the stimulant-normalization narrative is exploratory. (4)~PennLEAD n-back event alignment could not be resolved (ptseries $T{=}156$ vs events spanning 394\,s), so the n-back analysis is whole-run. (5)~ESWAN scale direction is inverted (higher = fewer symptoms; $\mathrm{corr}(\mathrm{dx},\mathrm{ESWAN}){=}-0.15$). (6)~Two datasets, both modest; a third cohort with prescription-coded medication data (e.g., ABCD) would settle the medication question and upgrade the finding to field-grade. (7)~The controllability quantities are correlational descriptors; the ``energy'' framing is interpretive until the J-space model is trained (and subject to the identifiability bounds established in Section~3.7).
+
+\textbf{The modeling agenda.} The J-space/neural-ODE machinery of Section~3, trained on \emph{controls only}, converts this population-level finding into a mechanistic hypothesis with a closed test: does the \emph{dispersion} of learned-dynamics deviation scores (trajectory NLL, or control energy to track the normative flow) reproduce the $z^2$-based dispersion effect? The statistic upgrades from variance-of-features to distance-from-normative-manifold, and the J-space metrics (spectral concentration, effective rank, axis stability, network loading) become the natural coordinates in which to ask \emph{along which dynamical axes} ADHD subjects disperse. However, as demonstrated in Section~3.7 and Section~3.8, applying this agenda at BOLD scale requires overcoming the persistence-dominance bound ($\bar{\rho} \approx 0.95$), which restricts per-subject operator identifiability at $T \approx 355$.
+
+\subsection{Design Rules for Future Work}
+
+The foregoing determines six rules: (1) verify spectral collapse ($r(\mathrm{MC},\lambda_{\max})$) before interpreting any static-$A$ controllability contrast; (2) do not fit per-subject operators at $T{\approx}355$ for biomarkers without a run-1/run-2 identifiability demonstration; (3) match preprocessing regimes before comparing cohorts (global-signal handling changes object identity); (4) verify atlas geometry across releases before transferring dictionaries; (5) recompute the design inverse inside every permutation null; (6) treat $k{=}5$-specific, atlas-specific dwell findings as discretization artifacts until replicated across resolutions.
+
+\section{Conclusion}
+
+We proposed a dynamical-systems framework for ADHD (LEiDA states $\to$ controllability $\to$ J-space) and tested it exhaustively across four cohorts ($N > 1{,}900$). Its first-order (mean-shift) predictions are null across cohorts, task states, sites, and fourteen preregistered batches --- an assay-validated negative map with certified positive controls. Its second-order prediction, derived from heterogeneity theory and preregistered before testing, was observed in these preregistered continuous-block legs: inter-individual dispersion of normative dynamical deviations is elevated in pediatric ADHD across independent cohorts (ADHD-200 rest: $\Delta D{=}{+}0.251$, VR $2.19$; PennLEAD n-back: $\Delta D{=}{+}0.343$, VR $2.30$, $p{=}0.0022$), is state-modulated within-subject ($+0.351$), ADHD-specific against prodromal-risk controls, and robust to motion, leverage, and pipeline placebo analyses; however, replication on discrete ROI-level blocks in Penn/HBN was null, and the effect is tail-concentrated ($p{=}0.019$ after trim) and site-heterogeneous (carried by two of four sites --- see Section~4 boundary conditions).
+
+Crucially, multi-cohort auditing establishes the exact boundaries of this effect and of the broader dynamical framework: (i)~normative dispersion is feature-class specific, dissolving when evaluated on discrete ROI-level dwell/switch blocks ($S, G, C$); (ii)~modal controllability derived from static $|FC|$ collapses algebraically into the whole-brain spectral radius ($r{=}0.979$) and motion; and (iii)~fitted per-subject dynamical operators (VAR, Neural ODEs, switching-linear stay fields) are fundamentally bounded by parameter unidentifiability at BOLD scales ($T \approx 355, \mathrm{ICC} \approx 0.04$) despite high predictive accuracy ($R^2 \approx 0.81$). \textbf{Thus, the principal mathematical result is not a single biomarker, but a possible characterization of the domains in which dynamical dispersion is detectable, spectral measures remain non-degenerate, and that dynamical operators are identifiable.} The durable products of this work are the negative map itself, the feature boundaries of dynamical dispersion, three measurement-validity findings (regime non-invariance, parcellation mismatch, permutation-bug class), \textbf{and the mathematical account of of the structural and identifiability limits underlying each failure mode} --- highlighting the evidence base and design rules on which future dynamical biomarker program could possibly build upon.
+
+\newpage
+\section{Reference}
+\makeatletter
+\renewenvironment{thebibliography}[1]
+     {\list{\@biblabel{\@arabic\c@enumiv}}%
+          {\settowidth\labelwidth{\@biblabel{#1}}%
+           \leftmargin\labelwidth
+           \advance\leftmargin\labelsep
+           \usecounter{enumiv}%
+           \let\p@enumiv\@empty
+           \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+     \sloppy
+     \clubpenalty4000
+     \widowpenalty4000
+     \sfcode`\.\@m}
+     {\endlist}
+\makeatother
+
+\begin{thebibliography}{99}
+
+\bibitem{Sun2026}
+Sun et al.
+Controllability, control energy and state transitions in functional brain
+networks based on data-constrained dynamical modeling.
+\textit{Nonlinear Dynamics}. 2026.
+
+\bibitem{Tang2026}
+Tang et al.
+Reorganization of Global Phase Pattern in Complex Brain Network During Aging
+Revealed by Leading Eigenvector Dynamics Analysis.
+\textit{International Journal of Bifurcation and Chaos}. 2026.
+
+\bibitem{Anthropic2026}
+Anthropic.
+Verbalizable Representations Form a Global Workspace in Language Models.
+2026.
+
+\bibitem{Baars1988}
+Baars BJ.
+A Cognitive Theory of Consciousness.
+Cambridge University Press; 1988.
+
+\bibitem{Dehaene2011}
+Dehaene S, Changeux JP.
+Experimental and theoretical approaches to conscious processing.
+\textit{Neuron}. 2011;70(2):200--227.
+
+\bibitem{ADHD2002012}
+The ADHD-200 Consortium.
+The ADHD-200 Consortium: a model to advance the translational potential of
+neuroimaging in clinical neuroscience.
+\textit{Frontiers in Systems Neuroscience}. 2012;6:62.
+
+\bibitem{Castellanos2012}
+Castellanos FX, Proal E.
+Large-scale brain systems in ADHD: beyond the prefrontal-striatal model.
+\textit{Trends in Cognitive Sciences}. 2012;16(1):17--26.
+
+\bibitem{Fassbender2009}
+Fassbender C, et al.
+A lack of default network suppression is linked to increased distractibility
+in ADHD.
+\textit{Brain Research}. 2009;1273:114--128.
+
+\bibitem{Gu2015}
+Gu S, et al.
+Controllability of structural brain networks.
+\textit{Nature}. 2015;522:221--224.
+
+\bibitem{Gu2017}
+Gu S, et al.
+Optimal trajectories of brain state transitions.
+\textit{NeuroImage}. 2017;148:305--317.
+
+\bibitem{Cabral2017}
+Cabral J, et al.
+Cognitive performance in healthy older adults relates to spontaneous switching
+between states of functional connectivity during rest.
+\textit{Scientific Reports}. 2017;7:5135.
+
+\bibitem{Chen2018}
+Chen RTQ, et al.
+Neural Ordinary Differential Equations.
+In: \textit{Advances in Neural Information Processing Systems (NeurIPS)}.
+2018.
+
+\bibitem{Fortin2018}
+Fortin JP, et al.
+Harmonization of cortical thickness measurements across scanners and sites.
+\textit{NeuroImage}. 2018;167:104--120.
+
+\end{thebibliography}
+
+\section{Supplementary Materials}
+\textbf{Data:} ADHD-200 Consortium / INDI, \texttt{http://fcon\_1000.projects.nitrc.org/indi/adhd200/} (preprocessed release, phenotypics, CC200 atlas; competition results and winner methods: \texttt{http://fcon\_1000.projects.nitrc.org/indi/adhd200/results.html}; Eloyan et al.\ 2012, Front Syst Neurosci 6:61; Brown et al.\ 2012, Front Syst Neurosci 6:69; Colby et al.\ 2012, Front Syst Neurosci 6:59; batch-corrected collapse under leave-site-out: \texttt{pmc.ncbi.nlm.nih.gov/articles/PMC3465911/}). PennLEAD: local single-site cohort (Prisma 3T, TR$=$0.8\,s, Schaefer-400+subcortical, rest+n-back, ESWAN dimensional ADHD ratings; PRO/CHR, ADHD, TD/NC groups), loaded via \texttt{src-pennlead}. Atlas: Schaefer et al.\ 2018, Cereb Cortex 28:4094--4114; Yeo et al.\ 2011, J Neurophysiol 106:1125--1165. \\
+\textbf{Methods:} LEiDA --- Cabral et al.\ 2017, NeuroImage 145:374--388; aging application --- Tang et al.\ 2026, Int J Bifurcation Chaos 36(8):2650106. Controllability --- Gu et al.\ 2015, Nat Commun 6:8414; schizophrenia application --- Sun et al.\ 2026, Nonlinear Dyn 114:712. VAR/metastability --- Hancock et al.\ 2023, PLOS ONE 18(5):e0282707 (our $H3$ is an eigenvector-element variant). Neural ODEs --- Chen et al.\ 2018, NeurIPS 31. \\
+\textbf{Heterogeneity framework:} Marquand et al.\ 2016, Biol Psychiatry 80:552--561; Marquand et al.\ 2019, Mol Psychiatry 24:1415--1424; Wolfers et al.\ 2018, JAMA Psychiatry 75:1146--1155; Wolfers et al.\ 2020, Psychol Med 50:314--323; Segal et al.\ 2023, Nat Neurosci 26:1613--1621; Mooney et al.\ 2024, J Neurosci 44:e1202232023. \\
+\textbf{ADHD priors/foils:} Wang, Jiao \& Li 2018, Sci Rep 8:11789; Gao et al.\ 2025, Nat Commun 16:2346; Keane et al.\ 2024, NeuroImage Clin 43:103630; Henry et al.\ 2022, Transl Psychiatry 12:563; Lin et al.\ 2018, Psychol Med; Cortese et al.\ 2020, Am J Psychiatry 177:1038--1045; Shaw et al.\ 2007, PNAS 104:19649--19654; Wang et al.\ 2017, Front Neurosci 11:320 (cross-site Dice $\le 0.0131$); Cai et al.\ 2018, Biol Psychiatry; Chen et al.\ 2024, Front Hum Neurosci 18:1412572.
+
+Additional screen batches from this study: HBN $k$-sweep, 7-network, cross-atlas, smoothing, polarity-native, pooled-dimensional, half-split analyses; Penn polarity, reliability, and clean-group retests; ds000030 subgraph, multi-atlas, coverage, and native-dictionary analyses. Validity ledger: two-CC200 mismatch ($83$\,mm same-id); scrubbing fingerprint (FD-trait $\leftrightarrow$ DVARS $r{\approx}-0.3$); frozen-design permutation-bug class. 
+
+
+
+\end{document}
