@@ -1,4 +1,4 @@
-# exp/37 — LEiDA Family Sieve: PREREGISTRATION (SCREEN protocol)
+# LEiDA family sieve: preregistration (screen protocol)
 
 **Written BEFORE any screening fit. This is a SCREEN, not a confirmatory experiment.**
 

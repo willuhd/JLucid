@@ -1,6 +1,6 @@
-# exp/37 SIEVE TABLE — every variant, every gate, dead or alive (updated as screened)
+# LEiDA sieve table — every variant, every gate, dead or alive (updated as screened)
 
-Protocol: exp/37_leida/PREREG.md (3 gates; screen not confirmatory).
+Protocol: `prereg.md` (3 gates; screen not confirmatory).
 Targets: T-cohort (n=336→335 after NaN drop, sites 3/5/6, ADHD Measure 2/3) Inattentive (primary),
 Hyper (secondary). ADHD-Index cohort (n=514, sites 1/3/5) added as screen target in Batch 2 (preregistered below).
 
@@ -635,7 +635,7 @@ measurement-limited-free null of the program.
 
 ## Batch 14 — preregistered 2026-08-30: fALFF anchors + slow-3 PennLEAD + FC DECOMPOSITION
 
-From the amplitude-axis literature research (amplitude_axis_research_report.md):
+From the amplitude-axis literature research (amplitude-axis.md):
 - ALE meta-analytic ADHD regions: L middle/medial frontal (BA6/9), OFC, precuneus, lingual.
   Feature (a): ROI-level amplitude fraction fALFF-A = |W(0.01-0.027 ∪ 0.027-0.073)| fraction
   relative to broadband — computed per meta-region block at slow-5 (0.02Hz/5cyc) and

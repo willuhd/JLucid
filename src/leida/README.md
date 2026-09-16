@@ -2,7 +2,7 @@
 
 The finding: inter-individual DISPERSION of normative phase-dynamics/controllability
 deviations is elevated in pediatric ADHD — cross-dataset (ADHD-200 rest + PennLEAD
-n-back), motion-robust, ADHD-specific. See `../../docs/REPORT.md`.
+n-back), motion-robust, ADHD-specific. See `../../docs/report.md`.
 
 ## What's here
 
@@ -27,7 +27,10 @@ back into `results/`.
 
 ## Provenance
 
-Ported from JLucid2 `exp/37_leida` without functional changes — only path
-constants were rebased (JLucid2 -> JLucid; exp subfolders -> results/37_leida).
-The experiment-container docs (PREREG, SIEVE_TABLE, batch logs) live in `../../docs/`
+Ported from JLucid2 `exp/37_leida` without functional changes — path
+constants were rebased (JLucid2 -> JLucid) and committed outputs were
+flattened from exp subfolders into `results/` (the `results/37_leida`
+output prefix still present in script constants is stale; direct outputs
+at `results/` to reproduce the committed layout).
+The experiment-container docs (prereg, sieve-table, batch logs) live in `../../docs/`
 and `../../results/` with results preserved verbatim.

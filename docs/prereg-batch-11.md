@@ -1,10 +1,10 @@
-# exp/37 — Batch 11 (CONFIRMATION RUN): Lnet/Lstr7 × ADHD-Index, preregistered BEFORE any fit
+# Batch 11 (confirmation run): Lnet/Lstr7 × ADHD-Index, preregistered BEFORE any fit
 
 **Confirmation of batch-10 screen-positive (Lnet_rest × ESWAN-total, PennLEAD n=70, CV r=+0.21 seed-mean / +0.41 luckiest-seed, all-seeds-positive, fw_p=0.037 at seed 0).** NOT a new screen — a directional confirmation on a cohort and target never touched by these cells.
 
 ## Why this is the correct confirmation cell
 - Batch-10 positive: co-leadership network-block architecture (Lnet28, cache geometry g050 c5 K60) predicts PennLEAD ESWAN ADHD total.
-- The L-family × ADHD-Index cells (sites 1/3/5, n=514) have NEVER been fitted (verified against SIEVE_TABLE batches 1–10: batch-1 Gate 2 was T-cohort Inatt/Hyper only; batch-2 A-family was W1/W2 only; batch-5 A-cohort cells were H1/H3/K1 only). Registered as the t6 theorist's "V1 L-IDX" variant, never run.
+- The L-family × ADHD-Index cells (sites 1/3/5, n=514) have NEVER been fitted (verified against `sieve-table.md` batches 1–10: batch-1 Gate 2 was T-cohort Inatt/Hyper only; batch-2 A-family was W1/W2 only; batch-5 A-cohort cells were H1/H3/K1 only). Registered as the t6 theorist's "V1 L-IDX" variant, never run.
 - ADHD-Index is the largest ADHD-severity cohort in ADHD-200 (n=514), parent/teacher-rated Conners composite — a different RATER and DATASET from ESWAN self-ratings: a genuine direction test of the family.
 
 ## Frozen cells (2)

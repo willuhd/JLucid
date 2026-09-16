@@ -1,8 +1,8 @@
-# exp/37 LEiDA/Controllability Sieve — FINAL REPORT (2026-08-29)
+# LEiDA/Controllability sieve — final report (2026-08-29)
 
 ## What was run
-10 preregistered screen batches (protocol: PREREG.md, results: SIEVE_TABLE.md and
-gate1_oracle/*.json|log) covering the COMPLETE paper-6/7 feature family on the
+10 preregistered screen batches (protocol: `prereg.md`, results: `sieve-table.md` and
+`../results/` batch `*.json`/`*.log`) covering the COMPLETE paper-6/7 feature family on the
 QC'd ADHD-200 (n=872; T-cohort 335, ADHD-Index 514, DX 721) and PennLEAD (rest n=87,
 nback n=86; ESWAN n=85-87) cohorts:
 
@@ -47,9 +47,9 @@ and split-half confirmation — reported as NOT CONFIRMED, not as a hit.
 
 ## Cost accounting
 All 10 batches: ~2.5 hours wall-clock on 4 cores. Features cached in
-gate1_oracle/{features,batch2_features,batch5_features,batch10_feats}.npz; every gate
-result JSON + log preserved. PREREG discipline held throughout: every batch's variants
-were frozen in SIEVE_TABLE.md BEFORE any target fit; re-parameterizations were logged as
+`../results/`{features,batch2_features,batch5_features,batch10_feats}.npz; every gate
+result JSON + log preserved. Prereg discipline held throughout: every batch's variants
+were frozen in `sieve-table.md` BEFORE any target fit; re-parameterizations were logged as
 new variants and priced into the familywise null; the one discovered ALIVE cell was
 audited (multi-seed, jackknife, Spearman, univariate, confounds) and honestly downgraded
 when it failed confirmation.
@@ -94,7 +94,7 @@ Directions NOT yet tried, in order of literature support:
 
 ## ROUND-4 OUTCOME (2026-08-30): FIRST CERTIFIED CROSS-DATASET ADHD SIGNAL
 
-See ADHD_DISPERSION_FINDING.md. Summary: after 14 null batches (all first-order screens),
+See `dispersion.md`. Summary: after 14 null batches (all first-order screens),
 the preregistered heterogeneity-first design (batch 15) found that ADHD shows ELEVATED
 INTER-INDIVIDUAL DISPERSION of the paper-6/7 features (variance ratio ≈2.2): ADHD-200 rest
 unmedicated n=192 vs 401, p=0.0005 (motion-matched p=0.023); PennLEAD nback n=41/45,

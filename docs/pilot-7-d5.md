@@ -101,4 +101,4 @@ signal would have to live).
 - `run_pilot7d_d5_pc1_redundancy.py` / `pilot7d_d5_results.json` — PC1 rescue attempts (dead)
   + redundancy vs occ bases.
 
-Gate-0 verdicts recorded; Gate 1/2 remain for the formal sieve per exp/37 PREREG.
+Gate-0 verdicts recorded; Gate 1/2 remain for the formal sieve per `prereg.md`.

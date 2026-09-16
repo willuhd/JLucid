@@ -1,6 +1,6 @@
 ## Batch 11 — CLOSED 2026-08-30. Confirmation of batch-10 positive: NULL.
 
-Prereg (PREREG_batch11_confirm.md, written before fit): Lnet28/Lstr7 x ADHD-Index
+Prereg (`prereg-batch-11.md`, written before fit): Lnet28/Lstr7 x ADHD-Index
 (sites 1/3/5, n=514), 5 CV seeds averaged, LOSO + per-site estimators, 200-perm max-stat
 null over 2 cells x 2 estimators. Confirmation bar: r_sc>0.10 AND fw_p<0.05 AND >=2/3 sites.
 

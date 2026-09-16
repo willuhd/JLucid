@@ -20,3 +20,12 @@ Temporary Items
 
 # project specific
 data/
+
+# environment and caches (never commit)
+.venv/
+__pycache__/
+*.py[cod]
+
+# heavy binaries (never commit; tracked results/*.npz predate this rule)
+*.npz
+*.pt

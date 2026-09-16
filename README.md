@@ -8,4 +8,4 @@ Inter-individual **dispersion** of normative phase-dynamics/controllability devi
 elevated in pediatric ADHD, cross-dataset (ADHD-200 rest, d=0.34; PennLEAD n-back, d=0.63,
 within-subject state change p=0.044), motion-robust, and ADHD-specific (null in
 prodromal-risk-without-ADHD). Every first-order (mean-shift) screen across 14 batches was
-null — the signal lives in the second moment. See **docs/REPORT.md**.
+null — the signal lives in the second moment. See **docs/report.md**.

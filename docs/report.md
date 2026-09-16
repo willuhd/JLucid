@@ -1,7 +1,7 @@
 # Inter-Individual Dispersion of Phase-Dynamics and Controllability Features is Elevated in Pediatric ADHD
 
 **A cross-dataset finding in the LEiDA / network-controllability family**
-exp/37 sieve program · batches 1–15 · report generated 2026-08-30
+LEiDA sieve program · batches 1–15 · report generated 2026-08-30
 Figures: `../results/figures/fig1_cohort.png` … `../results/figures/fig6_null_calibration.png` (all in this folder; stats in `../results/figures/figure_stats.json`)
 
 ---
@@ -39,7 +39,7 @@ Larger D means the subject sits farther (in absolute normative-deviation units) 
 
 ![Figure 1 — cohort overview](../results/figures/fig1_cohort.png)
 
-**ADHD-200** (5 sites with ≥30 controls and ≥10 ADHD after QC: sites 1, 3, 4, 5, 6; n=722; 325 ADHD / 397... — see figure for exact per-site composition; ages 7–26; site 4 is an adult-enriched site). Motion (max displacement) is group-comparable after QC; age and sex differ by group at some sites and are therefore partialled out twice: once inside the normative model (age/sex controls-only fit) and once as covariates in all first-order screens (documented in `../results/SIEVE_TABLE.md`).
+**ADHD-200** (5 sites with ≥30 controls and ≥10 ADHD after QC: sites 1, 3, 4, 5, 6; n=722; 325 ADHD / 397... — see figure for exact per-site composition; ages 7–26; site 4 is an adult-enriched site). Motion (max displacement) is group-comparable after QC; age and sex differ by group at some sites and are therefore partialled out twice: once inside the normative model (age/sex controls-only fit) and once as covariates in all first-order screens (documented in `sieve-table.md`).
 
 **PennLEAD** (single site, Prisma 3T, TR=0.8 s; n-back QC n=86: 41 ADHD / 45 non-ADHD; rest QC n=87: 42/45). Crucially, the "non-ADHD" comparison group is not all typically developing: it contains 25 TD/NC subjects plus prodromal-clinical-risk (PRO/CHR) subjects *without* ADHD. This composition lets us test specificity — the dispersion effect should be present in ADHD but absent in clinical-risk-without-ADHD if it is ADHD-specific rather than a generic "any-clinical-state" artifact.
 
@@ -126,10 +126,10 @@ The dispersion index D is a *magnitude of deviation without direction*. An eleva
 
 ## 9. Reproducibility
 
-- All feature blocks cached: `../results/features.npz`, `batch2_features.npz`, `batch5_features.npz`, `batch13_amp_features.npz`, `batch13b_penn_amp.npz`, `batch10_feats.npz`
-- Certified dispersion artifacts: `../results/batch15_results.json`, `batch15_adhd200_comb.npz`, `batch15b_penn_disp.json`, `batch15c_penn_dispz.npz`
-- Figure script (this session, regenerates everything from artifacts): `figures/make_figures.py` → writes `figure_stats.json`
-- Full preregistration trail: `../results/SIEVE_TABLE.md` (15 batches, every closure documented); program summary `CONCLUSION.md`; finding summary `ADHD_DISPERSION_FINDING.md`
+- All feature blocks cached: `../results/features.npz`, `../results/batch2_features.npz`, `../results/batch5_features.npz`, `../results/batch13_amp_features.npz`, `../results/batch13b_penn_amp.npz`, `../results/batch10_feats.npz`, `../results/batch10_pheno.npz`
+- Certified dispersion artifacts: `../results/batch15_results.json`, `../results/batch15_adhd200_comb.npz`, `../results/batch15b_penn_disp.json`, `../results/batch15c_penn_dispz.npz`
+- Figure script (this session, regenerates everything from artifacts): `../src/leida/make_figures.py` → writes `../results/figures/figure_stats.json`
+- Full preregistration trail: `sieve-table.md` (15 batches, every closure documented); program summary `conclusion.md`; finding summary `dispersion.md`
 - **Known hole (disclosed):** the inline scripts that produced `batch15_adhd200_comb.npz` and the PennLEAD z-score artifacts were not saved as standalone files (only `run_batch15_het.py` is, which writes `batch15_results.json` only). The artifacts themselves rebuild exactly from raw features; the missing scripts are the root cause of the audit's p-value dispute and must be re-written and committed before submission.
 
 ## 10. Sources
@@ -141,9 +141,9 @@ The dispersion index D is a *magnitude of deviation without direction*. An eleva
 
 ### Methods family (papers 6/7)
 - **LEiDA**: Cabral, Vidaurre, Marques, Magalhães, Silva, Deco 2017, NeuroImage 145:374–388, "Cognitive activation of the default mode network in dynamic functional connectivity", https://doi.org/10.1016/j.neuroimage.2016.03.015 ; phase-coherence leading eigenvector at network level as used here follows the aging application: Tang, Wang, Xu, Pan, Wang 2026, Int J Bifurcation Chaos 36(8):2650106.
-- **Controllability**: Sun, Wang, Xu, Du, Pan, Wang 2026, Nonlinear Dynamics 114:712 (control energy / state transitions in functional brain networks); foundational: Gu et al. 2015, Nat Commun 6:8414, "Controllability of structural brain networks", https://doi.org/10.1038/ncomms9414 ; signed-A stable-shift construction as in our K1: see `../results/SIEVE_TABLE.md` batch 5 (paper-6 A invalidation note: the |A| form is discrete-unstable; we use the symmetrized shifted form).
+- **Controllability**: Sun, Wang, Xu, Du, Pan, Wang 2026, Nonlinear Dynamics 114:712 (control energy / state transitions in functional brain networks); foundational: Gu et al. 2015, Nat Commun 6:8414, "Controllability of structural brain networks", https://doi.org/10.1038/ncomms9414 ; signed-A stable-shift construction as in our K1: see `sieve-table.md` batch 5 (paper-6 A invalidation note: the |A| form is discrete-unstable; we use the symmetrized shifted form).
 - **VAR/metastability**: Hancock, Farinha, Wens, Hall, Noonan, Casadio 2023, PLOS ONE 18(5):e0282707 (our H3 is an eigenvector-element *variant* of their phase-locking VAR — disclosed); Farinha, Vega, Fernández, Pastor 2022, Front Neurosci (dwell-time metastability in stroke).
-- **Wavelet/phase machinery**: Morlet complex wavelet instantaneous phase per Brualla/LEiDA conventions; amplitude-axis implementations and reliability data in `amplitude_axis_research_report.md` (60+ citations).
+- **Wavelet/phase machinery**: Morlet complex wavelet instantaneous phase per Brualla/LEiDA conventions; amplitude-axis implementations and reliability data in `amplitude-axis.md` (60+ citations).
 
 ### Normative-deviation and heterogeneity framework
 - Marquand, Rezek, Buitelaar, Beckmann 2016, Biol Psychiatry 80(7):552–561, https://doi.org/10.1016/j.biopsych.2015.12.016
@@ -160,12 +160,12 @@ The dispersion index D is a *magnitude of deviation without direction*. An eleva
 - Henry et al. 2022, Transl Psychiatry 12:563 (controllability in medication-naïve ADHD; MPH normalization), https://doi.org/10.1038/s41398-022-02014-4
 - Lin, Cocchi, Zalesky et al. 2018, Psychol Med (no categorical ADHD biotypes; dimensional mode), https://doi.org/10.1017/S0033292918000141
 - Cortese et al. 2020, Am J Psychiatry 177(11):1038–1045 (meta-analysis: no convergent resting-FC alteration), https://doi.org/10.1176/appi.ajp.2020.19030310
-- Solodkin et al. 2021 (ALE null in ADHD), https://doi.org/10.1016/j.neubiorev.2021.04.029 (as cited in our SIEVE_TABLE)
+- Solodkin et al. 2021 (ALE null in ADHD), https://doi.org/10.1016/j.neubiorev.2021.04.029 (as cited in our `sieve-table.md`)
 - Cross-site non-replication: Wang et al. 2017, Front Neurosci 11:320 (Dice ≤0.0131), https://doi.org/10.3389/fnins.2017.00320 ; Wang et al. 2019, Front Psychiatry 10:692, https://doi.org/10.3389/fpsyt.2019.00692
 - Cai et al. 2018, Biol Psychiatry (dynamic network-interaction index, NYU+PKU inattention r=−0.25), https://med.stanford.edu/content/dam/sm/scsnl/documents/aberrant_time_varying_cross.pdf
 - Shaw et al. 2007, PNAS 104(49):19649–19654 (maturational lag — motivated batch 11), https://doi.org/10.1073/pnas.0708540104
-- Amplitude/variability ADHD literature (fALFF, dALFF, slow-band findings): Chen et al. 2024, Front Hum Neurosci 18:1412572, https://doi.org/10.3389/fnhum.2024.1412572 ; BMC Psychiatry 2025 slow-band FC, https://doi.org/10.1186/s12888-025-07586-6 ; Lou et al. 2021 (dALFF variability); Hong & Hwang 2022 (DMN instability, ADHD-200); full list in `amplitude_axis_research_report.md`.
+- Amplitude/variability ADHD literature (fALFF, dALFF, slow-band findings): Chen et al. 2024, Front Hum Neurosci 18:1412572, https://doi.org/10.3389/fnhum.2024.1412572 ; BMC Psychiatry 2025 slow-band FC, https://doi.org/10.1186/s12888-025-07586-6 ; Lou et al. 2021 (dALFF variability); Hong & Hwang 2022 (DMN instability, ADHD-200); full list in `amplitude-axis.md`.
 
 ---
 
-*All numeric claims in this report are reproducible from the cached artifacts via `figures/make_figures.py` (writes `figure_stats.json`). The p-value range in §4 reflects the documented test (within-site subject-level permutation, this session's 5,000-perm recomputation) and the external audit's variant; both are reported rather than reconciled, because the audit's variant was not saved.*
+*All numeric claims in this report are reproducible from the cached artifacts via `../src/leida/make_figures.py` (writes `../results/figures/figure_stats.json`). The p-value range in §4 reflects the documented test (within-site subject-level permutation, this session's 5,000-perm recomputation) and the external audit's variant; both are reported rather than reconciled, because the audit's variant was not saved.*

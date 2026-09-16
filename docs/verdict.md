@@ -1,8 +1,8 @@
-# exp/37 — LEiDA/Controllability Family Sieve: FINAL VERDICT
+# LEiDA/Controllability family sieve: final verdict
 
 **12 batches, ~60 variants, 3 gates each. THE PAPER-6/7 FAMILY IS COMPREHENSIVELY NULL FOR ADHD.**
 
-This document closes the family per the batch-12 preregistered stop rule. Every claim below is backed by a saved script + JSON in this directory or `../pilot_geometry/`.
+This document closes the family per the batch-12 preregistered stop rule. Every claim below is backed by a saved script + JSON in `../src/leida/` and `../results/` (`../results/pilot_geometry/` for geometry pilots).
 
 ## What was screened (the full inventory)
 

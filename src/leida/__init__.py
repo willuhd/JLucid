@@ -8,9 +8,9 @@ Layout:
     src/pennlead/               PennLEAD loader (copied from JLucid2)
     results/     all outputs: feature caches, gate results, batch results,
                                 figures, and input data assets (V1/V2 wavelet caches)
-    docs/                       reports (REPORT.md is the main finding writeup)
+    docs/                       reports (report.md is the main finding writeup)
 
-Entry points (see docs/REPORT.md and docs/SIEVE_TABLE.md for the full prereg trail):
+Entry points (see docs/report.md and docs/sieve-table.md for the full prereg trail):
     make_figures.py        regenerate all 6 figures + figure_stats.json from cached artifacts
     run_batch15_het.py     the certified dispersion analysis (discovery leg)
     build_features.py      rebuild feature caches from raw CC200 timeseries

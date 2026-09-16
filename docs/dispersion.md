@@ -1,6 +1,6 @@
 # A genuine, cross-dataset ADHD signal in the LEiDA/controllability family: ELEVATED INTER-INDIVIDUAL DISPERSION
 
-Date: 2026-08-30 (sieve batches 15/15b/15c, exp/37)
+Date: 2026-08-30 (sieve batches 15/15b/15c)
 Status: CERTIFIED per the sieve protocol (preregistered batch-15 design; adversarial audit;
 cross-dataset confirmation; honest scope notes).
 
@@ -30,7 +30,7 @@ H3v +0.35 p=0.043; K1 +0.46 p=0.064 (one-sided, validated direction).
 
 ## Why this is genuine (audit trail)
 
-1. Preregistration: batch 15 design frozen in SIEVE_TABLE.md before any dispersion test ran
+1. Preregistration: batch 15 design frozen in `sieve-table.md` before any dispersion test ran
    (the heterogeneity research report motivated it; Marquand 2019 second-order theory;
    Segal 2023 burden-null motivated dispersion as co-primary).
 2. Motion (the killer confound of ADHD fMRI): survives low-motion halves (batch15-A1:
@@ -66,11 +66,11 @@ H3v +0.35 p=0.043; K1 +0.46 p=0.064 (one-sided, validated direction).
 
 ## Artifacts
 
-- exp/37_leida/gate1_oracle/batch15_results.json — discovery (dispersion/burden/cumulative)
-- batch15_adhd200_comb.npz — ADHD-200 combined index + strata
-- batch15b_penn_disp.json — PennLEAD rest per-block
-- batch15c_penn_dispz.npz — PennLEAD rest+nback combined + per-block z² indices
-- SIEVE_TABLE.md — full audit trail (A1-A7, B1-B3)
+- `../results/batch15_results.json` — discovery (dispersion/burden/cumulative)
+- `../results/batch15_adhd200_comb.npz` — ADHD-200 combined index + strata
+- `../results/batch15b_penn_disp.json` — PennLEAD rest per-block
+- `../results/batch15c_penn_dispz.npz` — PennLEAD rest+nback combined + per-block z² indices
+- `sieve-table.md` — full audit trail (A1-A7, B1-B3)
 
 ## Specificity checks (PennLEAD composition, 2026-08-30)
 
