@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 BASE = "/Volumes/thinkplus/Code/JLucid"
-OUT = f"{BASE}/results/37_leida"
+OUT = f"{BASE}/results"
 
 zb1 = np.load(f"{OUT}/features.npz"); zb2 = np.load(f"{OUT}/batch2_features.npz")
 zb5 = np.load(f"{OUT}/batch5_features.npz"); zb13 = np.load(f"{OUT}/batch13_amp_features.npz")

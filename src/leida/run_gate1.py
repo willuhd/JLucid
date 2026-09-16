@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-exp/37 GATE 1 — oracle ridge screen on T-cohort targets (PREREG exp/37).
+GATE 1 — oracle ridge screen on T-cohort targets (prereg docs/prereg.md).
 
-Protocol (frozen in exp/37_leida/PREREG.md BEFORE this run):
+Protocol (frozen in docs/prereg.md BEFORE this run):
 - Cohort: T-cohort = sites 3/5/6, ADHD Measure in (2,3), Inattentive available (n=336 expected).
 - Targets: Inattentive T (primary), Hyper/Impulsive T (secondary).
 - Oracle = IN-SAMPLE ridge (alpha grid {0.1,1,10,100,1000,3000,1e4,3e5} per PREREG: we use
@@ -22,7 +22,7 @@ import numpy as np
 import pandas as pd
 
 BASE = "/Volumes/thinkplus/Code/JLucid"
-OUT = f"{BASE}/results/37_leida"
+OUT = f"{BASE}/results"
 ALPHAS = [0.1, 1, 10, 100, 1000, 3000, 1e4, 3e4, 1e5, 3e5]
 
 # ---- load features ----

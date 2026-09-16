@@ -15,7 +15,7 @@ BASE = "/Volumes/thinkplus/Code/JLucid"
 sys.path.insert(0, f"{BASE}/src")
 from controllability.datasets_cc200 import load_cc200
 
-OUT = f"{BASE}/results/37_leida"
+OUT = f"{BASE}/results"
 z = np.load(f"{OUT}/batch2_features.npz")
 ts_all, _, meta = load_cc200(qc_only=True)
 Ts = [t.shape[0] for t in ts_all]

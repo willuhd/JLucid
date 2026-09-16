@@ -19,7 +19,7 @@ import pandas as pd
 from scipy import stats as st
 
 BASE = "/Volumes/thinkplus/Code/JLucid"
-OUT = f"{BASE}/results/37_leida"
+OUT = f"{BASE}/results"
 sys.path.insert(0, f"{BASE}/src")
 from pennlead.datasets import load_pennlead
 

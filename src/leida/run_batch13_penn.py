@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 BASE = "/Volumes/thinkplus/Code/JLucid"
-OUT = f"{BASE}/results/37_leida"
+OUT = f"{BASE}/results"
 TR = 0.8
 sys.path.insert(0, f"{BASE}/src")
 from pennlead.datasets import load_pennlead

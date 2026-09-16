@@ -17,7 +17,7 @@ from pathlib import Path
 
 BASE = Path("/Volumes/thinkplus/Code/JLucid")
 sys.path.insert(0, str(BASE / "src"))
-OUT = BASE / "results/37_leida"
+OUT = BASE / "results"
 ALPHAS = [0.1, 1, 10, 100, 1000, 3e3, 1e4, 3e4, 1e5]
 import time as _t; T0 = _t.time()
 def log(m): print(f"[{_t.time()-T0:7.1f}s] {m}", flush=True)

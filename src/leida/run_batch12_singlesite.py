@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 BASE = "/Volumes/thinkplus/Code/JLucid"
-OUT = f"{BASE}/results/37_leida"
+OUT = f"{BASE}/results"
 ALPHAS = [0.1, 1, 10, 100, 1000, 3000, 1e4, 3e4, 1e5, 3e5]
 N_PERM = 200
 
@@ -126,6 +126,6 @@ for tname in REAL:
         REAL[tname][k]["GATE2_VERDICT"] = verdict
         print(f"[{tname:5s}] {k:12s} CVr={r:+.3f} fw_p={fw_p:.4f} -> {verdict}")
 
-with open(f"{OUT}/batch12_results.json", "w") as f:
+with open(f"{OUT}/batch12_singlesite_results.json", "w") as f:
     json.dump(REAL, f, indent=2)
 print(f"\nDONE {time.time()-t0:.0f}s")

@@ -10,7 +10,7 @@ try:
 except Exception:
     pass
 BASE = "/Volumes/thinkplus/Code/JLucid"
-OUT = f"{BASE}/results/37_leida"
+OUT = f"{BASE}/results"
 
 sys.path.insert(0, f"{BASE}/src")
 from controllability.datasets_cc200 import load_cc200

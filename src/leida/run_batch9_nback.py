@@ -13,7 +13,7 @@ import pandas as pd
 from scipy import stats as st
 
 BASE = "/Volumes/thinkplus/Code/JLucid"
-OUT = f"{BASE}/results/37_leida"
+OUT = f"{BASE}/results"
 TR = 0.8
 NETS = ['VIS', 'SOM', 'DAN', 'SAL', 'LIM', 'FPN', 'DMN']
 UP = [(a, b) for a in range(7) for b in range(a, 7)]

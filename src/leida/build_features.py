@@ -35,7 +35,7 @@ import numpy as np
 from controllability.datasets_cc200 import load_cc200
 
 BASE = "/Volumes/thinkplus/Code/JLucid"
-OUT = f"{BASE}/results/37_leida"
+OUT = f"{BASE}/results"
 TR = 2.0
 NETS = ['VIS', 'SOM', 'DAN', 'SAL', 'LIM', 'FPN', 'DMN']
 CACHE_V1 = "/Volumes/thinkplus/Code/JLucid/results/V1_adhd200_wavelet.npy"

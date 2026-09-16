@@ -13,7 +13,7 @@ from sklearn.covariance import LedoitWolf
 
 BASE = Path("/Volumes/thinkplus/Code/JLucid")
 sys.path.insert(0, str(BASE / "src"))
-OUT = BASE / "results/37_leida"
+OUT = BASE / "results"
 SEED = 42
 N_PERM = 200
 ALPHAS = [0.1, 1, 10, 100, 1000, 3e3, 1e4, 3e4, 1e5]

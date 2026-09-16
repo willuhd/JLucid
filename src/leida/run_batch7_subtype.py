@@ -18,7 +18,7 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import roc_auc_score
 
 BASE = "/Volumes/thinkplus/Code/JLucid"
-OUT = f"{BASE}/results/37_leida"
+OUT = f"{BASE}/results"
 C_GRID = [0.001, 0.01, 0.1, 1.0]
 N_PERM = 200
 

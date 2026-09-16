@@ -5,7 +5,7 @@ import numpy as np
 from scipy import stats as st
 
 BASE = "/Volumes/thinkplus/Code/JLucid"
-OUT = f"{BASE}/results/37_leida"
+OUT = f"{BASE}/results"
 z = np.load(f"{OUT}/batch10_feats.npz")
 p = np.load(f"{OUT}/batch10_pheno.npz")
 
