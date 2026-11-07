@@ -59,6 +59,8 @@ null group means. This is a single-cohort reanalysis: the $k=5$ sample overlaps 
 de Lacy and Calhoun by $70.5\%$, and one site code reverses. We conclude that the ADHD
 phase-state difference is real but pattern-defined in this cohort, and that named-state
 claims in dynamic-FC analyses are not identifiable without a refit-identifiability test.
+The pattern effect persists under three sign conventions, including a gauge-free
+partition.
 \end{abstract}
 
 \section{Introduction}
@@ -473,7 +475,10 @@ $1000+r$, $r=0,\dots,39$); they share two-thirds of their data and are therefore
 correlated by construction; the refit centroids are matched to the reference
 de-novo centroids by the Hungarian algorithm on absolute cosine similarity; the matched
 and literal occupancies are computed on all runs; the refit-specific effect is estimated
-for each refit.
+for each refit. Gauge robustness refits the same partition under argmax,
+majority-negative, and projective conventions (projective: best of ten inits by
+clustering objective); each partition is tested by the same within-site permutation
+with max-statistic FWER over its five states.
 
 \subsection{Statistics}
 Group effects are standardized mean differences $d$ in the two-group comparison and
@@ -680,9 +685,32 @@ This reanalysis & LEiDA occupancy (pattern-matched) & 665 & lower occupancy, $d=
 The pattern effect survives within-site-code permutation, reliability gating, motion
 matching, and site-wise analysis. It is not explained by age, sex, site, or motion, and
 it is negative in three of the four site codes, with NeuroIMAGE reversing.
-Gauge robustness beyond the max-component gauge used here---majority-negative and
-projective partitions---is computed in code but not reported here; the named-index
-result does not depend on which gauge fixes the labels.
+
+The effect is not an artifact of the gauge choice. Refit under three sign
+conventions---argmax (used above), majority-negative, and a gauge-free projective
+partition (best of ten inits by clustering objective, never by significance)---each
+yields a FWER-significant occupancy difference (max-statistic over five states, 2,000
+draws):
+
+\begin{table}[H]
+\centering
+\caption{Pattern effect under three sign gauges (max-$|d|$ state per partition).}
+\begin{tabular}{lccc}
+\toprule
+Partition & max $|d|$ & FWER & site signs \\
+\midrule
+argmax & $-0.328$ & $0.001$ & $-$, $-$, $+$, $-$ \\
+majority-negative & $-0.337$ & $0.001$ & $-$, $-$, $+$, $-$ \\
+projective (gauge-free) & $-0.277$ & $0.004$ & $-$, $-$, $-$, $-$ \\
+\bottomrule
+\end{tabular}
+\label{tab:gauge}
+\end{table}
+
+\noindent The winning state index moves across partitions while the sign and approximate
+magnitude persist, as expected when only the pattern---not the integer---is meaningful.
+The gauge-free version is negative in all four site codes, including NeuroIMAGE, and
+its motion ladder survives full covariates ($b=-0.0200$, $p=0.0081$).
 
 \section{Discussion}
 \label{sec:discussion}
