@@ -132,20 +132,14 @@ is the occupancy, not the operator. These are the structural results of Sections
 
 \subsection*{Hypotheses}
 
-We test two hypotheses. The first is structural: the iPA matrix is rank 2, and the
-J-space is an occupancy mixture whose stay-field metrics are functions of the occupancy.
-If that is right, the rank-2 identity should hold frame by frame, every $\bar J$ spectral
-metric should be predictable from the occupancy, and no such metric should survive
-occupancy control; a single frame violating the identity, or a $\bar J$ metric surviving
-occupancy partialling with $\Delta R^2$ above the detection floor, would falsify it. The
-second is empirical: ADHD differs in the pattern-matched occupancy of the LEiDA state,
-but not in an identifiable named index. If that is right, the pattern-matched difference
-should be negative and survive a within-site-code permutation null and a reliability
-gate, the literal index effect should be null, and refits should recover the index at the
-$1/k$ chance level; a null pattern effect, a significant literal effect, or index
-recovery far above $1/k$ would falsify it.
+We make two predictions. First, the iPA matrix is rank 2, so the identity holds frame
+by frame and every $\bar J$ spectral metric is predictable from occupancy, with no
+metric surviving occupancy control. Second, ADHD differs in pattern-matched
+occupancy but not in a named index: the pattern effect is negative under a
+within-site permutation null with adequate reliability, the literal effect is null,
+and refits recover the index near the $1/k$ chance level.
 
-The data support this structure. The rank-2 identities hold to machine precision; the
+Results follow this structure. The rank-2 identities hold to machine precision; the
 $\bar J$ spectral metrics are occupancy-dominated (linear $R^2$ $0.56$--$0.66$,
 quadratic $0.73$--$0.77$), their group means are null, and the coupling between the
 J-space metrics and an independent $k=5$ occupancy lens collapses after occupancy
@@ -497,7 +491,7 @@ parcellation. After z-scoring each parcel and Hilbert phase extraction, the $2\t
 Gram of $(\cos\phi_t,\sin\phi_t)$ gives the leading eigenvector; the sign is fixed by
 the maximum-absolute-component rule. The de-novo $k=5$ lens is a $k$-means fit on the
 pooled leading eigenvectors (seed 0); each run is labeled by nearest centroid. The
-analysis is gated to $n=665$ subjects ($309$ ADHD, $356$ typically developing) across
+analysis includes $n=665$ subjects ($309$ ADHD, $356$ typically developing) across
 four ADHD-200 site codes (Peking 1/2/3 pooled, KKI, NeuroIMAGE, NYU) with at least 120
 TRs. Occupancy
 of state $s$ is the fraction of frames labeled $s$; entry and dwell are secondary.
@@ -531,13 +525,11 @@ for each refit.
 Group effects are standardized mean differences $d$ in the two-group comparison and
 fixed-effect or random-effects meta-analyses across site codes. The exact null is the
 within-site-code permutation of diagnosis (2,000 draws; FWER over five states from
-1,000 draws; $+1$ correction). The detection floor is
-$\mathrm{MDE}_{80}=2.8016\sqrt{1/n_1+1/n_2}$, and the attenuation-corrected floor
-divides by $\sqrt{r_{xx}}$. Reliability is split-half $SB=2r/(1+r)$ over odd/even runs;
+1,000 draws; $+1$ correction). Power at 80% for a two-group difference is $d \approx 2.8016\sqrt{1/n_1+1/n_2}$, inflated by $1/\sqrt{r_{xx}}$ after attenuation correction. Reliability is split-half $SB=2r/(1+r)$ over odd/even runs;
 it is computed on the 220 subjects with at least two runs (179 at NYU and 40 at a
 TDC-only site), so reliability is unmeasured at the other site codes. Motion is the true
 per-run maximum displacement from the per-site motion tables; matching is within site
-code on log mean displacement. Multiplicity is controlled within pre-specified families.
+code on log mean displacement. Multiplicity is controlled within each family of tests.
 The refit identifiability test was specified before the refit outcomes; the $k=5$ effect
 is reported as a retrospective reanalysis of an existing cohort.
 
@@ -603,7 +595,7 @@ $r=-0.322$, $r_{\mathrm{eff}}=+0.340$) collapses after controlling the $k=3$ occ
 to $+0.079$ ($p=0.175$) and $+0.023$ ($p=0.695$). This is the empirical form of
 Corollary \ref{cor:noindependent}: the $\bar J$ operator is a re-encoding of the
 occupancy. The decoder-space DMN contamination has a nominal partial of $-0.124$
-($p=0.033$), below the detection floor ($\mathrm{MDE}_r\approx0.16$), so it is not
+($p=0.033$), below the $r \approx 0.16$ power threshold, so it is not
 evidence of a survivor.
 
 \begin{table}[H]
@@ -760,7 +752,7 @@ null and a reliability gate.
 \subsection*{Constraints that shaped the finding}
 
 The occupancy test is limited by what public ADHD data can support. ADHD-200 is the only
-cohort on disk that combines a categorical ADHD diagnosis with an $N$ large enough to
+cohort available here that combines a categorical ADHD diagnosis with an $N$ large enough to
 test the pattern effect at the required reliability; that is why the test is there and
 not in an independent cohort. The other public cohorts are limited in different ways.
 HBN provides the largest pediatric sample but its categorical diagnosis is behind a data
@@ -772,7 +764,7 @@ not interchangeable with ADHD-200 for the present test, and
 their limitations are why the finding is a single-cohort pattern-defined reanalysis
 rather than an independent replication.
 
-There is a power statement to be made carefully. At $n=665$ the detection floor for a
+At $n=665$, the 80% power threshold for a
 two-group difference is $d\approx0.22$; the data are adequate to detect the moderate
 effect reported here and a large effect ($d\approx0.66$), but not a small effect
 ($d\approx0.18$) at the measured reliability. The binding constraints are the absence of
@@ -781,8 +773,8 @@ two-run subjects; single-run $r=0.415$; attenuation-corrected effect $d\approx0.
 the $70.5\%$ overlap with the ADHD-200 sample of de Lacy and Calhoun \cite{deLacy2019},
 and the one reversing site code.
 
-The J-space model is trained in-sample, and its operator is not retained; per-subject
-J-space claims are bounded by the in-sample fit and by the absence of per-run J metrics.
+The J-space model is trained in-sample, so per-subject
+J-space estimates are bounded by the in-sample fit.
 The per-subject operator is not identifiable at $T\approx355$, and the SVD metrics are
 not invariant under non-orthogonal latent reparameterization; the J-space summaries
 should be read as population-level descriptions, not stable subject properties. The refit identifiability test uses one-third-run
