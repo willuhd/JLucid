@@ -1,0 +1,575 @@
+\documentclass[11pt]{ctexart}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\graphicspath{{figs/}}
+\usepackage{amsmath,amssymb,amsthm,booktabs,float}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{定理}
+\newtheorem{lemma}{引理}
+\newtheorem{proposition}{命题}
+\newtheorem{corollary}{推论}
+\theoremstyle{definition}
+\newtheorem{definition}{定义}
+\newtheorem{remark}{注记}
+\renewcommand{\proofname}{证明}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\RP}{\mathbb{R}\mathrm{P}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\title{基于数据驱动建模的儿童与青少年 ADHD 脑状态可识别性与领先特征向量相位动力学分析}
+\author{Felicity Li \and Quhao Chen}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+我们研究两个可识别性问题：当高维时间序列被聚类和拟合线性算子概括时，簇标签何时是可迁移的坐标、而非任意名称；算子何时携带超出标签占据率（即处于该状态的帧占总帧比例）的信息。我们以脑动力学相位模型回答这两个问题。第一，LEiDA（领先特征向量动力学分析，即取逐帧主特征向量并做聚类的方法）相位对齐矩阵半正定、秩至多为二，具有闭式特征值与主特征向量，并存在 $\mathbb{Z}_2$ 符号规范。第二，我们为学习得到的切换线性隐场 $z(t+1)=A(p_t)z(t)+b(p_t)$ 定义自定义 \emph{J 空间}，其中 $p_t$ 为 LEiDA 标签的独热编码；该 J 空间即平均雅可比矩阵做奇异值分解（SVD）的几何，$A(p)=\sum_s p_sA_s$。由于该场关于 $z$ 线性、且标签为独热编码，每帧雅可比矩阵恰为 $A(p_t)$；其停留帧（即标签与下一帧相同的帧）平均 $\bar J=\sum_s f_sA_s$ 位于共享算子的凸包内，自由度至多 $k-1=2$。因此 $\bar J$ 的每个奇异值概括都是占据率 $f$ 的函数，学习得到的算子不能提供超出占据率的独立动力学证据。我们进一步证明，命名的 $k$-means 状态索引不可识别：在独立重拟合下，期望索引恢复率为 $1/k$，而模式匹配效应可以稳定。在 ADHD-200（$n=665$）中，模式匹配的 LEiDA 占据效应为负且稳健（ADHD 占据率更低；固定效应荟萃分析 $d=-0.302$（此处 $d$ 为标准化均值差，即两组均值之差除以合并标准差），站点内置换即在站点内打乱诊断标签的置换检验（$p=0.001$ [2,000 次抽样下限]），FWER 即五状态最大值检验的族错误率（$0.001$ [1,000 次抽样下限]），分半信度 SB 即奇偶两半相关校正的信度（$0.586$）；运动匹配配对 $d_z\approx-0.17$，匹配组间 $d\approx-0.25$，$p=0.006$），但名义索引效应为零（$d=-0.035$），40 次重拟合的索引恢复率处于随机水平（$22.5\%$ 对 $20\%$）。$\bar J$ 谱指标是占据率函数、组均值无差异，模式效应在三种符号规范下（包括无规范的投影分区）均持续存在。这是一项单队列重分析：$k=5$ 样本与 de Lacy 和 Calhoun 的 ADHD-200 样本重叠 $70.5\%$，且一个站点代码在 argmax 规范下反向。我们得出结论：ADHD 相位状态差异在本队列中真实存在但由模式定义，动态功能连接分析中的命名状态主张在没有重拟合可识别性检验时不可识别。
+\end{abstract}
+
+\section{引言}
+
+高维时间序列通常被划分为少数几组来概括。分区产生标签 $\ell(t)\in\{1,\dots,k\}$ 和占据率 $\pi_s$，但标签本身不是数据的一部分：置换组名不改变分区，却改变关于“状态 $s$”的每个陈述。命名索引能否从独立拟合中恢复，是一个可识别性问题。在混合模型中，它是标签切换问题 \cite{Stephens2000,Jasra2005}；在聚类分析中，它是稳定性问题 \cite{Hennig2007,vonLuxburg2010}。在动态状态文献中，它常被隐含处理：状态按索引报告，仿佛整数就是坐标。
+
+第二个问题出现在对同一标签拟合动力学模型时。考虑切换线性场
+\begin{equation}
+z(t+1)=A(p_t)z(t)+b(p_t),
+\qquad
+A(p)=\sum_{s=1}^{k}p_sA_s,
+\end{equation}
+其中 $p_t$ 为 $\ell(t)$ 的独热编码，算子 $A_s$ 在被试间共享。每帧雅可比矩阵恰为 $J(t)=A(p_t)$。对被试的停留帧取平均，得到凸组合，
+\begin{equation}
+\bar J=\frac1{T_{\mathrm{stay}}}\sum_{t\in\mathrm{stay}}J(t)
+=\sum_{s=1}^{k}f_sA_s,
+\qquad
+f_s=\frac{n_s}{T_{\mathrm{stay}}},
+\qquad
+\sum_s f_s=1,
+\end{equation}
+其中 $n_s$ 为状态 $s$ 的停留帧数。于是 $\bar J$ 的每个标量概括都是占据率 $f$ 的函数：算子不能提供超出占据率的独立动力学证据。这是共享算子切换线性模型的数学事实，与具体数据集无关，也是本文第二个主题。在动态状态主张的每个层面——矩阵、算子、索引——我们都追问：什么是可识别的，什么是经得起检验的。
+
+\paragraph{数据简要说明。}功能磁共振成像（fMRI）测量一种间接、缓慢的血管信号（血氧水平依赖，BOLD），每重复时间（TR，此处约为 2\,s；一个采样即一帧）采样一次。静息态指无任务：被试静卧。大脑被固定图谱平均为 N 个脑区（parcel，即把连续脑信号固定平均为 N 个区域的平均值）；此处透镜即分区方式与状态数 $k$ 的组合选择：$k=5$ 透镜用 CC200（$N=190$），$k=3$ 透镜用 AAL-90，其时间序列来自 Athena 预处理版本。各站点使用不同扫描仪、产生批效应，故组间检验在站点内进行。头部运动会抬高连接，故需匹配并控制运动。ADHD 为注意缺陷多动障碍；TDC 为典型发育对照。HBN 为 Healthy Brain Network 队列（静息态规范样本，$n=180$）。BOLD 序列经带通滤波（即只保留该频率段的滤波）（Athena $0.009$--$0.08$\,Hz）并按脑区做 z 标准化（即减去均值、除以标准差的仿射归一化）。
+
+我们在静息态功能磁共振成像（fMRI）的相位模型中研究这些问题。$N$ 个脑区的血氧水平依赖（BOLD）信号经带通滤波并做 z 标准化；Hilbert 变换给出每个脑区的瞬时相位（即解析信号的幅角或角度） $\phi_i(t)$。瞬时相位对齐（iPA）矩阵为
+\begin{equation}
+C_{ij}(t)=\cos\big(\phi_i(t)-\phi_j(t)\big).
+\end{equation}
+LEiDA 取 $C(t)$ 的主特征向量 $v_1(t)$，对序列 $\{v_1(t)\}$ 做 $k$-means 聚类、划分为 $k$ 个状态 \cite{Cabral2017,Glerean2012}。占据率、寿命与切换是这些状态的标准概括，状态占据的组间差异已在注意缺陷多动障碍（ADHD）及其他疾病中报告 \cite{deLacy2019,Shappell2021,Ahmadi2021,Kaboodvand2020}。这些主张都以整数状态索引为锚，这恰是第一个问题。
+
+在算子方面，我们对同一组主特征向量拟合切换线性隐变量模型 \cite{Linderman2017,Taghia2018}。对每个被试，我们在停留帧上计算平均雅可比矩阵 $\bar J$，做奇异值分解（SVD） $\bar J=U\Sigma V^{\top}$，并以集中度 $C_k$ 与有效秩 $r_{\mathrm{eff}}$ 概括其谱几何。我们把这个导出对象——平均雅可比矩阵的奇异值分解（SVD）几何及其标量概括——称为被试的 \emph{J 空间}。该术语仅指此导出对象，它建立在 LEiDA 状态之上，是学习动力学分析通常视为动力学表型的量。
+
+iPA 矩阵的数学使第一个问题更清晰。矩阵秩为 2，但其主特征向量是 $N$ 维向量：秩 2 是关于谱子空间的陈述，而非状态本身。特征向量至多确定到符号，符号约定改变会改变标签序列；相当一部分表观状态转移本质是规范漂移，而非动力学。J 空间有第二个退化。在 $k$ 个共享算子下，$\bar J$ 位于 $(k-1)$-单纯形中，故二维对象是占据率而非算子。这些是第 \ref{sec:leida} 节与第 \ref{sec:jspace} 节的结构结果。
+
+\subsection*{假设}
+
+我们提出两个预测。第一，iPA 矩阵秩为 2，故恒等式逐帧成立，每个 $\bar J$ 谱指标都可由占据率预测，在占据率控制后无指标存活。第二，ADHD 在模式匹配占据率上不同、在名义索引上相同（无差异）：模式效应在站点内置换零假设下为负且信度充足，名义（索引）效应为零，重拟合的索引恢复率接近 $1/k$ 随机水平。
+
+结果符合这一结构。秩-2 恒等式精确到机器精度；$\bar J$ 谱指标以占据率为主（线性 $R^2$ $0.56$--$0.66$，二次 $0.73$--$0.77$），组均值无差异，J 空间指标与独立 $k=5$ 占据透镜的耦合在占据率控制后崩溃。在该 $k=5$ 透镜（$n=665$）中，模式匹配占据效应为负且稳健：$d=-0.302$，站点内置换 $p=0.001$（2,000 次抽样下限），FWER $0.001$（1,000 次抽样下限），分半信度 $0.586$；运动匹配配对 $d_z\approx-0.17$（组间 $d\approx-0.25$），$p=0.006$。名义索引效应为零（$d=-0.035$），40 次重拟合的索引恢复率为 $22.5\%$ 对 $20\%$ 随机水平；模式匹配效应为 $-0.299$，且 40 次重拟合全部为负。该效应由模式定义，而非索引定义。$k=5$ 队列与 de Lacy 和 Calhoun \cite{deLacy2019} 的 ADHD-200 样本重叠 $469/665$（$70.5\%$；见其补充表 S3），故这是重分析而非独立队列复制；我们将在局限性部分再谈此点。
+
+秩-2 分解与符号歧义并非新发现 \cite{Glerean2012,Olsen2022,EiDA2024}，切换线性模型类也是标准模型 \cite{Linderman2017,Taghia2018}。新颖之处在于 J 空间构造及其停留场概括可识别为占据率函数、命名状态的可识别性结果及其 $1/k$ 基线，以及剔除索引主张后的模式定义负差异。本文主张并非大脑存在二维状态，而是：秩 2 是关于谱子空间的陈述；J 空间是伪装成算子的两自由度占据率；命名聚类索引不是坐标；ADHD 占据差异在模式定义下真实存在。
+
+数学核心在第 \ref{sec:leida}--\ref{sec:identifiability} 节；数据与结果在第 \ref{sec:methods}--\ref{sec:results} 节。
+
+\section{相位对齐与 LEiDA}
+\label{sec:leida}
+
+\subsection{相位提取}
+记 $x_i(t)$ 为脑区 $i\in\{1,\dots,N\}$ 在帧 $t\in\{1,\dots,T\}$ 处的 BOLD 信号。带通滤波并做 z 标准化后，构造解析信号
+\begin{equation}
+x_i(t)+i\,\mathcal{H}[x_i](t)=A_i(t)e^{i\phi_i(t)},
+\end{equation}
+其中 $\mathcal{H}$ 为 Hilbert 变换，$\phi_i(t)\in[0,2\pi)$ 为瞬时相位。记 $c_i(t)=\cos\phi_i(t)$，$s_i(t)=\sin\phi_i(t)$。
+
+\subsection{瞬时相位对齐矩阵}
+iPA 矩阵为
+\begin{equation}
+C_{ij}(t)=\cos\!\big(\phi_i(t)-\phi_j(t)\big)
+=c_i(t)c_j(t)+s_i(t)s_j(t),
+\end{equation}
+或矩阵形式
+\begin{equation}
+C(t)=c(t)c(t)^{\top}+s(t)s(t)^{\top}.
+\label{eq:Crank}
+\end{equation}
+$C(t)$ 对称、半正定，对角元为 1，且 $\tr C(t)=N$。
+
+\begin{theorem}[秩-2 相位对齐]
+\label{thm:rank2}
+对每个 $t$，有 $\rank C(t)\le 2$。令
+$\sum_{j=1}^N e^{2i\phi_j(t)}=A(t)e^{2i\psi(t)}$，其中 $A(t)\ge0$ 且
+$\psi(t)\in[0,\pi)$，定义 $R_2(t)=A(t)/N\in[0,1]$。则 $C(t)$ 的非零特征值为
+\begin{equation}
+\lambda_1(t)=\frac{N+A(t)}{2}=\frac{N}{2}\big(1+R_2(t)\big),
+\qquad
+\lambda_2(t)=\frac{N-A(t)}{2}=\frac{N}{2}\big(1-R_2(t)\big),
+\end{equation}
+对应的正交归一特征向量为
+\begin{equation}
+v_1(t)=\frac{\cos(\phi(t)-\psi(t))}{\sqrt{\lambda_1(t)}},
+\end{equation}
+其中余弦逐元素作用。特别地，
+\begin{equation}
+\frac{\lambda_1(t)}{N}=\frac{1+R_2(t)}{2}\ge\frac12.
+\label{eq:l1identity}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+式 \eqref{eq:Crank} 直接给出 $\rank C\le2$ 与半正定性。$C$ 的非零谱等于 $2\times2$ Gram 矩阵的谱
+\begin{equation}
+G=\begin{pmatrix}c^{\top}c & c^{\top}s\\ s^{\top}c & s^{\top}s\end{pmatrix}.
+\end{equation}
+记 $\sum_j e^{2i\phi_j}=A e^{2i\psi}$，则
+\begin{equation}
+c^{\top}c=\frac{N+A\cos2\psi}{2},\quad
+s^{\top}s=\frac{N-A\cos2\psi}{2},\quad
+c^{\top}s=\frac{A\sin2\psi}{2}.
+\end{equation}
+$G$ 的特征值为 $(N\pm A)/2$，对应特征向量 $(\cos\psi,\sin\psi)^{\top}$ 与 $(-\sin\psi,\cos\psi)^{\top}$。映射回 $\R^N$ 得 $v_1\propto c\cos\psi+s\sin\psi=\cos(\phi-\psi)$ 与 $v_2\propto-c\sin\psi+s\cos\psi=\sin(\phi-\psi)$；分别用 $\lambda_1,\lambda_2$ 归一化即得所陈形式。最后 $\lambda_1+\lambda_2=N$ 且 $\lambda_1/N=(1+R_2)/2$。
+\end{proof}
+
+\begin{corollary}[主特征向量是 $N$ 维向量，而非二维参数状态]
+\label{cor:not2d}
+矩阵 $C(t)$ 有二维\emph{谱子空间}，但主特征向量 $v_1(t)\in\R^N$ 是 $N$ 维对象。对 $(\psi(t),R_2(t))$ 是相位构型的两参数概括，而非 $v_1(t)$ 的无损编码：重构 $v_1(t)$ 需要完整相位向量 $\phi(t)$。
+\end{corollary}
+
+\begin{proof}
+由定理 \ref{thm:rank2} 立得：$v_1(t)=\cos(\phi(t)-\psi(t))/\sqrt{\lambda_1(t)}$ 通过逐元素余弦依赖于整个向量 $\phi(t)$。对 $(\psi,R_2)$ 仅决定平均相位与相干幅度两项概括统计量。
+\end{proof}
+
+推论 \ref{cor:not2d} 值得明说：“状态是二维的”这一说法不能用于主特征向量。二维的是 $C(t)$ 的谱子空间（秩 2），以及（与之独立的）第 \ref{sec:jspace} 节 J 空间的占据率单纯形。LEiDA 中的经验状态是投影类 $[v_1(t)]\in\RP^{N-1}$；聚类作用在该投影空间上，而非二维参数空间上。
+
+\subsection{符号规范}
+特征向量方程至多确定 $v_1(t)$ 的符号：$v_1(t)$ 与 $-v_1(t)$ 是同一投影点，$C(t)$ 不变。\emph{规范}（gauge）是在每帧从 $\pm v_1(t)$ 中选取代表元。
+
+\begin{lemma}[$\mathbb{Z}_2$ 规范]
+\label{lem:gauge}
+设 $g(t)\in\{\pm1\}$ 为规范场，$\tilde v_1(t)=g(t)v_1(t)$。则 $C(t)$ 不变，但标签序列 $\ell(t)=\argmin_j\|v_1(t)-\mu_j\|$ 与转移矩阵 $P_{ij}=\Prob(\ell(t+1)=j\mid\ell(t)=i)$ 依赖 $g$。因此 $\ell$ 或 $P$ 的任何统计量除非定义在投影类 $[v_1]$ 上，否则都依赖规范。
+\end{lemma}
+
+\begin{proof}
+$C$ 关于其特征向量符号为零次齐次。最近质心规则若在有符号表示中拟合质心则非不变：翻转子集帧会把它们移至球面对跖侧、改变归属。转移矩阵是标签序列的函数，故随 $g$ 改变。在 $[v_1]$ 上定义的统计量由构造即不变。
+\end{proof}
+
+选 v 还是 -v 会改标签，故凡用到标签的量都依赖符号选择。实践中规范由约定固定（多数正、多数负、最大绝对分量为正或连续性对齐）。这些约定在相当比例帧上不一致；在 HBN 静息态 $180$ 名被试样本中，最大分量约定在 $32.3\%$ 帧上翻转，多数负约定在 $11.3\%$ 上翻转。当最大分量规范翻转时，标签切换以概率 $0.822$ 跟随，未翻转时为 $0.124$；多数负约定下对应概率为 $0.311$ 与 $0.063$。因此相当一部分“状态转移”是规范漂移，除非以投影方式聚类，否则标签序列并非规范不变。下文分析中，$k=5$ 透镜固定最大绝对分量规范，$k=3$ J 空间透镜使用多数负规范；秩-2 与占据定理与规范无关，命名标签则有关。
+
+\subsection{聚类与命名状态}
+LEiDA 用 $k$-means 将 $[v_1(t)]$ 的时间序列聚为 $k$ 个质心 $\mu_1,\dots,\mu_k$，并赋予 $\ell(t)=\argmin_j d([v_1(t)],[\mu_j])$。状态 $s$ 的占据率为
+\begin{equation}
+\pi_s=\frac1T\sum_{t=1}^{T}\one[\ell(t)=s].
+\end{equation}
+索引 $s$ 只是记账工具：置换质心不改变分区，却改变关于“状态 $s$”的每个陈述。命名索引能否在独立拟合间恢复，是第 \ref{sec:identifiability} 节的可识别性问题。
+
+上文的对 $(\psi,R_2)$——平均相位与相干度——是 $\phi(t)$ 的两参数投影，而非主特征向量本身。
+
+\section{J 空间：定义与占据退化}
+\label{sec:jspace}
+
+J 空间是导出对象。它建立在 LEiDA 标签序列之上，不预设于既往文献；我们在此定义它，后文统一使用该名称。
+
+\begin{definition}[J 空间]
+设 $v(t)\in\R^N$ 为 iPA 矩阵主特征向量，$\ell(t)\in\{1,\dots,k\}$ 为其 LEiDA 标签。设 $z(t)\in\R^d$ 为因果编码器给出的隐状态 $z(t)=E(v(t-w+1),\dots,v(t))$（仅依赖过去帧），令
+\begin{equation}
+z(t+1)=A(p_t)z(t)+b(p_t),
+\qquad
+A(p)=\sum_{s=1}^{k}p_sA_s,
+\qquad
+b(p)=\sum_{s=1}^{k}p_sb_s,
+\label{eq:field}
+\end{equation}
+其中 $p_t\in\{0,1\}^k$ 为 $\ell(t)$ 的独热编码，$A_s\in\R^{d\times d}$、$b_s\in\R^d$ 在被试间共享。每帧雅可比矩阵为
+\begin{equation}
+J(t)=\frac{\partial z(t+1)}{\partial z(t)}=A(p_t).
+\label{eq:Jt}
+\end{equation}
+对被试，令
+\begin{equation}
+\bar J=\frac1{T_{\mathrm{stay}}}\sum_{t\in\mathrm{stay}}J(t)
+=\sum_{s=1}^{k}f_sA_s,
+\qquad
+f_s=\frac{n_s}{T_{\mathrm{stay}}},
+\qquad
+\sum_s f_s=1,
+\label{eq:Jbar}
+\end{equation}
+上式在 $T_{\mathrm{stay}}$ 个停留帧（即标签与下一帧相同的帧）上求平均（$\ell(t)=\ell(t+1)$ 且 $\cos(v(t),v(t+1))\ge-0.5$ 的帧），其中 $n_s$ 为状态 $s$ 的停留帧数。记 $\bar J=U\Sigma V^{\top}$，奇异值 $\sigma_1\ge\cdots\ge\sigma_d\ge0$。被试的 \emph{J 空间}即元组 $(\bar J,U,\Sigma,V)$ 及其标量概括
+\begin{equation}
+C_k=\frac{\sum_{i=1}^{k}\sigma_i^2}{\sum_{i=1}^{d}\sigma_i^2},
+\qquad
+r_{\mathrm{eff}}=\frac{(\sum_i\sigma_i)^2}{\sum_i\sigma_i^2},
+\end{equation}
+\end{definition}
+
+\begin{remark}[J 空间的占据退化]
+\label{thm:occupancy}
+对带共享算子 $A_s$ 与独热条件 $p_t$ 的场 \eqref{eq:field}，$J(t)=A(p_t)$ 与 $z(t)$ 无关，$\bar J=\sum_s f_s A_s$ 位于 $\mathrm{conv}\{A_s\}$ 中（仿射维数至多 $k-1$），每个标量函数 $g(\bar J)$ 都是函数 $h_g(f)$（$\sum_s f_s=1$）——特别地，$k=3$ 时每个停留场指标至多依赖两个数。
+\end{remark}
+
+\begin{proof}
+由式 \eqref{eq:Jt} 得 $J(t)=A(p_t)$；$\bar J$ 为式 \eqref{eq:Jbar}，$f$ 在单纯形中，且 $f\mapsto\bar J$ 线性、$\bar J$ 为 $g$ 的唯一宗量，故余 $k-1$ 个自由度。
+\end{proof}
+
+该结果是由定义即得的恒等式；其内容在于把指标库识别为占据率函数，而非推导。
+
+\begin{corollary}[无独立 $\bar J$ 证据]
+\label{cor:noindependent}
+停留帧平均 $\bar J$ 的任何标量函数不能提供超出 $k$-状态占据率的独立动力学证据。特别地，该类指标与表型的相关等同于该表型与占据率函数的相关，除非能证明该指标依赖 $\bar J$ 未捕捉的顺序敏感对象，例如标签序列的转移矩阵或 $J(t)$ 的滞后换位子。
+\end{corollary}
+
+\begin{proof}
+由注记 \ref{thm:occupancy} 立得：每个停留场指标都是 $f$ 的函数。同一 $f$ 的两个函数不能提供超出 $f$ 本身的独立证据。
+\end{proof}
+
+推论 \ref{cor:noindependent} 是 $\bar J$ 均值差何以看似动力学效应、实则不含占据率外信息的数学原因。经验上，在 $N=307$ 队列中，$C_k$ 与 $r_{\mathrm{eff}}$ 对 $k=3$ 占据率的线性 $R^2$ 为 $0.556$、$0.657$，二次 $R^2$ 为 $0.766$、$0.768$。精确对应是恒等式（注记 \ref{thm:occupancy}），故无需外推 $R^2$。J 空间组均值无差异（第 \ref{sec:results} 节）。J 空间指标与独立 $k=5$ 占据透镜的耦合是记录中最强的 J 空间关联（$C_k$ 偏相关 $r=-0.322$，$r_{\mathrm{eff}}=+0.340$），控制占据率后崩溃至 $+0.079$（$p=0.175$）与 $+0.023$（$p=0.695$）：它是跨透镜占据一致性，而非 J 空间机制。图 \ref{fig:jspace} 给出单纯形着色、$R^2$ 柱状图以及控制前后耦合。
+
+\section{命名状态的可识别性}
+\label{sec:identifiability}
+
+本节结果关乎标签，而非信号。它并不说占据效应不存在；它说效应必须附着于定义状态的模式，而非恰好命名它的整数。
+
+设 $\ell:\{1,\dots,T\}\to\{1,\dots,k\}$ 为参考标签，$\ell^{(r)}$ 为独立重拟合 $r=1,\dots,R$（不同初始化和/或重采样扫描段）的标签。以绝对余弦相似度上的匈牙利算法（最优线性指派）把重拟合质心匹配到参考质心，得到 $\{1,\dots,k\}$ 的置换 $\sigma_r$。参考状态 $j$ 的\emph{索引恢复率}为
+\begin{equation}
+\rho_j=\frac1R\sum_{r=1}^{R}\one[\sigma_r(j)=j],
+\end{equation}
+\emph{索引匹配率}为 $\rho_{\mathrm{idx}}=\frac1k\sum_j\rho_j$。重拟合 $r$ 处的\emph{模式匹配}状态为聚类 $\sigma_r(j)$，其占据率与参考状态占据率比较。\emph{名义}状态为整数索引同为 $j$ 的聚类。
+
+在可交换重拟合标签（均匀置换）下，由线性可得 $\E[\rho_j]=\E[\rho_{\mathrm{idx}}]=1/k$，不动点个数均值与方差均为 1；$k=5$ 时随机索引匹配率为 $0.20$。
+
+这给出可识别性检验的零模型。若流水线把命名索引恢复到远高于 $1/k$，则索引可识别（或重拟合并不独立）；若恢复率处于随机水平，则即使分区本身稳定，索引也不是可迁移坐标。对每个参考状态 $j$，于是有两个待估计量：\emph{名义}效应（每次重拟合用索引为 $j$ 的聚类），以及\emph{模式匹配}效应（每次重拟合用 $\sigma_r$ 匹配到 $j$ 的聚类）。模式匹配效应与标签置换不变，名义（索引）效应不然。关于“状态 $j$”的主张仅当名义（索引）效应与模式匹配效应一致且索引恢复率高时成立，否则该主张关于“某个状态”，其正确表述应为模式定义。
+
+\section{数据与方法}
+\label{sec:methods}
+
+\subsection{数据与两个透镜}
+$k=5$ LEiDA 透镜为 ADHD-200 静息态 fMRI \cite{ADHD2002012}（CC200-190 分区）。每脑区做 z 标准化、Hilbert 相位提取后，$(\cos\phi_t,\sin\phi_t)$ 的 $2\times2$ Gram 给出主特征向量，符号由最大绝对分量规则固定。从头构建 $k=5$ 透镜是在汇集的主特征向量上做 $k$-means 拟合（seed 0）；每段扫描按最近质心标记。分析纳入 $n=665$ 名被试（309 ADHD、356 典型发育）横跨四个 ADHD-200 站点代码（Peking 1/2/3 合并、KKI、NeuroIMAGE、NYU），每个至少 120 TR。队列计数随分析过滤而不同（未过滤队列 T$\ge$120 有 666 人，此处与字段表合并后为 665 人，合并要求 Age 与 sex）；运动匹配使用逐段运动表（260 对）。状态 $s$ 的占据率为标记为 $s$ 的帧比例；进入次数（访次）与停留时长（访次长度）为次要指标。
+
+$k=3$ J 空间透镜为 AAL-90 切换线性模型（$d=12$，7 帧窗），在 $N=307$ 名被试（124 ADHD、183 典型发育）上样本内训练。指标定义见第 \ref{sec:jspace} 节；逐被试估计受样本内拟合边界所限。
+
+两个透镜共享同一秩-2 相位状态，但在分区（CC200-190 对 AAL-90）、状态数（5 对 3）与符号规范上不同。秩-2 与占据两个定理与透镜无关；负效应在 $k=5$ 透镜度量，J 空间崩溃在 $k=3$ 透镜度量。本文无主张要求两透镜为同一分区。307 人 J 空间队列是 665 人的严格子集；该子集中的模式效应更弱（$d\approx-0.16$，$p=0.20$），J 空间统计量不作为 $k=5$ 效应的证据。
+
+\subsection{重拟合可识别性检验}
+四十次 $k$-means 重拟合在随机三分之一扫描段子样本上进行（seed $1000+r$，$r=0,\dots,39$）；它们共享三分之二数据、故由构造相关；重拟合质心以匈牙利算法（最优线性指派）在绝对余弦相似度上匹配到参考从头构建质心；匹配与名义（索引）占据率在全部扫描段上计算；每重拟合的专属效应逐次估计。
+
+规范稳健性在 argmax、多数负与投影三种约定下重拟合分区（投影：十个初始中按聚类目标最优）。每分区以同一站点内置换、五状态最大值统计量 FWER 检验；所报状态为每分区 $\max$-$|d|$ 状态，而非模式匹配状态。
+
+\subsection{统计}
+组效应为两组比较的标准化均值差（即两组均值之差除以合并标准差） $d$，以及跨站点代码的固定效应或随机效应荟萃分析。精确零假设为诊断的站点内置换（即在站点内随机打乱诊断标签以建零分布的置换检验）（2,000 次抽样；五状态最大值检验的族错误率（FWER）取自 1,000 次抽样；$+1$ 修正避免 $p=0$）。两组差异 80\% 把握度即能检出该效应的概率为 $d\approx2.8016\sqrt{1/n_1+1/n_2}$，衰减修正后按 $1/\sqrt{r_{xx}}$ 放大。信度为奇偶扫描段的分半信度（SB，即把奇偶两半相关经公式校正的信度） $SB=2r/(1+r)$；在至少两段扫描的 220 名被试上计算（179 人在 NYU、40 人在仅 TDC 站点），故其他站点代码信度未度量。运动为逐站点运动表中的实际测得逐段最大位移；匹配在站点代码内按对数平均位移进行。每检验族内控制多重比较。重拟合可识别性检验在重拟合结果之前预先指定；$k=5$ 效应作为既有队列的回顾性重分析报告。
+
+\section{结果}
+\label{sec:results}
+
+\subsection{秩-2 恒等式精确到机器精度}
+在两数据集共 $47{,}745$ 帧中，$C(t)$ 的第三奇异值处于机器零水平：$\sigma_3/\sigma_1=5.6\times10^{-16}$。特征值恒等式 \eqref{eq:l1identity} 的最大绝对误差为 $8.9\times10^{-16}$，闭式主特征向量与数值特征向量的复现误差为 $2.0\times10^{-15}$。矩阵秩为 2；谱子空间二维；主特征向量为 $N$ 维向量（推论 \ref{cor:not2d}）。表 \ref{tab:rank2} 概括之。
+
+\begin{table}[H]
+\centering
+\caption{秩-2 结构数值核查。}
+\begin{tabular}{lcc}
+\toprule
+量 & 值 & 帧数/数据集 \\
+\midrule
+$\sigma_3/\sigma_1$ & $5.6\times10^{-16}$ & 47,745 帧 / 2 数据集 \\
+$\max_t |\lambda_1(t)/N-(1+R_2(t))/2|$ & $8.9\times10^{-16}$ & 47,745 帧 \\
+$\max_t\|v_1^{\mathrm{closed}}-v_1^{\mathrm{num}}\|$ & $2.0\times10^{-15}$ & 47,745 帧 \\
+\bottomrule
+\end{tabular}
+\label{tab:rank2}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig1_rank2_gauge.png}
+\caption{秩-2 结构与符号规范。(a) 三帧 iPA 矩阵特征值谱；两个非零特征值，$\sigma_3/\sigma_1\approx 5.6\times10^{-16}$。(b) 逐帧主特征向量（展示用连续性对齐）：每帧 $N=190$ 维向量；插入图显示两参数概括 $(\psi,R_2)$。(c) 最大分量与多数负两种约定下，规范翻转 vs 未翻转时标签切换概率（HBN 静息态，$n=180$；均值 $\pm$ SEM）。}
+\label{fig:rank2}
+\end{figure}
+
+\subsection{符号规范并非无害}
+在 180 名 HBN 静息态被试样本中，最大绝对分量规范在 $32.3\%$ 帧上翻转，多数负规范在 $11.3\%$ 上翻转。最大分量规范下，规范翻转后标签切换概率为 $0.822$，未翻转时为 $0.124$；多数负规范下对应概率为 $0.311$ 与 $0.063$。投影 $k$-means 分区消除规范（引理 \ref{lem:gauge}）；在该分区中，以往报告的二阶标签统计量在 $k=5$ 时从 $z=+138$ 崩溃至 $z\approx+0.5$。故规范解释了相当一部分表观“状态动力学”，任何基于标签的主张此前必须固定或消去它。
+
+\subsection{J 空间谱指标崩溃为占据率}
+表 \ref{tab:jspace} 给出 J 空间组对比，均不显著。$\bar J$ 谱指标以占据率为主：$k=3$ 占据率上的线性 $R^2$，$C_k$ 为 $0.556$，$r_{\mathrm{eff}}$ 为 $0.657$；二次 $R^2$ 为 $0.766$ 与 $0.768$。J 空间指标与独立 $k=5$ 占据透镜的耦合（$C_k$ 偏相关 $r=-0.322$，$r_{\mathrm{eff}}=+0.340$）在控制 $k=3$ 占据率后崩溃至 $+0.079$（$p=0.175$）与 $+0.023$（$p=0.695$）。这是推论 \ref{cor:noindependent} 的经验形态：$\bar J$ 算子是占据率的重新编码。
+
+\begin{table}[H]
+\centering
+\caption{自定义 J 空间组对比（切换线性停留场，$N=307$）。}
+\begin{tabular}{lccc}
+\toprule
+指标 & $d$ & $p$ & 分布 \\
+\midrule
+谱集中度 $C_k$ & $-0.085$ & $0.47$ & 均值 $0.817$，标差 $0.011$ \\
+有效秩 $r_{\mathrm{eff}}$ & $+0.083$ & $0.47$ & 均值 $6.29$，标差 $0.07$ \\
+\bottomrule
+\end{tabular}
+\label{tab:jspace}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig2_jspace_occupancy.png}
+\caption{J 空间的占据退化。(a) $k=3$ 占据率单纯形、按 $C_k$ 着色；该指标是 $f$ 的函数。(b) 每 J 空间指标在占据率上的 $R^2$：全帧线性与仅停留帧二次。(c) 控制 $k=3$ 占据率前后，J 空间指标与独立 $k=5$ 透镜的耦合（偏相关 $r$，$p$）。}
+\label{fig:jspace}
+\end{figure}
+
+\subsection{模式定义效应稳健}
+$k=5$ 从头构建透镜显示 ADHD 在模式匹配缩减状态上存在负效应（ADHD 占据更低）。表 \ref{tab:o2} 报告主要分析。四站点代码固定效应荟萃分析为 $d=-0.302$（参数检验 $p$ 值 $=0.00016$）；未调整队列标准化差异为 $d=-0.263$（$p=0.00077$）。站点内置换给出 $p=0.001$（2,000 次抽样下限），FWER $0.001$（1,000 次抽样下限），$n=665$，$I^2=27.6\%$（异质份额），随机效应估计 $-0.294$（$p=0.0029$）。分半信度 $SB=0.586$ $[0.453,0.681]$，在至少两段扫描的 220 名被试上度量；单次扫描相关 $r=0.415$ 落在健康成年人同日 LEiDA 占据 ICC 的已发表范围 0.39--0.59（k=5）内\cite{Vohryzek2020}（分半信度 $SB$ 为 Spearman-Brown 校正值，与 ICC 不直接可比），与既往信度一致而非孤立估计。以实际测得的逐段运动匹配，配对 $d_z$ 为 $-0.172$（260 对，$p=0.006$），匹配组间 $d$ 为 $-0.246$ [95\% CI $-0.428$ 至 $-0.074$]；站点+运动 OLS 即普通最小二乘线性回归给出 $b=-0.0162$（$p=0.0020$，$n=640$）。四站点代码中三者为负；NeuroIMAGE 反向（$d=+0.115$，未调整 $p=0.62$），作为站点代码异质性披露。
+
+\begin{table}[H]
+\centering
+\caption{ADHD-200 模式匹配 LEiDA 占据效应（$k=5$ 从头构建透镜）。}
+\begin{tabular}{lcc}
+\toprule
+量 & 值 & 注 \\
+\midrule
+$d$（模式匹配，固定效应荟萃分析） & $-0.302$ & 665 人（309 ADHD/356 TDC） \\
+未调整队列 $d$ & $-0.263$ & $p=0.00077$ \\
+参数检验 $p$ & $0.00016$ & 固定效应荟萃分析 \\
+站点内置换 $p$ & $0.001$ & 2,000 次抽样下限 \\
+FWER & $0.001$ & 1,000 次抽样下限；五状态中最大 $|d|$ \\
+$I^2$ & $27.6\%$ & 随机效应 $-0.294$（$p=0.0029$） \\
+分半信度 $SB$ & $0.586$ $[0.453,0.681]$ & 220 名两段扫描被试；单次扫描 $r=0.415$ \\
+运动匹配 $d_z$ / $d$ & $-0.172$ / $-0.246$ & 260 对，$p=0.006$；95\% CI $[-0.428,-0.074]$ \\
+站点+运动 $b$ & $-0.0162$ & $p=0.0020$ \\
+按站点符号 & 3/4 为负 & NeuroIMAGE $+0.115$（未调整 $p=0.62$） \\
+\bottomrule
+\end{tabular}
+\label{tab:o2}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig3_o2_effect.png}
+\caption{ADHD-200 模式匹配 LEiDA 占据效应（$k=5$ 从头构建透镜）。
+(a) 按组占据率（$n=665$；309 ADHD / 356 TDC）。(b) 按站点标准化差异及 bootstrap 95\% CI。(c) 荟萃分析效应与运动匹配配对 $d_z$ / 组间 $d$ 及 95\% CI。}
+\label{fig:o2}
+\end{figure}
+
+\subsection{模式效应存活，整数索引不存}
+表 \ref{tab:refit} 报告重拟合可识别性检验。名义索引-4 效应为 $d=-0.0347$（50\% 重拟合为负，不显著）。模式匹配效应为 $d=-0.2987$，40 次重拟合估计的 2.5--97.5 百分位为 $[-0.3645,-0.1915]$，100\% 重拟合为负。索引在 $9/40=22.5\%$ 重拟合中恢复，与 $20\%$ 随机水平（$1/k$）一致。40 次重拟合共享三分之二数据，故名义 95\% 区间 $[11.8\%,37.1\%]$ 高估精度；点估计与随机水平一致，不能排除高达约 $37\%$ 的恢复率。分区稳定，索引不稳定。正确主张是关于由模式识别的“某个状态”，而非关于“状态 4”。图 \ref{fig:refit} 给出恢复率、名义（索引） vs 匹配效应分布与恢复索引直方图。
+
+\begin{table}[H]
+\centering
+\caption{重拟合可识别性检验（40 次三分之一扫描段重拟合；相关子样本）。}
+\begin{tabular}{lcc}
+\toprule
+量 & 值 & 解释 \\
+\midrule
+名义索引-4 $d$ & $-0.0347$ & 零；50\% 重拟合为负 \\
+模式匹配 $d$ & $-0.2987$ & 95\% CI $[-0.3645,-0.1915]$；100\% 为负 \\
+索引-4 恢复 & $9/40=22.5\%$ & 随机 $20\%$；95\% CI $11.8$--$37.1\%$ \\
+\bottomrule
+\end{tabular}
+\label{tab:refit}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig4_identifiability.png}
+\caption{命名状态可识别性（40 次三分之一扫描段重拟合；相关子样本）。
+(a) 索引-4 恢复率 vs $1/k$ 随机水平（名义 95\% CI）。(b) 重拟合间名义（索引） vs 模式匹配效应量。(c) 恢复索引分布 vs 随机期望。}
+\label{fig:refit}
+\end{figure}
+
+模式本身——质心图及其网络载荷——此处不展示；效应由该模式定义，而非命名索引。表 \ref{tab:prior} 把本次重分析与既往动态功能连接 ADHD 队列并列。
+
+\begin{table}[H]
+\centering
+\caption{既往动态功能连接 ADHD 队列 vs 本次重分析。设计不同，仅方向。}
+\begin{tabular}{lll}
+\toprule
+研究 & 算子/设计 & 方向 \\
+\midrule
+de Lacy 2019 & 动态功能网络连接，停留/亚稳态 & 默认模式网络（DMN）停留减少 \\
+Shappell 2021 & 滑动窗动态功能连接 & 高连接状态时间更长 \\
+Ahmadi 2021 & 滑动窗动态功能连接 & 某一状态时间更短 \\
+Kaboodvand 2020 & 协同构形 & 协同构形改变 \\
+本次重分析 & LEiDA 占据（模式匹配） & 占据更低，$d=-0.302$ \\
+\bottomrule
+\end{tabular}
+\label{tab:prior}
+\end{table}
+
+\subsection{稳健性}
+模式效应经站点内置换、信度把关、运动匹配与按站点分析存活。它不由年龄、性别、站点或运动解释，四站点代码中三者为负，NeuroIMAGE 反向。
+
+该效应不是规范选择的假象。在三种符号约定——argmax（上文所用）、多数负、无规范投影分区（十个初始按聚类目标最优，永不按显著性）——下重拟合，每者均给出五状态最大值统计量 FWER 显著的占据差异（2,000 次抽样）。表 \ref{tab:gauge} 报告三者：
+
+\begin{table}[H]
+\centering
+\caption{三种符号规范下的模式效应。状态按每分区最大 $|d|$ 选择（非模式匹配）；FWER 为五状态最大值统计量。}
+\begin{tabular}{lccc}
+\toprule
+分区 & 最大 $|d|$ & FWER & 站点符号 \\
+\midrule
+argmax & $-0.328$ & $0.001$ & $-$, $-$, $+$, $-$ \\
+多数负 & $-0.337$ & $0.001$ & $-$, $-$, $+$, $-$ \\
+投影（无规范） & $-0.277$ & $0.004$ & $-$, $-$, $-$, $-$ \\
+\bottomrule
+\end{tabular}
+\label{tab:gauge}
+\end{table}
+
+\noindent 获胜状态索引随分区移动，符号与近似大小持续，正如预期：只有模式、而非整数有意义。无规范版本在四站点代码中均负（含 NeuroIMAGE），其运动梯度在全协变量下存活（$b=-0.0200$，$p=0.0081$）。
+
+\section{讨论}
+\label{sec:discussion}
+
+LEiDA 状态是投影主特征向量：$N$ 维模式。iPA 矩阵秩为 2，但状态不能只用两个数描述；二维的是谱子空间。状态仅当采用学习算子的占据率时才成为二维对象，且即便如此，那两个数也是 J 空间的 $k-1$ 单纯形坐标，而非主特征向量。这一区分正是矩阵数学事实与大脑状态错误主张的差别。
+
+J 空间作为坐标系有用，但其停留场概括是占据率函数（注记 \ref{thm:occupancy}）。故 J 空间均值差异即算子坐标下的占据差异。J 空间指标与独立 $k=5$ 透镜的耦合是跨透镜占据一致性，而非机制。未来 J 空间主张应指向逃定理的顺序敏感对象——拟合转移矩阵、滞后换位子或时变算子；当前静态共享算子场无法提供此类对象。
+
+ADHD 在组水平模式匹配占据更低，该模式本身未展示，故不作“极性”判断；仅作一致性表述——精神分裂症报告全局同步状态的占据减少\cite{Farinha2022}，缓解期抑郁工作报告额顶—默认模式控制状态的进入受损\cite{Figueroa2019}。名义索引为零，故该主张关于模式定义状态，而非整数索引。与 de Lacy 和 Calhoun 的重叠使本次为重分析；贡献是可识别性结果，而非效应的发现。
+
+秩-2 与符号歧义是既往工作 \cite{Glerean2012,Olsen2022,EiDA2024}；切换线性模型类亦然 \cite{Linderman2017,Taghia2018}。新颖之处：占据退化注记、$1/k$ 可识别性基线，以及精确零假设下的模式定义效应。
+
+\subsection*{塑造本发现的局限性}
+
+占据检验受公开 ADHD 数据所限。ADHD-200 是此处可用队列中唯一兼具分类 ADHD 诊断与足够 $N$、可在所需信度下检验模式效应的队列；故检验在此而非独立队列。其他公开队列各有其限。HBN 提供最大儿童样本，但其分类诊断在数据使用协议之后，开放版本只有双因子分数。ds005899 有 $26$ 名 ADHD 儿童与 $35$ 名对照儿童、扫描仅五分钟。ds000030 有 $42$ 名 ADHD 成人、不同采集与图谱。这些队列不能与 ADHD-200 互换，其局限解释了本发现为何是单队列、模式定义重分析而非独立复制。
+
+在 $n=665$ 时，两组差异 80\% 把握度阈值为 $d\approx0.22$；数据足以检测本文报告的中等效应与大效应（$d\approx0.66$），在实测信度下不足以检测小效应（$d\approx0.18$）。约束性因素是缺少第二个分类诊断队列、分半信度（$SB=0.586$，220 名两段扫描被试；单次扫描 $r=0.415$；衰减校正效应 $d\approx0.39$--$0.47$）、与 de Lacy 和 Calhoun \cite{deLacy2019} ADHD-200 样本 $70.5\%$ 重叠，以及一个反向站点代码。
+
+J 空间模型样本内训练，故逐被试 J 空间估计受样本内拟合边界所限。$T\approx355$ 时逐被试算子不可识别，奇异值指标在非正交隐重参数化下非不变；J 空间概括应读作群体层面描述，而非稳定的被试属性。重拟合可识别性检验使用三分之一扫描段子样本；推广 $22.5\%$ 估计需要全数据重拟合与第二透镜。随机模型假定可交换标签，这只是零假设，而非数据描述。
+
+这些约束并不弱化本文实际作出的两个主张：J 空间是占据的重新编码，命名状态索引不可识别。它们限定经验主张：模式效应是组水平、单队列、模式定义差异，非个体生物标志，也非命名状态效应。
+
+\subsection*{何种结果会改变结论}
+
+三项检验将实质改变结论。在 $(\psi,R_2)$ 上做连续状态检验并配精确零假设，可完全避开命名索引、看出模式效应是否在无 $k$-means 分区下存活。这种检验在 Kuramoto 序参数与相位同步亚稳分析\cite{Hancock2023} 中已有直接先例，无需离散聚类即可度量协同。在第二透镜与第二队列重复重拟合可识别性检验，可看出 $1/k$ 结果是本流水线还是状态定义的性质。时变算子可看出 J 空间能否逃离占据退化；当前静态共享算子场不能。
+
+\section{结论}
+\label{sec:conclusion}
+
+我们分离了三个常被混同的对象：秩-2 相位对齐矩阵、学习雅可比算子、命名的 $k$-means 状态。第一者是二维谱对象却有 $N$ 维特征向量；第二者是共享算子占据混合，其停留场概括是 $k-1=2$ 个数的函数；第三者不可识别，索引恢复处于 $1/k$ 随机水平。将框架用于 ADHD-200，我们发现负的、稳健的模式匹配占据效应（ADHD 占据更低；$d=-0.302$，置换 $p=0.001$ [2,000 次抽样下限]，FWER $0.001$ [1,000 次抽样下限]，$n=665$，$SB=0.586$）和零的名义索引效应（$d=-0.035$），索引恢复 $22.5\%$ 对 $20\%$ 随机水平。该效应在本队列中真实；命名状态不真实。故动态功能连接中关于“状态 $s$”的主张应报告重拟合可识别性检验和模式匹配效应，或按“某个状态”的主张表述。
+
+\section*{数据与代码可用性}
+数据为数据与方法中所述的 ADHD-200 与 HBN fMRI。复现全部主要数字的代码见配套仓库；J 空间算子指标与 CC200/Yeo 图谱映射为仓库中归档的工件，ADHD-200 未发布逐帧运动轨迹，故帧级删失不在范围内。
+
+\begin{thebibliography}{99}
+
+\bibitem{Cabral2017}
+Cabral J, Vidaurre D, Marques P, Magalh\~aes R, Silva Moreira P, Miguel Soares J, Deco G,
+Sousa N, Kringelbach ML.
+Cognitive performance in healthy older adults relates to spontaneous switching between
+states of functional connectivity during rest.
+\textit{Scientific Reports}. 2017;7:5135. doi:10.1038/s41598-017-05425-7.
+
+\bibitem{Glerean2012}
+Glerean E, Salmi J, Lahnakoski JM, J\"a\"askel\"ainen IP, Sams M.
+Functional magnetic resonance imaging phase synchronization as a measure of dynamic
+functional connectivity.
+\textit{Brain Connectivity}. 2012;2(2):91--101. doi:10.1089/brain.2011.0068.
+
+\bibitem{Olsen2022}
+Olsen AS, Lykkebo-Vall\o e A, Ozenne B, Madsen MK, Stenb\ae k DS, Armand S, M\o rup M, Ganz
+M, Knudsen GM, Fisher PM.
+Psilocybin modulation of time-varying functional connectivity is associated with plasma
+psilocin and subjective effects.
+\textit{NeuroImage}. 2022;264:119716. doi:10.1016/j.neuroimage.2022.119716.
+
+\bibitem{EiDA2024}
+de Alteriis G, MacNicol E, Hancock F, Ciaramella A, Cash D, Expert P, Turkheimer FE.
+EiDA: A lossless approach for dynamic functional connectivity; application to fMRI data of
+a model of ageing.
+\textit{Imaging Neuroscience}. 2024;2:1--22. doi:10.1162/imag\_a\_00113.
+
+\bibitem{Linderman2017}
+Linderman S, Johnson M, Miller A, Adams R, Blei D, Paninski L.
+Bayesian learning and inference in recurrent switching linear dynamical systems.
+In: \textit{Proceedings of the 20th International Conference on Artificial Intelligence and
+Statistics (AISTATS)}. PMLR 54:914--922, 2017.
+
+\bibitem{Taghia2018}
+Taghia J, Cai W, Ryali S, Kochalka J, Nicholas J, Chen T, Menon V.
+Uncovering hidden brain state dynamics that regulate performance and decision-making during
+cognition.
+\textit{Nature Communications}. 2018;9:2505. doi:10.1038/s41467-018-04723-6.
+
+\bibitem{ADHD2002012}
+The ADHD-200 Consortium.
+The ADHD-200 Consortium: a model to advance the translational potential of neuroimaging in
+clinical neuroscience.
+\textit{Frontiers in Systems Neuroscience}. 2012;6:62. doi:10.3389/fnsys.2012.00062.
+
+\bibitem{deLacy2019}
+de Lacy N, Calhoun VD.
+Dynamic connectivity and the effects of maturation in youth with attention deficit
+hyperactivity disorder.
+\textit{Network Neuroscience}. 2019;3(1):195--216. doi:10.1162/netn\_a\_00063.
+
+\bibitem{Shappell2021}
+Shappell HM, Duffy KA, Rosch KS, Pekar JJ, Mostofsky SH, Lindquist MA, Cohen JR.
+Children with attention-deficit/hyperactivity disorder spend more time in hyperconnected
+network states and less time in segregated network states as revealed by dynamic
+connectivity analysis.
+\textit{NeuroImage}. 2021;229:117753. doi:10.1016/j.neuroimage.2021.117753.
+
+\bibitem{Ahmadi2021}
+Ahmadi M, Kazemi K, Ku\'c K, Cybulska-Klosowicz A, Helfroush MS, Aarabi A.
+Resting state dynamic functional connectivity in children with attention
+deficit/hyperactivity disorder.
+\textit{Journal of Neural Engineering}. 2021;18(4):0460d1.
+doi:10.1088/1741-2552/ac16b3.
+
+\bibitem{Kaboodvand2020}
+Kaboodvand N, Iravani B, Fransson P.
+Dynamic synergetic configurations of resting-state networks in ADHD.
+\textit{NeuroImage}. 2020;207:116347. doi:10.1016/j.neuroimage.2019.116347.
+
+\bibitem{Hennig2007}
+Hennig C.
+Cluster-wise assessment of cluster stability.
+\textit{Computational Statistics \& Data Analysis}. 2007;52(1):258--271.
+doi:10.1016/j.csda.2006.11.025.
+
+\bibitem{vonLuxburg2010}
+von Luxburg U.
+Clustering stability: an overview.
+\textit{Foundations and Trends in Machine Learning}. 2010;2(3):235--274.
+doi:10.1561/2200000008.
+
+\bibitem{Stephens2000}
+Stephens M.
+Dealing with label switching in mixture models.
+\textit{Journal of the Royal Statistical Society: Series B}. 2000;62(4):795--809.
+doi:10.1111/1467-9868.00265.
+
+\bibitem{Jasra2005}
+Jasra A, Holmes CC, Stephens DA.
+Markov chain Monte Carlo methods and the label switching problem in Bayesian mixture
+modeling.
+\textit{Statistical Science}. 2005;20(1):50--67. doi:10.1214/088342305000000016.
+
+\bibitem{Vohryzek2020}
+Vohryzek J, Deco G, Cessac B, Kringelbach ML, Cabral J.
+Ghost attractors in spontaneous brain activity: recurrent excursions into functionally-relevant
+BOLD phase-locking states.
+\textit{Frontiers in Systems Neuroscience}. 2020;14:20. doi:10.3389/fnsys.2020.00020.
+
+\bibitem{Hancock2023}
+Hancock F, Rosas FE, McCutcheon RA, Cabral J, Dipasquale O.
+Metastability as a candidate neuromechanistic biomarker of schizophrenia pathology.
+\textit{PLOS ONE}. 2023; doi:10.1371/journal.pone.0282707.
+
+\bibitem{Farinha2022}
+Farinha M, Amado C, Morgado P, Cabral J.
+Increased excursions to functional networks in schizophrenia in the absence of task.
+\textit{Frontiers in Neuroscience}. 2022; doi:10.3389/fnins.2022.821179.
+
+\bibitem{Figueroa2019}
+Figueroa CA, Cabral J, Mocking RJT, Rapuano KM, van Hartevelt TJ, Deco G, Expert P,
+Schene AH, Kringelbach ML, Ruh\'e HG.
+Altered ability to access a clinically relevant control network in patients remitted from
+major depressive disorder.
+\textit{Human Brain Mapping}. 2019;40(9):2771--2786. doi:10.1002/hbm.24559.
+
+\end{thebibliography}
+
+\end{document}

@@ -11,6 +11,7 @@
 \newtheorem{corollary}{Corollary}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\E}{\mathbb{E}}
@@ -23,8 +24,7 @@
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
 
-\title{What Is a Brain State? Rank-2 Phase Dynamics, J-Space Occupancy Degeneracy,\\
-and a Pattern-Defined ADHD Effect}
+\title{Data-Driven Modeling and Identifiability of Pediatric ADHD Brain States with Leading-Eigenvector Phase Dynamics}
 \author{Felicity Li \and Quhao Chen}
 \date{}
 
@@ -598,7 +598,10 @@ standardized difference is $d=-0.263$ ($p=0.00077$). The within-site-code permut
 gives $p=0.001$ (2,000-draw floor) and the FWER is $0.001$ (1,000-draw floor), with
 $n=665$, $I^2=27.6\%$ (heterogeneity share), and a random-effects estimate of $-0.294$ ($p=0.0029$).
 Split-half reliability is $SB=0.586$ $[0.453,0.681]$, measured on the 220 subjects with
-at least two runs; the single-run correlation is $r=0.415$. With true per-run motion
+at least two runs; the single-run correlation is $r=0.415$, inside the same-day
+LEiDA fractional-occupancy ICC range of 0.39--0.59 reported at $k=5$ in healthy adults\cite{Vohryzek2020}
+(the split-half $SB$ is Spearman--Brown-corrected and is not directly comparable to the ICCs).
+The measurement is consistent with published reliability rather than a bespoke estimate. With true per-run motion
 matching, the paired $d_z$ is $-0.172$ ($260$ pairs, $p=0.006$) and the matched
 between-group $d$ is $-0.246$ [95\% CI $-0.428$ to $-0.074$]; a site+motion OLS gives
 $b=-0.0162$ ($p=0.0020$, $n=640$). The effect is negative in three of the four site
@@ -745,7 +748,12 @@ future J-space claim should target an order-sensitive object that escapes the
 theorem---a fitted transition matrix, a lagged commutator, or a time-varying operator;
 the present static shared-operator field cannot supply one.
 
-ADHD shows lower pattern-matched occupancy at the group level. The literal index is
+ADHD shows lower pattern-matched occupancy at the group level. The pattern itself is not
+displayed here, so no pole claim is made; the group-level occupancy difference is consistent
+with reports of altered global-state occupancy across disorders: schizophrenia is reported with
+reduced fractional occupancy of a globally synchronized state\cite{Farinha2022}, while remitted-MDD
+work reports reduced access to a frontoparietal--default-mode control state\cite{Figueroa2019}.
+The literal index is
 null, so the claim is about a pattern-defined state, not an integer index. Overlap with
 de Lacy and Calhoun makes this a reanalysis; the contribution is the identifiability
 result, not discovery of the effect.
@@ -796,7 +804,9 @@ difference, not an individual biomarker and not a named-state effect.
 
 Three tests would materially change the picture. A continuous-state test on
 $(\psi,R_2)$ with an exact null would avoid the named index entirely and show whether
-the pattern effect survives without a $k$-means partition. The
+the pattern effect survives without a $k$-means partition. Such a test has a direct
+precedent in Kuramoto order-parameter and metastability analyses of phase synchronization\cite{Hancock2023},
+which quantify coordination without discrete clustering. The
 refit identifiability test in a second lens and a second cohort would show whether the
 $1/k$ result is a property of this pipeline or of the state definition. A time-varying
 operator would show whether the J-space can escape the occupancy degeneracy; the present
@@ -851,7 +861,7 @@ psilocin and subjective effects.
 de Alteriis G, MacNicol E, Hancock F, Ciaramella A, Cash D, Expert P, Turkheimer FE.
 EiDA: A lossless approach for dynamic functional connectivity; application to fMRI data of
 a model of ageing.
-\textit{Imaging Neuroscience}. 2024;2:1--22. doi:10.1162/imag_a_00113.
+\textit{Imaging Neuroscience}. 2024;2:1--22. doi:10.1162/imag\_a\_00113.
 
 \bibitem{Linderman2017}
 Linderman S, Johnson M, Miller A, Adams R, Blei D, Paninski L.
@@ -875,7 +885,7 @@ clinical neuroscience.
 de Lacy N, Calhoun VD.
 Dynamic connectivity and the effects of maturation in youth with attention deficit
 hyperactivity disorder.
-\textit{Network Neuroscience}. 2019;3(1):195--216. doi:10.1162/netn_a_00063.
+\textit{Network Neuroscience}. 2019;3(1):195--216. doi:10.1162/netn\_a\_00063.
 
 \bibitem{Shappell2021}
 Shappell HM, Duffy KA, Rosch KS, Pekar JJ, Mostofsky SH, Lindquist MA, Cohen JR.
@@ -919,6 +929,29 @@ Jasra A, Holmes CC, Stephens DA.
 Markov chain Monte Carlo methods and the label switching problem in Bayesian mixture
 modeling.
 \textit{Statistical Science}. 2005;20(1):50--67. doi:10.1214/088342305000000016.
+
+\bibitem{Vohryzek2020}
+Vohryzek J, Deco G, Cessac B, Kringelbach ML, Cabral J.
+Ghost attractors in spontaneous brain activity: recurrent excursions into functionally-relevant
+BOLD phase-locking states.
+\textit{Frontiers in Systems Neuroscience}. 2020;14:20. doi:10.3389/fnsys.2020.00020.
+
+\bibitem{Hancock2023}
+Hancock F, Rosas FE, McCutcheon RA, Cabral J, Dipasquale O.
+Metastability as a candidate neuromechanistic biomarker of schizophrenia pathology.
+\textit{PLOS ONE}. 2023; doi:10.1371/journal.pone.0282707.
+
+\bibitem{Farinha2022}
+Farinha M, Amado C, Morgado P, Cabral J.
+Increased excursions to functional networks in schizophrenia in the absence of task.
+\textit{Frontiers in Neuroscience}. 2022; doi:10.3389/fnins.2022.821179.
+
+\bibitem{Figueroa2019}
+Figueroa CA, Cabral J, Mocking RJT, Rapuano KM, van Hartevelt TJ, Deco G, Expert P,
+Schene AH, Kringelbach ML, Ruh\'e HG.
+Altered ability to access a clinically relevant control network in patients remitted from
+major depressive disorder.
+\textit{Human Brain Mapping}. 2019;40(9):2771--2786. doi:10.1002/hbm.24559.
 
 \end{thebibliography}
 
