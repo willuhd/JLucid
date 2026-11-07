@@ -1,7 +1,7 @@
 """turn6 / o2 occupancy — instrumented re-test of the suppressed group claim.
 
 Claim tested: ADHD-200 children spend less time in a specific de-novo LEiDA state
-(the state whose pattern is denovo-index 4 / recon-index 0 / seed1-index 1);
+(the state whose pattern is denovo-index 4 / recon-index 0 / seed1-index 4 after denovo-order permutation);
 the literal "o2/o4 index" claim is tested separately for identifiability.
 
 Instrumentation (pre-stated before tests):
@@ -158,7 +158,7 @@ for i in range(1000):
 fwer = float((1 + (np.array(mx) >= abs(effect(L["denovo"], 4)["d"])).sum()) / 1001)
 print("FWER", fwer)
 print("CROSS recon_o0", {k: effect(L["recon"], 0)[k] for k in ("d", "p", "n")},
-      "seed1_o1", {k: effect(L["seed1"], 1)[k] for k in ("d", "p", "n")})
+      "seed1_o4", {k: effect(L["seed1"], 4)[k] for k in ("d", "p", "n")})
 
 A2 = A.dropna(subset=["Age", "sex", "maxmotion_mm", "amp", "T"]).copy()
 A2["logmot"] = np.log(A2.maxmotion_mm.astype(float).clip(lower=1e-3))
