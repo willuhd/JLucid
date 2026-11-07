@@ -55,8 +55,9 @@ $d=-0.302$, within-site-code permutation $p=0.001$ [2,000-draw floor], FWER $0.0
 $d_z\approx-0.17$, matched between-group $d\approx-0.25$, $p=0.006$), but the literal
 named-index effect is null ($d=-0.035$), and 40 refits recover the index at chance
 ($22.5\%$ vs $20\%$). The $\bar J$ spectral metrics are occupancy functions and show
-null group means. We conclude
-that the ADHD phase-state difference is real but pattern-defined, and that named-state
+null group means. This is a single-cohort reanalysis: the $k=5$ sample overlaps the ADHD-200 sample of
+de Lacy and Calhoun by $70.5\%$, and one site code reverses. We conclude that the ADHD
+phase-state difference is real but pattern-defined in this cohort, and that named-state
 claims in dynamic-FC analyses are not identifiable without a refit-identifiability test.
 \end{abstract}
 
@@ -94,6 +95,8 @@ where $n_s$ is the number of stay frames in state $s$. Every scalar summary of $
 is then a function of the occupancy $f$: the operator cannot supply independent evidence
 about dynamics beyond occupancy. This is a fact about shared-operator switching-linear
 models, not about a particular dataset, and it is the second theme of the paper.
+At each level of a dynamic-state claim---the matrix, the operator, the index---we ask
+what is identifiable, and what survives.
 
 We study these questions in a phase-based model of resting-state functional magnetic
 resonance imaging (fMRI). Blood-oxygen-level-dependent (BOLD) signals from $N$ brain
@@ -114,8 +117,7 @@ On the operator side, we fit a switching-linear latent model
 \cite{Linderman2017,Taghia2018,Chen2018} to the same leading eigenvectors. For each
 subject we compute the average Jacobian $\bar J$ over stay frames, decompose it by
 singular value decomposition $\bar J=U\Sigma V^{\top}$, and summarize its spectral
-geometry by the concentration $C_k$, the effective rank $r_{\mathrm{eff}}$, the DMN
-contamination, and the decoder-space network loadings. We call this derived
+geometry by the concentration $C_k$ and the effective rank $r_{\mathrm{eff}}$. We call this derived
 object---the SVD geometry of the average Jacobian, together with its scalar
 summaries---the \emph{J-space} of the subject. We use this term for the derived object;
 it is built on top of the LEiDA state. It is the quantity a learned-dynamics analysis
@@ -208,8 +210,6 @@ of $C(t)$ are
 with orthonormal eigenvectors
 \begin{equation}
 v_1(t)=\frac{\cos(\phi(t)-\psi(t))}{\sqrt{\lambda_1(t)}},
-\qquad
-v_2(t)=\frac{\sin(\phi(t)-\psi(t))}{\sqrt{\lambda_2(t)}},
 \end{equation}
 where the cosine and sine are applied elementwise. In particular,
 \begin{equation}
@@ -307,16 +307,8 @@ partition unchanged but changes every statement about ``state $s$.'' Whether a n
 index is recoverable across independent fits is the identifiability question of Section
 \ref{sec:identifiability}.
 
-A recurrent two-parameter summary of the phase configuration is
-\begin{equation}
-\psi(t)=\tfrac12\arg\sum_j e^{2i\phi_j(t)},
-\qquad
-R_2(t)=\Big|\frac1N\sum_j e^{2i\phi_j(t)}\Big|,
-\end{equation}
-i.e.\ the mean phase and the phase coherence. It is used in some continuous-state
-analyses as a coarse-grained state. It is a projection, not the leading eigenvector;
-Theorem \ref{thm:rank2} gives the exact relation between the two only through the full
-$\phi(t)$.
+The pair $(\psi,R_2)$ above---mean phase and coherence---is a two-parameter projection
+of $\phi(t)$, not the leading eigenvector itself.
 
 \section{The J-Space: Definition and Occupancy Degeneracy}
 \label{sec:jspace}
@@ -364,30 +356,17 @@ C_k=\frac{\sum_{i=1}^{k}\sigma_i^2}{\sum_{i=1}^{d}\sigma_i^2},
 \qquad
 r_{\mathrm{eff}}=\frac{(\sum_i\sigma_i)^2}{\sum_i\sigma_i^2},
 \end{equation}
-the decoder-space network loadings $L_m$, and the DMN contamination
-$L_{\mathrm{DMN}}/((L_{\mathrm{FPN}}+L_{\mathrm{DAN}})/2+\epsilon)$.
+the decoder-space network loadings $L_m$.
 \end{definition}
 
-\begin{theorem}[Occupancy degeneracy of the J-space]
+\begin{remark}[Occupancy degeneracy of the J-space]
 \label{thm:occupancy}
 For the field \eqref{eq:field} with shared operators $A_s$ and one-hot conditioning
-$p_t$:
-\begin{enumerate}
-\item $J(t)$ is independent of $z(t)$ (Eq.~\eqref{eq:Jt}).
-\item $\bar J$ lies in the convex hull $\mathrm{conv}\{A_1,\dots,A_k\}$; its affine
-dimension is at most $k-1$.
-\item For every scalar function $g$ of $\bar J$ (including every singular-value summary,
-every Schatten norm, and every spectral concentration), there exists a function $h_g$
-such that
-\begin{equation}
-g(\bar J)=h_g(f_1,\dots,f_k),
-\qquad
-\sum_s f_s=1.
-\end{equation}
-In particular, with $k=3$, every stay-field J-space metric is a function of at most two
-numbers.
-\end{enumerate}
-\end{theorem}
+$p_t$, $J(t)=A(p_t)$ is independent of $z(t)$, $\bar J=\sum_s f_s A_s$ lies in
+$\mathrm{conv}\{A_s\}$ (affine dimension at most $k-1$), and every scalar function
+$g(\bar J)$ is a function $h_g(f)$ with $\sum_s f_s=1$---in particular, with $k=3$,
+every stay-field metric depends on at most two numbers.
+\end{remark}
 
 \begin{proof}
 Part (1) is Eq.~\eqref{eq:Jt}. Part (2) is Eq.~\eqref{eq:Jbar} with $f$ in the
@@ -419,16 +398,14 @@ itself.
 Corollary \ref{cor:noindependent} is the mathematical reason a $\bar J$ mean difference
 can look like a dynamical effect while carrying no information beyond occupancy.
 Empirically, in the $N=307$ cohort, the linear $R^2$ of $C_k$, $r_{\mathrm{eff}}$, and
-the DMN contamination on the $k=3$ occupancy is $0.556$, $0.657$, and $0.628$; the
-quadratic $R^2$ is $0.766$, $0.768$, and $0.732$. The exact analogue is an identity
+the $k=3$ occupancy is $0.556$ and $0.657$; the
+quadratic $R^2$ is $0.766$ and $0.768$. The exact analogue is an identity
 (Theorem \ref{thm:occupancy}), so no extrapolated $R^2$ is needed. The J-space group
 means are null (Section \ref{sec:results}). The coupling between the J-space metrics and
 the independent $k=5$ occupancy lens, which is the strongest J-space association in the
 record ($C_k$ partial $r=-0.322$, $r_{\mathrm{eff}}=+0.340$), collapses after occupancy
 control to $+0.079$ ($p=0.175$) and $+0.023$ ($p=0.695$): it is cross-lens occupancy
-consistency, not a J-space mechanism. The decoder-space DMN contamination has a nominal
-partial of $-0.124$ ($p=0.033$), below the detection floor ($\mathrm{MDE}_r\approx0.16$),
-so it is not evidence of a survivor.
+consistency, not a J-space mechanism.
 
 \section{Identifiability of Named States}
 \label{sec:identifiability}
@@ -451,25 +428,7 @@ $\rho_{\mathrm{idx}}=\frac1k\sum_j\rho_j$. The \emph{pattern-matched} state at r
 $r$ is the cluster $\sigma_r(j)$; its occupancy is compared to the reference state's
 occupancy. The \emph{literal} state is the cluster with the same integer index $j$.
 
-\begin{proposition}[Index recovery under exchangeable labels]
-\label{prop:chance}
-Assume the refit partition is exchangeable with respect to the reference labels, i.e.\
-the matching permutation is uniform over the symmetric group $S_k$. Then
-\begin{equation}
-\E[\rho_j]=\frac1k,
-\qquad
-\E[\rho_{\mathrm{idx}}]=\frac1k,
-\end{equation}
-and the number of fixed indices $F=\sum_j\one[\sigma(j)=j]$ satisfies $\E[F]=1$ and
-$\mathrm{Var}(F)=1$. For $k=5$, the chance index-match fraction is $0.20$.
-\end{proposition}
-
-\begin{proof}
-For a uniform random permutation, $\Prob(\sigma(j)=j)=1/k$ for each $j$; linearity
-gives the expectation. The number of fixed points of a uniform random permutation has
-mean $1$ and variance $1$ (the classical fixed-point distribution). The fraction is
-$F/k$.
-\end{proof}
+Under exchangeable refit labels (uniform permutation), $\E[\rho_j]=\E[\rho_{\mathrm{idx}}]=1/k$ by linearity, and the fixed-point count has mean and variance 1; for $k=5$ the chance index-match fraction is $0.20$.
 
 The proposition gives a null model for the identifiability test. If a pipeline recovers
 a named index far above $1/k$, the index is identifiable (or the refits are not
@@ -493,17 +452,14 @@ the maximum-absolute-component rule. The de-novo $k=5$ lens is a $k$-means fit o
 pooled leading eigenvectors (seed 0); each run is labeled by nearest centroid. The
 analysis includes $n=665$ subjects ($309$ ADHD, $356$ typically developing) across
 four ADHD-200 site codes (Peking 1/2/3 pooled, KKI, NeuroIMAGE, NYU) with at least 120
-TRs. Occupancy
+TRs. Cohort counts differ by analysis filter (666 subjects at T$\ge$120 in the frequency
+analysis, 665 here after the diagnostic/site filter); motion matching uses per-run motion
+(260 pairs), not field-table motion. Occupancy
 of state $s$ is the fraction of frames labeled $s$; entry and dwell are secondary.
 
-The $k=3$ J-space lens is the JLucid4 switching-linear model, AAL-90 parcellation,
-$k=3$ majority-negative LEiDA labels, latent dimension $d=12$, GRU encoder window $7$
-TRs. The field \eqref{eq:field} is trained by cosine loss over short rollouts on the
-same $N=307$ subjects ($124$ ADHD, $183$ typically developing; six site-blocks:
-Peking\_1 75, NYU 68, Peking\_2 57, KKI 38, NeuroIMAGE 36, Peking\_3 33). Stay-frame
-means and the metric bank are computed as in Section \ref{sec:jspace}. The J-space model
-is in-sample; the occupancy theorem does not depend on training, but subject-level
-J-space claims inherit this limitation.
+The $k=3$ J-space lens is an AAL-90 switching-linear model ($d=12$, window 7) trained
+in-sample on $N=307$ subjects ($124$ ADHD, $183$ typically developing). Metrics are as in
+Section \ref{sec:jspace}; per-subject estimates are bounded by the in-sample fit.
 
 The two lenses share the same rank-2 phase state but differ in parcellation (CC200-190
 versus AAL-90), number of states (5 versus 3), and sign gauge. The rank-2 and occupancy
@@ -587,16 +543,13 @@ label-based claim.
 \subsection{The J-space spectral metrics collapse to occupancy}
 Table \ref{tab:jspace} gives the J-space group contrasts; none is significant. The
 $\bar J$ spectral metrics are occupancy-dominated: linear $R^2$ on the $k=3$ occupancy
-is $0.556$ for $C_k$ and $0.657$ for $r_{\mathrm{eff}}$; the decoder-space DMN
-contamination is also predictable ($0.628$), but it is not covered by Theorem
-\ref{thm:occupancy}. The quadratic $R^2$ is $0.766$, $0.768$, and $0.732$. The coupling
+is $0.556$ for $C_k$ and $0.657$ for $r_{\mathrm{eff}}$.
+The quadratic $R^2$ is $0.766$ and $0.768$. The coupling
 between the J-space metrics and the independent $k=5$ occupancy lens ($C_k$ partial
 $r=-0.322$, $r_{\mathrm{eff}}=+0.340$) collapses after controlling the $k=3$ occupancy
 to $+0.079$ ($p=0.175$) and $+0.023$ ($p=0.695$). This is the empirical form of
 Corollary \ref{cor:noindependent}: the $\bar J$ operator is a re-encoding of the
-occupancy. The decoder-space DMN contamination has a nominal partial of $-0.124$
-($p=0.033$), below the $r \approx 0.16$ power threshold, so it is not
-evidence of a survivor.
+occupancy.
 
 \begin{table}[H]
 \centering
@@ -607,7 +560,6 @@ Metric & $d$ & $p$ & spread \\
 \midrule
 Spectral concentration $C_k$ & $-0.085$ & $0.47$ & mean $0.817$, sd $0.011$ \\
 Effective rank $r_{\mathrm{eff}}$ & $+0.083$ & $0.47$ & mean $6.29$, sd $0.07$ \\
-DMN contamination & $+0.081$ & $0.50$ & mean $1.00$, sd $0.16$ \\
 \bottomrule
 \end{tabular}
 \label{tab:jspace}
@@ -707,11 +659,46 @@ sizes across refits. (c) Distribution of recovered indices vs the chance expecta
 \label{fig:refit}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+% PLACEHOLDER fig_pattern.png: centroid pattern map for the pattern-matched state
+% (parcel-wise pattern / network loadings, ADHD vs TDC), to be generated from the
+% de-novo centroids. No placeholder image is committed.
+\caption{PLACEHOLDER: pattern of the pattern-matched state (centroid map, network
+loadings). Figure to be generated; see Methods.}
+\label{fig:pattern}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Prior dynamic-FC ADHD cohorts vs this reanalysis. Designs differ; direction only.}
+\begin{tabular}{llll}
+\toprule
+Study & Operator / design & $n$ & Direction \\
+\midrule
+de Lacy 2019 & dynamic FNC, dwell/meta-state & 504 (252/252) & reduced DMN dwell \\
+Shappell 2021 & sliding-window dFC & --- & hyperconnected states \\
+Ahmadi 2021 & sliding-window dFC & --- & less time in one state \\
+Kaboodvand 2020 & synergetic configurations & --- & altered configurations \\
+This reanalysis & LEiDA occupancy (pattern-matched) & 665 & lower occupancy, $d=-0.302$ \\
+\bottomrule
+\end{tabular}
+\label{tab:prior}
+\end{table}
+
 \subsection{Robustness}
 The pattern effect survives within-site-code permutation, reliability gating, motion
 matching, and site-wise analysis. It is not explained by age, sex, site, or motion, and
-it is negative in three of the four site codes, with NeuroIMAGE reversing. These checks
-are the basis for the constraints discussed next.
+it is negative in three of the four site codes, with NeuroIMAGE reversing.
+\begin{figure}[H]
+\centering
+% PLACEHOLDER fig_gauge_robust.png: pattern effect under argmax, majority-negative
+% and projective (gauge-free) partitions, per site. Numbers to be generated from
+% the gauge-free partition code; no placeholder image is committed.
+\caption{PLACEHOLDER: gauge robustness of the pattern effect (three partitions).
+Figure to be generated; see Methods.}
+\label{fig:gauge_robust}
+\end{figure}
 
 \section{Discussion}
 \label{sec:discussion}
@@ -732,22 +719,15 @@ future J-space claim should target an order-sensitive object that escapes the
 theorem---a fitted transition matrix, a lagged commutator, or a time-varying operator;
 the present static shared-operator field cannot supply one.
 
-The negative effect is present at the group level: ADHD shows lower pattern-matched
-occupancy of a de-novo LEiDA state, with a moderate effect size, reliability, motion
-robustness, and site-wise consistency in the overlapping site codes. It is not a
-named-state effect: the literal index is null and refit recovery is at chance. The correct statement
-is ``a pattern-defined state differs,'' and the correct claim is about the partition, not
-the integer. The overlap with the ADHD-200 sample of de Lacy and Calhoun means the result is a
-reanalysis, not an independent replication; the novelty of this paper is the mathematical
-structure and the identifiability result, which are cohort-independent, not the discovery
-of the effect.
+ADHD shows lower pattern-matched occupancy at the group level. The literal index is
+null, so the claim is about a pattern-defined state, not an integer index. Overlap with
+de Lacy and Calhoun makes this a reanalysis; the contribution is the identifiability
+result, not discovery of the effect.
 
-The rank-2 decomposition and the sign ambiguity are prior art
-\cite{Glerean2012,Olsen2022,EiDA2024}. The switching-linear model class is prior art
-\cite{Linderman2017,Taghia2018}. The new results are the occupancy-degeneracy theorem
-for a shared-operator J-space, the named-state identifiability result with its $1/k$
-chance baseline, and the pattern-defined negative occupancy difference under an exact
-null and a reliability gate.
+Rank-2 and sign ambiguity are prior art \cite{Glerean2012,Olsen2022,EiDA2024}; the
+switching-linear class is prior art \cite{Linderman2017,Taghia2018}. New here: the
+occupancy-degeneracy remark, the $1/k$ identifiability baseline, and the pattern-defined
+effect under an exact null.
 
 \subsection*{Constraints that shaped the finding}
 
@@ -812,6 +792,10 @@ $0.001$ [1,000-draw floor], $n=665$, $SB=0.586$) and a null literal index effect
 this cohort; the named state is not. Dynamic-FC claims about ``state
 $s$'' should therefore report a refit identifiability test and a pattern-matched effect,
 or be stated as claims about ``some state.''
+
+\section*{Data and Code Availability}
+Data are ADHD-200 and HBN fMRI as described in Data and Methods; code to reproduce
+all numbers is available in the accompanying repository.
 
 \begin{thebibliography}{99}
 
