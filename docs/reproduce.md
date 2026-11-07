@@ -6,10 +6,10 @@ Generated artifacts go to ignored flat `outputs/`; bulky intermediates go to ign
 
 1. Download data (docs/data-download.md) into data/.
 2. o4 effect: .venv/bin/python src/o4_occupancy.py
-   - Needs retained `data/e123_adhd200_denovo_labels.npz`, `data/e123_adhd200_denovo_C.npy`, phenotypics, per-site motion tables, plus `outputs/field_table.csv`.
+   - Needs retained `data/e123_adhd200_denovo_labels.npz`, `data/e123_adhd200_denovo_C.npy`, phenotypics, per-site motion tables, plus `outputs/field_table.csv` (via `scripts/build_field_table.py`).
    - Writes flat `outputs/o4_subject.csv`, `outputs/o4_refits.csv`, `outputs/o4_summary.json`.
    - Expect d=-0.302, perm p=0.001 floor, SB=0.586, refit matched -0.299, literal -0.035, recovery 9/40.
-   - The recon/seed1 cross-lens label files are absent from this lean checkout.
+   - The recon labels rebuild via `scripts/rebuild_filelens_labels.py`; the exact seed1 rescue file remains frozen.
 3. Motion: .venv/bin/python scripts/essay_motion_stats.py
    - Needs `outputs/o4_subject.csv` plus per-site motion tables.
    - Writes flat `outputs/motion_stats.json`.
