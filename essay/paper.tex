@@ -40,7 +40,7 @@ brain dynamics. First, the Leading Eigenvector Dynamics Analysis (LEiDA) phase-a
 matrix is positive semidefinite of rank at most two, with closed-form eigenvalues and
 leading eigenvector, and a $\mathbb{Z}_2$ sign gauge. Second, we define a custom
 \emph{J-space} for a learned switching-linear latent field
-$z_{t+1}=A(p_t)z_t+b(p_t)$, where $p_t$ is a one-hot LEiDA label and
+$z(t+1)=A(p_t)z(t)+b(p_t)$, where $p_t$ is a one-hot LEiDA label and
 $A(p)=\sum_s p_sA_s$. Because the field is linear in $z$ and the labels are one-hot, the
 per-frame Jacobian is exactly $A(p_t)$; its stay-frame average
 $\bar J=\sum_s f_sA_s$ lies in the convex hull of the shared operators and has at most
@@ -119,14 +119,14 @@ C_{ij}(t)=\cos\big(\phi_i(t)-\phi_j(t)\big).
 \end{equation}
 Leading Eigenvector Dynamics Analysis (LEiDA) takes the leading eigenvector $v_1(t)$ of
 $C(t)$ and clusters the time series $\{v_1(t)\}$ into $k$ states
-\cite{Cabral2017,Glerean2012,Tang2026}. Occupancy, lifetime, and switching of these
+\cite{Cabral2017,Glerean2012}. Occupancy, lifetime, and switching of these
 states are the standard summaries, and group differences in state occupancy have been
 reported in attention-deficit/hyperactivity disorder (ADHD) and other conditions
 \cite{deLacy2019,Shappell2021,Ahmadi2021,Kaboodvand2020}. Those claims are keyed to an
 integer state index, which is exactly the first question.
 
 On the operator side, we fit a switching-linear latent model
-\cite{Linderman2017,Taghia2018,Chen2018} to the same leading eigenvectors. For each
+\cite{Linderman2017,Taghia2018} to the same leading eigenvectors. For each
 subject we compute the average Jacobian $\bar J$ over stay frames, decompose it by
 singular value decomposition $\bar J=U\Sigma V^{\top}$, and summarize its spectral
 geometry by the concentration $C_k$ and the effective rank $r_{\mathrm{eff}}$. We call this derived
@@ -223,7 +223,7 @@ with orthonormal eigenvector
 \begin{equation}
 v_1(t)=\frac{\cos(\phi(t)-\psi(t))}{\sqrt{\lambda_1(t)}},
 \end{equation}
-where the cosine and sine are applied elementwise. In particular,
+where the cosine is applied elementwise. In particular,
 \begin{equation}
 \frac{\lambda_1(t)}{N}=\frac{1+R_2(t)}{2}\ge\frac12.
 \label{eq:l1identity}
@@ -332,7 +332,7 @@ the paper.
 \begin{definition}[J-space]
 Let $v(t)\in\R^N$ be the leading eigenvector of the iPA matrix and
 $\ell(t)\in\{1,\dots,k\}$ its LEiDA label. Let $z(t)\in\R^d$ be a latent state given
-by a causal encoder $z(t)=E(v(t-w+1),\dots,v(t))$, and let
+by a causal encoder $z(t)=E(v(t-w+1),\dots,v(t))$ (depending only on past frames), and let
 \begin{equation}
 z(t+1)=A(p_t)z(t)+b(p_t),
 \qquad
@@ -357,12 +357,11 @@ f_s=\frac{n_s}{T_{\mathrm{stay}}},
 \sum_s f_s=1,
 \label{eq:Jbar}
 \end{equation}
-over the $n$ stay frames (frames with $\ell(t)=\ell(t+1)$ and
+over the $T_{\mathrm{stay}}$ stay frames (frames with $\ell(t)=\ell(t+1)$ and
 $\cos(v(t),v(t+1))\ge-0.5$), where $n_s$ is the number of stay frames in state $s$.
 Write $\bar J=U\Sigma V^{\top}$ with singular values
-$\sigma_1\ge\cdots\ge\sigma_d\ge0$, let $V_k=[v_1,\dots,v_k]$ be the leading right
-singular vectors, and let $A_J=V_k^{\top}\bar J V_k$. The \emph{J-space} of the subject
-is the tuple $(\bar J,U,\Sigma,V,V_k,A_J)$ together with the scalar summaries
+$\sigma_1\ge\cdots\ge\sigma_d\ge0$. The \emph{J-space} of the subject
+is the tuple $(\bar J,U,\Sigma,V)$ together with the scalar summaries
 \begin{equation}
 C_k=\frac{\sum_{i=1}^{k}\sigma_i^2}{\sum_{i=1}^{d}\sigma_i^2},
 \qquad
@@ -383,7 +382,6 @@ every stay-field metric depends on at most two numbers.
 $J(t)=A(p_t)$ by Eq.~\eqref{eq:Jt}; $\bar J$ is Eq.~\eqref{eq:Jbar} with $f$ in the
 simplex, and $f\mapsto\bar J$ is linear with $\bar J$ the only argument of $g$, leaving
 $k-1$ degrees of freedom.
-\end{proof}
 \end{proof}
 
 The result is an identity that follows from the definition; its content is the
@@ -407,8 +405,8 @@ itself.
 
 Corollary \ref{cor:noindependent} is the mathematical reason a $\bar J$ mean difference
 can look like a dynamical effect while carrying no information beyond occupancy.
-Empirically, in the $N=307$ cohort, the linear $R^2$ of $C_k$, $r_{\mathrm{eff}}$, and
-the $k=3$ occupancy is $0.556$ and $0.657$; the
+Empirically, in the $N=307$ cohort, the linear $R^2$ of $C_k$ and $r_{\mathrm{eff}}$ on
+the $k=3$ occupancy are $0.556$ and $0.657$; the
 quadratic $R^2$ is $0.766$ and $0.768$. The exact analogue is an identity
 (Remark \ref{thm:occupancy}), so no extrapolated $R^2$ is needed. The J-space group
 means are null (Section \ref{sec:results}). The coupling between the J-space metrics and
@@ -440,7 +438,7 @@ occupancy. The \emph{literal} state is the cluster with the same integer index $
 
 Under exchangeable refit labels (uniform permutation), $\E[\rho_j]=\E[\rho_{\mathrm{idx}}]=1/k$ by linearity, and the fixed-point count has mean and variance 1; for $k=5$ the chance index-match fraction is $0.20$.
 
-The proposition gives a null model for the identifiability test. If a pipeline recovers
+This gives a null model for the identifiability test. If a pipeline recovers
 a named index far above $1/k$, the index is identifiable (or the refits are not
 independent); if recovery is at chance, the index is not a transferable coordinate, even
 if the partition itself is stable. For each reference state $j$ there are then two
@@ -463,11 +461,11 @@ pooled leading eigenvectors (seed 0); each run is labeled by nearest centroid. T
 analysis includes $n=665$ subjects ($309$ ADHD, $356$ typically developing) across
 four ADHD-200 site codes (Peking 1/2/3 pooled, KKI, NeuroIMAGE, NYU) with at least 120
 TRs. Cohort counts differ by analysis filter (666 subjects at T$\ge$120 in the unfiltered cohort,
-665 here after the diagnostic/site filter); motion matching uses per-run motion
-(260 pairs), not field-table motion. Occupancy
+665 here after merging with the field table, which requires Age and sex); motion matching
+uses per-run motion tables (260 pairs). Occupancy
 of state $s$ is the fraction of frames labeled $s$; entry (visits) and dwell (visit length) are secondary.
 
-The $k=3$ J-space lens is an AAL-90 switching-linear model ($d=12$, window 7) trained
+The $k=3$ J-space lens is an AAL-90 switching-linear model ($d=12$, 7-frame window) trained
 in-sample on $N=307$ subjects ($124$ ADHD, $183$ typically developing). Metrics are as in
 Section \ref{sec:jspace}; per-subject estimates are bounded by the in-sample fit.
 
@@ -585,7 +583,7 @@ Effective rank $r_{\mathrm{eff}}$ & $+0.083$ & $0.47$ & mean $6.29$, sd $0.07$ \
 \includegraphics[width=\textwidth]{fig2_jspace_occupancy.png}
 \caption{Occupancy degeneracy of the J-space. (a) The $k=3$ occupancy simplex, colored
 by $C_k$; the metric is a function of $f$. (b) $R^2$ of each J-space metric on the
-occupancy: linear (all-shot proxy) and quadratic (stay-shot proxy). (c) The coupling
+occupancy: linear using all frames and quadratic using stay frames only. (c) The coupling
 between J-space metrics and the independent $k=5$ lens before and after controlling the
 $k=3$ occupancy (partial $r$, $p$).}
 \label{fig:jspace}
@@ -674,20 +672,20 @@ sizes across refits. (c) Distribution of recovered indices vs the chance expecta
 \end{figure}
 
 The pattern itself---the centroid map and its network loadings---is not displayed
-here; the effect is defined by that pattern (see Methods), not by a named index.
+here; the effect is defined by that pattern, not by a named index.
 
 \begin{table}[H]
 \centering
 \caption{Prior dynamic-FC ADHD cohorts vs this reanalysis. Designs differ; direction only.}
-\begin{tabular}{llll}
+\begin{tabular}{lll}
 \toprule
-Study & Operator / design & $n$ & Direction \\
+Study & Operator / design & Direction \\
 \midrule
-de Lacy 2019 & dynamic FNC, dwell/meta-state & 504 (252/252) & reduced DMN dwell \\
-Shappell 2021 & sliding-window dFC & --- & hyperconnected states \\
-Ahmadi 2021 & sliding-window dFC & --- & less time in one state \\
-Kaboodvand 2020 & synergetic configurations & --- & altered configurations \\
-This reanalysis & LEiDA occupancy (pattern-matched) & 665 & lower occupancy, $d=-0.302$ \\
+de Lacy 2019 & dynamic FNC, dwell/meta-state & reduced default-mode (DMN) dwell \\
+Shappell 2021 & sliding-window dFC & more time in hyperconnected states \\
+Ahmadi 2021 & sliding-window dFC & less time in one state \\
+Kaboodvand 2020 & synergetic configurations & altered configurations \\
+This reanalysis & LEiDA occupancy (pattern-matched) & lower occupancy, $d=-0.302$ \\
 \bottomrule
 \end{tabular}
 \label{tab:prior}
@@ -795,8 +793,8 @@ difference, not an individual biomarker and not a named-state effect.
 \subsection*{What would change the conclusion}
 
 Three tests would materially change the picture. A continuous-state test on
-$(\psi,R_2)$ or on the projective class with an exact null would avoid the named index
-entirely and show whether the pattern effect survives without a $k$-means partition. The
+$(\psi,R_2)$ with an exact null would avoid the named index entirely and show whether
+the pattern effect survives without a $k$-means partition. The
 refit identifiability test in a second lens and a second cohort would show whether the
 $1/k$ result is a property of this pipeline or of the state definition. A time-varying
 operator would show whether the J-space can escape the occupancy degeneracy; the present
@@ -819,8 +817,11 @@ $s$'' should therefore report a refit identifiability test and a pattern-matched
 or be stated as claims about ``some state.''
 
 \section*{Data and Code Availability}
-Data are ADHD-200 and HBN fMRI as described in Data and Methods; code to reproduce
-all numbers is available in the accompanying repository.
+Data are ADHD-200 and HBN fMRI as described in Data and Methods. Code to reproduce
+all headline numbers is available in the accompanying repository; the J-space operator
+metrics and the CC200/Yeo atlas mapping are archived artifacts documented in the
+repository, and per-frame motion traces were never released with ADHD-200, so
+frame-level censoring is out of scope.
 
 \begin{thebibliography}{99}
 
@@ -850,12 +851,7 @@ EiDA: A lossless approach for dynamic functional connectivity; application to fM
 a model of ageing.
 \textit{Imaging Neuroscience}. 2024;2:1--22. doi:10.1162/imag_a_00113.
 
-\bibitem{Chen2018}
-Chen RTQ, Rubanova Y, Bettencourt J, Duvenaud DK.
-Neural ordinary differential equations.
-In: \textit{Advances in Neural Information Processing Systems (NeurIPS)}. 2018;31.
-
-\bibitem{Linderman2017}
+\bibitem{Taghia2018}
 Linderman S, Johnson M, Miller A, Adams R, Blei D, Paninski L.
 Bayesian learning and inference in recurrent switching linear dynamical systems.
 In: \textit{Proceedings of the 20th International Conference on Artificial Intelligence and
@@ -866,13 +862,6 @@ Taghia J, Cai W, Ryali S, Kochalka J, Nicholas J, Chen T, Menon V.
 Uncovering hidden brain state dynamics that regulate performance and decision-making during
 cognition.
 \textit{Nature Communications}. 2018;9:2505. doi:10.1038/s41467-018-04723-6.
-
-\bibitem{Tang2026}
-Tang J, Wang Y, Xu X, Pan X, Wang R.
-Reorganization of global phase pattern in complex brain network during aging revealed by
-leading eigenvector dynamics analysis.
-\textit{International Journal of Bifurcation and Chaos}. 2026;36(8):2650106.
-doi:10.1142/S0218127426501063.
 
 \bibitem{ADHD2002012}
 The ADHD-200 Consortium.
