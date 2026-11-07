@@ -84,10 +84,10 @@ where $p_t$ is the one-hot encoding of $\ell(t)$ and the operators $A_s$ are sha
 across subjects. The per-frame Jacobian is exactly $J(t)=A(p_t)$. Over the stay frames
 of a subject, the average is a convex combination,
 \begin{equation}
-\bar J=\frac1n\sum_{t\in\mathrm{stay}}J(t)
+\bar J=\frac1{T_{\mathrm{stay}}}\sum_{t\in\mathrm{stay}}J(t)
 =\sum_{s=1}^{k}f_sA_s,
 \qquad
-f_s=\frac{n_s}{n},
+f_s=\frac{n_s}{T_{\mathrm{stay}}},
 \qquad
 \sum_s f_s=1,
 \end{equation}
@@ -97,6 +97,18 @@ about dynamics beyond occupancy. This is a fact about shared-operator switching-
 models, not about a particular dataset, and it is the second theme of the paper.
 At each level of a dynamic-state claim---the matrix, the operator, the index---we ask
 what is identifiable, and what survives.
+
+\paragraph{Data in brief.} Functional magnetic resonance imaging (fMRI) measures an
+indirect, slow vascular signal (blood-oxygen-level-dependent, BOLD) sampled every
+repetition time (TR, here $\approx$2\,s; one sample is a frame). Resting-state means
+no task: the subject lies still. The brain is partitioned by a fixed atlas into
+parcels (regions); here CC200 with $N=190$ for the $k=5$ lens and AAL-90 for the
+$k=3$ lens, whose time courses come from the Athena preprocessed release. Sites use
+different scanners, inducing batch effects, so group tests are within site. Head
+motion inflates connectivity, so motion is matched and controlled. ADHD is attention-
+deficit/hyperactivity disorder; TDC is typically developing controls. HBN is the
+Healthy Brain Network cohort (resting-state gauge sample, $n=180$). The BOLD series
+are band-pass filtered (Athena $0.009$--$0.08$\,Hz) and z-scored per parcel.
 
 We study these questions in a phase-based model of resting-state functional magnetic
 resonance imaging (fMRI). Blood-oxygen-level-dependent (BOLD) signals from $N$ brain
@@ -337,10 +349,10 @@ J(t)=\frac{\partial z(t+1)}{\partial z(t)}=A(p_t).
 \end{equation}
 For a subject, let
 \begin{equation}
-\bar J=\frac1n\sum_{t\in\mathrm{stay}}J(t)
+\bar J=\frac1{T_{\mathrm{stay}}}\sum_{t\in\mathrm{stay}}J(t)
 =\sum_{s=1}^{k}f_sA_s,
 \qquad
-f_s=\frac{n_s}{n},
+f_s=\frac{n_s}{T_{\mathrm{stay}}},
 \qquad
 \sum_s f_s=1,
 \label{eq:Jbar}
@@ -415,7 +427,7 @@ defines a state, not to the integer that happens to name it.
 Let $\ell:\{1,\dots,T\}\to\{1,\dots,k\}$ be a reference labeling, and let
 $\ell^{(r)}$ be the labeling from an independent refit $r=1,\dots,R$ (different
 initialization and/or resampled runs). Match the refit centroids to the reference
-centroids by the Hungarian algorithm on absolute cosine similarity, yielding a
+centroids by the Hungarian algorithm (optimal linear assignment) on absolute cosine similarity, yielding a
 permutation $\sigma_r$ of $\{1,\dots,k\}$. The \emph{index recovery} of reference state
 $j$ is
 \begin{equation}
@@ -453,7 +465,7 @@ four ADHD-200 site codes (Peking 1/2/3 pooled, KKI, NeuroIMAGE, NYU) with at lea
 TRs. Cohort counts differ by analysis filter (666 subjects at T$\ge$120 in the unfiltered cohort,
 665 here after the diagnostic/site filter); motion matching uses per-run motion
 (260 pairs), not field-table motion. Occupancy
-of state $s$ is the fraction of frames labeled $s$; entry and dwell are secondary.
+of state $s$ is the fraction of frames labeled $s$; entry (visits) and dwell (visit length) are secondary.
 
 The $k=3$ J-space lens is an AAL-90 switching-linear model ($d=12$, window 7) trained
 in-sample on $N=307$ subjects ($124$ ADHD, $183$ typically developing). Metrics are as in
@@ -471,7 +483,7 @@ statistics are not used as evidence for the $k=5$ effect.
 Forty $k$-means refits are run on random one-third subsamples of the runs (seed
 $1000+r$, $r=0,\dots,39$); they share two-thirds of their data and are therefore
 correlated by construction; the refit centroids are matched to the reference
-de-novo centroids by the Hungarian algorithm on absolute cosine similarity; the matched
+de-novo centroids by the Hungarian algorithm (optimal linear assignment) on absolute cosine similarity; the matched
 and literal occupancies are computed on all runs; the refit-specific effect is estimated
 for each refit.
 
@@ -484,7 +496,7 @@ the reported state is the max-$|d|$ state per partition, not the pattern-matched
 Group effects are standardized mean differences $d$ in the two-group comparison and
 fixed-effect or random-effects meta-analyses across site codes. The exact null is the
 within-site-code permutation of diagnosis (2,000 draws; FWER over five states from
-1,000 draws; $+1$ correction). Power at 80% for a two-group difference is $d \approx 2.8016\sqrt{1/n_1+1/n_2}$, inflated by $1/\sqrt{r_{xx}}$ after attenuation correction. Reliability is split-half $SB=2r/(1+r)$ over odd/even runs;
+1,000 draws; $+1$ correction to avoid $p=0$). Power at 80% for a two-group difference is $d \approx 2.8016\sqrt{1/n_1+1/n_2}$, inflated by $1/\sqrt{r_{xx}}$ after attenuation correction. Reliability is split-half $SB=2r/(1+r)$ over odd/even runs;
 it is computed on the 220 subjects with at least two runs (179 at NYU and 40 at a
 TDC-only site), so reliability is unmeasured at the other site codes. Motion is the true
 per-run maximum displacement from the per-site motion tables; matching is within site
@@ -585,7 +597,7 @@ The $k=5$ de-novo lens gives a negative ADHD effect on the pattern-matched reduc
 meta across the four site codes is $d=-0.302$ (parametric $p=0.00016$); the simple cohort
 standardized difference is $d=-0.263$ ($p=0.00077$). The within-site-code permutation
 gives $p=0.001$ (2,000-draw floor) and the FWER is $0.001$ (1,000-draw floor), with
-$n=665$, $I^2=27.6\%$, and a random-effects estimate of $-0.294$ ($p=0.0029$).
+$n=665$, $I^2=27.6\%$ (heterogeneity share), and a random-effects estimate of $-0.294$ ($p=0.0029$).
 Split-half reliability is $SB=0.586$ $[0.453,0.681]$, measured on the 220 subjects with
 at least two runs; the single-run correlation is $r=0.415$. With true per-run motion
 matching, the paired $d_z$ is $-0.172$ ($260$ pairs, $p=0.006$) and the matched
