@@ -13,7 +13,7 @@ Instrumentation (pre-stated before tests):
   the per-site <Site>_motion.csv files (NOT the defective adhd200_maxmotion.tsv);
   cluster identifiability tested by 40 independent k-means refits matched by |cos|.
 
-Outputs (this script writes under outputs/turn6/o2/).
+Outputs (this script writes flat files under outputs/).
 Provenance: executed read-only by freq-audit during the revival run; numbers matched
 a separately reported run (d=-0.302, perm <= .001, FWER .0010, SB .586).
 """
@@ -31,9 +31,9 @@ from sklearn.cluster import KMeans
 
 rng = np.random.default_rng(0)
 t0 = time.time()
-OUT = "outputs/turn6/o2"
+OUT = "outputs"
 os.makedirs(OUT, exist_ok=True)
-ft = pd.read_csv("outputs/turn3/field_table.csv")
+ft = pd.read_csv("outputs/field_table.csv")
 ft["sid"] = ft.sid.astype(str).str.zfill(7)
 ENV = ["o0", "o1", "o2", "o3", "o4"]
 
@@ -284,7 +284,7 @@ print("DONE secs", round(time.time() - t0, 1))
 
 # persist
 A0[["sid", "o4"]].merge(ft[["sid", "ADHD", "Site"]], on="sid").to_csv(f"{OUT}/o4_subject.csv", index=False)
-Rr.to_csv(f"{OUT}/refits.csv", index=False)
+Rr.to_csv(f"{OUT}/o4_refits.csv", index=False)
 json.dump({"primary": {k: (v if isinstance(v, (int, float)) else list(v)) for k, v in effect(L["denovo"], 4).items()},
            "perm_o4": pp, "fwer": fwer, "sb": sb,
            "sb_ci": [float(np.nanpercentile(bs, 2.5)), float(np.nanpercentile(bs, 97.5))],
@@ -292,4 +292,4 @@ json.dump({"primary": {k: (v if isinstance(v, (int, float)) else list(v)) for k,
            "refit_ci": [float(Rr.d_matched.quantile(.025)), float(Rr.d_matched.quantile(.975))],
            "idx4_frac": float((Rr.idx == 4).mean()),
            "literal4_mean": float(Rr.d_literal4.mean())},
-          open(f"{OUT}/summary.json", "w"), indent=1)
+          open(f"{OUT}/o4_summary.json", "w"), indent=1)

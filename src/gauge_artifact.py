@@ -62,7 +62,7 @@ def main():
     MOV = os.path.join(L.ROOT, "data", "hbn_movie_fmri")
     MISSING = [2, 5, 11, 25, 34, 68, 82, 95, 126, 191]
     KEEP = [i for i in range(200) if (i + 1) not in MISSING]
-    Ch = np.load(os.path.join(L.ROOT, "pilot", "out", "leida_centroids_190.npy"))
+    Ch = np.load(os.path.join(L.ROOT, "data", "pilot_out", "leida_centroids_190.npy"))
 
     Xs, phs = [], []
     for sid in sids:

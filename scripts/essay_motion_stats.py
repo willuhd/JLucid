@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Canonical true-per-run motion check for the k=5 occupancy effect.
-Writes outputs/turn7/essay_motion_stats.json; used by the manuscript.
+Writes outputs/motion_stats.json; used by the manuscript.
 """
 import glob
 import json
@@ -13,7 +13,7 @@ from scipy import stats
 import statsmodels.formula.api as smf
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-OUT = os.path.join(ROOT, "outputs", "turn7", "essay_motion_stats.json")
+OUT = os.path.join(ROOT, "outputs", "motion_stats.json")
 
 
 def main():
@@ -47,7 +47,7 @@ def main():
     M["mm"] = M.run.map(mot)
     agg = M.groupby("sid").mm.mean().reset_index()
 
-    O = pd.read_csv(os.path.join(ROOT, "outputs", "turn6", "o2", "o4_subject.csv"),
+    O = pd.read_csv(os.path.join(ROOT, "outputs", "o4_subject.csv"),
                     dtype={"sid": str})
     O["sid"] = O.sid.str.zfill(7)
     A = O[O.Site.isin([1, 3, 4, 5]) & O.ADHD.notna()].copy()

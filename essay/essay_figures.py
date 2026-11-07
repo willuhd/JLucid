@@ -171,14 +171,14 @@ def fig1():
 # Figure 2: J-space occupancy degeneracy
 # ----------------------------------------------------------------------
 def fig2():
-    S = pd.read_csv(os.path.join(ROOT, "outputs", "turn7", "jspace_dispersion_subjects.csv"))
+    S = pd.read_csv(os.path.join(ROOT, "outputs", "jspace_dispersion_subjects.csv"))
     S["sid"] = S.sid.astype(str).str.zfill(7)
     J = pd.read_csv(os.path.join(ROOT, ".agents", "previous", "results", "jspace",
                                  "jfuture", "metrics.csv"))
     J["sid"] = J.sid.astype(str).str.zfill(7)
     M = S.merge(J[["sid", "occ_0_stayshots", "occ_1_stayshots", "occ_2_stayshots"]],
                 on="sid", how="inner")
-    O = pd.read_csv(os.path.join(ROOT, "outputs", "turn6", "o2", "o4_subject.csv"),
+    O = pd.read_csv(os.path.join(ROOT, "outputs", "o4_subject.csv"),
                     dtype={"sid": str})
     O["sid"] = O.sid.str.zfill(7)
     M = M.merge(O[["sid", "o4"]], on="sid", how="inner")
@@ -291,7 +291,7 @@ def true_motion():
 
 
 def fig3():
-    O = pd.read_csv(os.path.join(ROOT, "outputs", "turn6", "o2", "o4_subject.csv"),
+    O = pd.read_csv(os.path.join(ROOT, "outputs", "o4_subject.csv"),
                     dtype={"sid": str})
     O["sid"] = O.sid.str.zfill(7)
     A = O[O.Site.isin([1, 3, 4, 5]) & O.ADHD.notna()].copy()
@@ -400,7 +400,7 @@ def fig3():
 # Figure 4: identifiability
 # ----------------------------------------------------------------------
 def fig4():
-    R = pd.read_csv(os.path.join(ROOT, "outputs", "turn6", "o2", "refits.csv"))
+    R = pd.read_csv(os.path.join(ROOT, "outputs", "o4_refits.csv"))
     k, n = int((R.idx == 4).sum()), len(R)
     rec = k / n
     lo, hi = stats.beta.ppf([0.025, 0.975], k + 0.5, n - k + 0.5)

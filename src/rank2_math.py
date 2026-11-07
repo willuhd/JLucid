@@ -45,7 +45,7 @@ import pandas as pd
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import leida_lib as L
 
-OUT = os.path.join(L.ROOT, "outputs", "turn3")
+OUT = os.path.join(L.ROOT, "outputs")
 T_H = 1.0
 
 

@@ -12,7 +12,7 @@ static-pattern control.
 Extra: jfuture/metrics.csv is a *different* Jacobian lens (J_route, 4x12) with
 its own C_k/r_eff; compare.
 
-Outputs JSON to outputs/audit_jspace/audit_jspace_results.json and prints a
+Outputs JSON to outputs/jspace_audit.json and prints a
 human table.
 """
 from __future__ import annotations
@@ -29,12 +29,12 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 JL = os.path.join(ROOT, ".agents", "previous")
 LAB = f"{ROOT}/data/e123_adhd200_denovo_labels.npz"
 CEN = f"{ROOT}/data/e123_adhd200_denovo_C.npy"
-CV = f"{ROOT}/pilot/out/canonical_v.npz"
+CV = f"{ROOT}/data/pilot_out/canonical_v.npz"
 JSM = f"{JL}/results/jspace/jspace_metrics.csv"
 JFU = f"{JL}/results/jspace/jfuture/metrics.csv"
 PHENO = f"{JL}/data/adhd200/adhd200_preprocessed_phenotypics.tsv"
 MOTION = f"{JL}/data/adhd200/adhd200_maxmotion.tsv"
-OUT = f"{ROOT}/outputs/audit_jspace"
+OUT = f"{ROOT}/outputs"
 os.makedirs(OUT, exist_ok=True)
 
 NPERM = 2000
@@ -509,7 +509,7 @@ def main():
             return None
         return o
 
-    with open(f"{OUT}/audit_jspace_results.json", "w") as f:
+    with open(f"{OUT}/jspace_audit.json", "w") as f:
         json.dump(clean(RESULTS), f, indent=2)
     print(f"\nwrote {OUT}/audit_jspace_results.json")
 
