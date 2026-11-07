@@ -21,6 +21,7 @@ Temporary Items
 # project specific
 .venv/
 data/
+outputs/
 __pycache__/
 *.py[cod]
 *.npz
