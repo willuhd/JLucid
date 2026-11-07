@@ -10,9 +10,10 @@ Design: refit the k=5 partition under three sign-gauge choices -- argmax (the
 paper's gauge), majneg (Paper 7's gauge), and a gauge-free projective
 partition (chordal distance on RP^(N-1)) -- and re-test the occupancy effect
 in each under the same within-site permutation null with max-statistic FWER
-over the five states (2,000 draws). A gauge artifact would appear under one
-gauge and vanish under the others; survival under all three, strongest
-gauge-free, rules that out.
+over the five states (2,000 draws). The projective fit uses ten independent
+inits with selection by the unsupervised clustering objective (never by
+p-value). A gauge artifact would appear under one gauge and vanish under the
+others; survival under all three, strongest gauge-free, rules that out.
 
 Writes (gitignored via outputs/):
   outputs/gauge_robustness.json   per-partition effects, FWER, motion ladder
@@ -224,7 +225,15 @@ def main():
         _, fw = fwer(occ, bal, rng)
         out["partitions"][mode]["fwer"] = fw
         print("   FWER(max|d|) = %.4f" % fw)
-    Mp = projective_fit(sub.copy())
+    # multi-init projective fit, selected by the unsupervised clustering
+    # objective (sum of max |cos| assignments) -- never by p-value
+    Mp, best_obj = None, -np.inf
+    for seed in range(10):
+        cand = projective_fit(sub.copy(), seed=seed)
+        obj = float(np.abs(sub @ cand.T).max(1).sum())
+        if obj > best_obj:
+            Mp, best_obj = cand, obj
+    print("projective fit: best of 10 inits, objective=%.1f" % best_obj)
     plab = np.argmax(np.abs(Vall @ Mp.T), axis=1)
     parts["projective"] = (plab, Mp)
     out["partitions"]["projective"] = report("projective (gauge-free)",
