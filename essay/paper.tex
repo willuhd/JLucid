@@ -207,7 +207,7 @@ of $C(t)$ are
 \qquad
 \lambda_2(t)=\frac{N-A(t)}{2}=\frac{N}{2}\big(1-R_2(t)\big),
 \end{equation}
-with orthonormal eigenvectors
+with orthonormal eigenvector
 \begin{equation}
 v_1(t)=\frac{\cos(\phi(t)-\psi(t))}{\sqrt{\lambda_1(t)}},
 \end{equation}
@@ -356,7 +356,6 @@ C_k=\frac{\sum_{i=1}^{k}\sigma_i^2}{\sum_{i=1}^{d}\sigma_i^2},
 \qquad
 r_{\mathrm{eff}}=\frac{(\sum_i\sigma_i)^2}{\sum_i\sigma_i^2},
 \end{equation}
-the decoder-space network loadings $L_m$.
 \end{definition}
 
 \begin{remark}[Occupancy degeneracy of the J-space]
@@ -369,10 +368,10 @@ every stay-field metric depends on at most two numbers.
 \end{remark}
 
 \begin{proof}
-Part (1) is Eq.~\eqref{eq:Jt}. Part (2) is Eq.~\eqref{eq:Jbar} with $f$ in the
-probability simplex $\Delta^{k-1}$. Part (3) follows because the map
-$f\mapsto\bar J$ is linear and $\bar J$ is the only argument of $g$; the constraint
-$\sum_s f_s=1$ removes one degree of freedom, leaving $k-1$.
+$J(t)=A(p_t)$ by Eq.~\eqref{eq:Jt}; $\bar J$ is Eq.~\eqref{eq:Jbar} with $f$ in the
+simplex, and $f\mapsto\bar J$ is linear with $\bar J$ the only argument of $g$, leaving
+$k-1$ degrees of freedom.
+\end{proof}
 \end{proof}
 
 The result is an identity that follows from the definition; its content is the
@@ -385,12 +384,11 @@ dynamics beyond the $k$-state occupancy. In particular, a correlation between su
 metric and a phenotype is a correlation between that phenotype and a function of the
 occupancy, unless the metric is shown to depend on an order-sensitive object not captured
 by $\bar J$, such as the transition matrix of the label sequence or a lagged commutator
-of $J(t)$. The decoder-space loadings are not covered by this identity and are reported
-separately.
+of $J(t)$.
 \end{corollary}
 
 \begin{proof}
-Immediate from Theorem \ref{thm:occupancy}: every stay-field metric is a function of
+Immediate from Remark \ref{thm:occupancy}: every stay-field metric is a function of
 $f$. Two functions of the same $f$ cannot be independent evidence about $f$ beyond $f$
 itself.
 \end{proof}
@@ -400,7 +398,7 @@ can look like a dynamical effect while carrying no information beyond occupancy.
 Empirically, in the $N=307$ cohort, the linear $R^2$ of $C_k$, $r_{\mathrm{eff}}$, and
 the $k=3$ occupancy is $0.556$ and $0.657$; the
 quadratic $R^2$ is $0.766$ and $0.768$. The exact analogue is an identity
-(Theorem \ref{thm:occupancy}), so no extrapolated $R^2$ is needed. The J-space group
+(Remark \ref{thm:occupancy}), so no extrapolated $R^2$ is needed. The J-space group
 means are null (Section \ref{sec:results}). The coupling between the J-space metrics and
 the independent $k=5$ occupancy lens, which is the strongest J-space association in the
 record ($C_k$ partial $r=-0.322$, $r_{\mathrm{eff}}=+0.340$), collapses after occupancy
@@ -452,8 +450,8 @@ the maximum-absolute-component rule. The de-novo $k=5$ lens is a $k$-means fit o
 pooled leading eigenvectors (seed 0); each run is labeled by nearest centroid. The
 analysis includes $n=665$ subjects ($309$ ADHD, $356$ typically developing) across
 four ADHD-200 site codes (Peking 1/2/3 pooled, KKI, NeuroIMAGE, NYU) with at least 120
-TRs. Cohort counts differ by analysis filter (666 subjects at T$\ge$120 in the frequency
-analysis, 665 here after the diagnostic/site filter); motion matching uses per-run motion
+TRs. Cohort counts differ by analysis filter (666 subjects at T$\ge$120 in the unfiltered cohort,
+665 here after the diagnostic/site filter); motion matching uses per-run motion
 (260 pairs), not field-table motion. Occupancy
 of state $s$ is the fraction of frames labeled $s$; entry and dwell are secondary.
 
@@ -628,8 +626,7 @@ Table \ref{tab:refit} reports the refit identifiability test. The literal index-
 is $d=-0.0347$ ($50\%$ of refits negative, not significant). The pattern-matched effect
 is $d=-0.2987$, with the 2.5--97.5th percentile of the 40 refit estimates at
 $[-0.3645,-0.1915]$, and $100\%$ of refits negative. The index is recovered in
-$9/40=22.5\%$ of refits, consistent with the $20\%$ chance level of Proposition
-\ref{prop:chance}. The 40 refits share two-thirds of their data, so the nominal 95\%
+$9/40=22.5\%$ of refits, consistent with the $20\%$ chance level ($1/k$). The 40 refits share two-thirds of their data, so the nominal 95\%
 interval $[11.8\%,37.1\%]$ overstates precision; the point estimate is consistent with
 chance and cannot exclude recovery up to about $37\%$. The partition is
 stable; the index is not. The correct claim is about ``a state'' identified by pattern,
@@ -659,15 +656,8 @@ sizes across refits. (c) Distribution of recovered indices vs the chance expecta
 \label{fig:refit}
 \end{figure}
 
-\begin{figure}[H]
-\centering
-% PLACEHOLDER fig_pattern.png: centroid pattern map for the pattern-matched state
-% (parcel-wise pattern / network loadings, ADHD vs TDC), to be generated from the
-% de-novo centroids. No placeholder image is committed.
-\caption{PLACEHOLDER: pattern of the pattern-matched state (centroid map, network
-loadings). Figure to be generated; see Methods.}
-\label{fig:pattern}
-\end{figure}
+The pattern itself---the centroid map and its network loadings---is not displayed
+here; the effect is defined by that pattern (see Methods), not by a named index.
 
 \begin{table}[H]
 \centering
@@ -690,15 +680,9 @@ This reanalysis & LEiDA occupancy (pattern-matched) & 665 & lower occupancy, $d=
 The pattern effect survives within-site-code permutation, reliability gating, motion
 matching, and site-wise analysis. It is not explained by age, sex, site, or motion, and
 it is negative in three of the four site codes, with NeuroIMAGE reversing.
-\begin{figure}[H]
-\centering
-% PLACEHOLDER fig_gauge_robust.png: pattern effect under argmax, majority-negative
-% and projective (gauge-free) partitions, per site. Numbers to be generated from
-% the gauge-free partition code; no placeholder image is committed.
-\caption{PLACEHOLDER: gauge robustness of the pattern effect (three partitions).
-Figure to be generated; see Methods.}
-\label{fig:gauge_robust}
-\end{figure}
+Gauge robustness beyond the max-component gauge used here---majority-negative and
+projective partitions---is computed in code but not reported here; the named-index
+result does not depend on which gauge fixes the labels.
 
 \section{Discussion}
 \label{sec:discussion}
@@ -712,7 +696,7 @@ difference between a mathematical fact about a matrix and a false claim about a 
 state.
 
 The J-space is useful as a coordinate system, but its stay-field summaries are functions
-of occupancy (Theorem \ref{thm:occupancy}). A J-space mean difference is therefore an
+of occupancy (Remark \ref{thm:occupancy}). A J-space mean difference is therefore an
 occupancy difference in operator coordinates. The coupling between the J-space metrics
 and the independent $k=5$ lens is cross-lens occupancy consistency, not a mechanism. A
 future J-space claim should target an order-sensitive object that escapes the
