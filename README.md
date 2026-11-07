@@ -6,3 +6,5 @@ See essay/paper.tex. Data are gitignored (data/); intermediates go to data/proce
 Reproduce: docs/reproduce.md. Download: docs/data-download.md. Methods: docs/methods.md.
 
 Headline: pattern-matched LEiDA occupancy lower in ADHD (ADHD-200, d=-0.302), literal named index null (d=-0.035, 22.5% refit recovery vs 20% chance); J-space stay-field metrics are occupancy functions (null group means). Single-cohort reanalysis, not a biomarker.
+
+Generated bulk goes to ignored `data/processed/`; small regenerated tables go to ignored flat `outputs/`; committed paper figures stay under `essay/figs/`.

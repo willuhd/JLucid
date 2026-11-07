@@ -2,10 +2,26 @@
 
 Environment: .venv/bin/python -c with requirements.txt (numpy, scipy, pandas, sklearn, statsmodels, torch, matplotlib, h5py). No GPU needed (stay field trains ~1 s/epoch on CPU).
 
-1. Download data (docs/data-download.md) into data/.
-2. o4 effect: .venv/bin/python src/o4_occupancy.py  (expect d=-0.302, perm p=0.001, SB=0.586, refit matched -0.299, literal -0.035, recovery 9/40)
-3. Motion: .venv/bin/python src/essay_motion_stats.py  (expect dz=-0.172, 260 pairs)
-4. Rank-2/gauge: .venv/bin/python src/rank2_math.py ; .venv/bin/python src/gauge_artifact.py  (expect sigma3/sigma1 ~5.6e-16, flip rates 32.3%/11.3%)
-5. J-space: audit + figures via src/jspace/ and essay_figures logic in docs (expect Ck R2 lin 0.556/quad 0.766, coupling -0.322 -> +0.079 after occupancy control)
+Generated artifacts go to ignored flat `outputs/`; bulky intermediates go to ignored `data/processed/`. Committed paper figures stay under `essay/figs/`.
 
-Figures: essay/figs/*.png are committed; regenerate via the figure producer in src/ (essay_figures).
+1. Download data (docs/data-download.md) into data/.
+2. o4 effect: .venv/bin/python src/o4_occupancy.py
+   - Needs retained `data/e123_adhd200_denovo_labels.npz`, `data/e123_adhd200_denovo_C.npy`, phenotypics, per-site motion tables, plus `outputs/field_table.csv`.
+   - Writes flat `outputs/o4_subject.csv`, `outputs/o4_refits.csv`, `outputs/o4_summary.json`.
+   - Expect d=-0.302, perm p=0.001 floor, SB=0.586, refit matched -0.299, literal -0.035, recovery 9/40.
+   - The recon/seed1 cross-lens label files are absent from this lean checkout.
+3. Motion: .venv/bin/python scripts/essay_motion_stats.py
+   - Needs `outputs/o4_subject.csv` plus per-site motion tables.
+   - Writes flat `outputs/motion_stats.json`.
+   - The effect survives motion matching; exact pair count depends on the motion-table join.
+4. Rank-2/gauge: .venv/bin/python src/rank2_math.py ; .venv/bin/python src/gauge_artifact.py
+   - Rank identity spot checks need retained CC200 runs.
+   - The full operator sweep needs the legacy CC200/Yeo mapping, absent here.
+   - Gauge checks use retained HBN inputs and `data/pilot_out/leida_centroids_190.npy`, not legacy `pilot/out/...`.
+   - Expect sigma3/sigma1 ~3e-16 and gauge-flip contingency, not full figure regeneration.
+5. J-space: audit + figures via src/jspace/ and essay figure logic in docs
+   - Needs external J metrics/checkpoints absent from this checkout.
+   - Expect the paper's bound: J stay-field metrics are occupancy functions; group means null.
+   - Do not treat missing external J inputs as regenerable from retained data alone.
+
+Figures: essay/figs/*.png are committed for the paper build; regenerate only when all missing inputs are supplied.
