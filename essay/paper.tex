@@ -55,12 +55,10 @@ $d=-0.302$, within-site-code permutation $p=0.001$ [2,000-draw floor], FWER $0.0
 $d_z\approx-0.17$, matched between-group $d\approx-0.25$, $p=0.006$), but the literal
 named-index effect is null ($d=-0.035$), and 40 refits recover the index at chance
 ($22.5\%$ vs $20\%$). The $\bar J$ spectral metrics are occupancy functions and show
-null group means. This is a single-cohort reanalysis: the $k=5$ sample overlaps the ADHD-200 sample of
-de Lacy and Calhoun by $70.5\%$, and one site code reverses. We conclude that the ADHD
+null group means, and the pattern effect persists under three sign conventions including a gauge-free partition. This is a single-cohort reanalysis: the $k=5$ sample overlaps the ADHD-200 sample of
+de Lacy and Calhoun by $70.5\%$, and one site code reverses under the argmax gauge. We conclude that the ADHD
 phase-state difference is real but pattern-defined in this cohort, and that named-state
 claims in dynamic-FC analyses are not identifiable without a refit-identifiability test.
-The pattern effect persists under three sign conventions, including a gauge-free
-partition.
 \end{abstract}
 
 \section{Introduction}
@@ -475,10 +473,12 @@ $1000+r$, $r=0,\dots,39$); they share two-thirds of their data and are therefore
 correlated by construction; the refit centroids are matched to the reference
 de-novo centroids by the Hungarian algorithm on absolute cosine similarity; the matched
 and literal occupancies are computed on all runs; the refit-specific effect is estimated
-for each refit. Gauge robustness refits the same partition under argmax,
-majority-negative, and projective conventions (projective: best of ten inits by
-clustering objective); each partition is tested by the same within-site permutation
-with max-statistic FWER over its five states.
+for each refit.
+
+Gauge robustness refits the partition under argmax, majority-negative, and projective
+conventions (projective: best of ten inits by clustering objective). Each partition is
+tested by the same within-site permutation with max-statistic FWER over its five states;
+the reported state is the max-$|d|$ state per partition, not the pattern-matched state.
 
 \subsection{Statistics}
 Group effects are standardized mean differences $d$ in the two-group comparison and
@@ -694,7 +694,8 @@ draws):
 
 \begin{table}[H]
 \centering
-\caption{Pattern effect under three sign gauges (max-$|d|$ state per partition).}
+\caption{Pattern effect under three sign gauges. State selected by max $|d|$ per
+partition (not pattern-matched); FWER is max-statistic over five states.}
 \begin{tabular}{lccc}
 \toprule
 Partition & max $|d|$ & FWER & site signs \\
